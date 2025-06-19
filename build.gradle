@@ -85,6 +85,7 @@ dependencies {
     compileOnly "curse.maven:terra-entity-1173196:6479056"
     compileOnly "curse.maven:terra-curio-1027625:6545988"
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 }
 
 tasks.withType(ProcessResources).configureEach {

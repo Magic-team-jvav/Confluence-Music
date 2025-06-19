@@ -26,7 +26,7 @@ import org.confluence.music.common.init.CMItems;
 import org.confluence.music.common.init.CMJukeboxSongs;
 import org.confluence.music.common.init.CMSoundEvents;
 import org.confluence.music.common.item.MusicBoxItem;
-import org.confluence.music.network.ReplaceMusicBoxItemPacketC2S;
+import org.confluence.music.common.network.ReplaceMusicBoxItemPacketC2S;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

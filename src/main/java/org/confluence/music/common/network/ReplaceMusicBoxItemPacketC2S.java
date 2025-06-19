@@ -1,4 +1,4 @@
-package org.confluence.music.network;
+package org.confluence.music.common.network;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.chat.Component;
