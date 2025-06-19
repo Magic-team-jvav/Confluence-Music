@@ -20,7 +20,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforgespi.locating.IModFile;
 import org.confluence.lib.util.ConfluenceResources;
-import org.confluence.music.client.ClientConfigs;
+import org.confluence.music.client.CMClientConfigs;
 import org.confluence.music.common.init.CMBlocks;
 import org.confluence.music.common.init.CMItems;
 import org.confluence.music.common.init.CMJukeboxSongs;
@@ -39,7 +39,7 @@ public class ConfluenceMusic {
 
     public ConfluenceMusic(IEventBus eventBus, ModContainer container) {
         if (FMLEnvironment.dist.isClient()) {
-            ClientConfigs.register(container);
+            CMClientConfigs.register(container);
             container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         }
         CMBlocks.BLOCKS.register(eventBus);

@@ -1,5 +1,6 @@
 package org.confluence.music.client;
 
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -8,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -21,13 +23,18 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.SelectMusicEvent;
+import net.neoforged.neoforge.common.Tags;
+import org.confluence.mod.common.init.ModBiomes;
+import org.confluence.mod.common.init.ModTags;
 import org.confluence.music.ConfluenceMusic;
 import org.confluence.music.common.block.MusicBoxBlock;
 import org.confluence.music.common.item.MusicBoxItem;
 import org.confluence.music.mixed.IMusicManager;
 import org.confluence.terraentity.entity.ai.Boss;
+import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.confluence.music.common.init.CMMusics.CachedLocationMusic;
@@ -35,6 +42,9 @@ import static org.confluence.music.common.init.CMMusics.CachedLocationMusic;
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(modid = ConfluenceMusic.MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 public final class MusicHandler {
+    public static final ResourceLocation CONFLUENCE = ConfluenceMusic.asResource("confluence"); // 汇流来世
+    public static final ResourceLocation OTHERWORLDLY = ConfluenceMusic.asResource("otherworldly"); // 泰拉瑞亚来世
+    private static final RandomSource RANDOM = RandomSource.create();
     private static CachedLocationMusic nextSong;
     private static int nextSongDelay = 2400;
     private static Holder<Biome> lastBiome;
@@ -43,7 +53,7 @@ public final class MusicHandler {
     private static boolean hasBossMusic = false;
 
     public static void handle(SelectMusicEvent event, LocalPlayer player, Minecraft minecraft) {
-        if (!ClientConfigs.playerOurMusic || !((IMusicManager) minecraft.getMusicManager()).confluence$getMusicBoxOccupied().isNone()) return;
+        if (!CMClientConfigs.playerOurMusic || !((IMusicManager) minecraft.getMusicManager()).confluence$getMusicBoxOccupied().isNone()) return;
         if (nextBiomeCheck-- <= 0) {
             Holder<Biome> biome = player.level().getBiome(player.blockPosition());
             if (biome != lastBiome) {
@@ -99,7 +109,7 @@ public final class MusicHandler {
     private static void selectBossMusic(LocalPlayer player, Minecraft minecraft) {
         if (minecraft.gui.getBossOverlay().shouldPlayMusic()) {
             AABB area = new AABB(player.blockPosition()).inflate(minecraft.levelRenderer.getLastViewDistance());
-            for (Entity boss : player.level().getEntities((Entity) null, area, entity -> entity instanceof Boss)) {
+            for (Entity boss : player.level().getEntities((Entity) null, area, entity -> entity instanceof Boss)) { // todo
 //                if (boss.getType() == TEBossEntities.KING_SLIME.get()) {
 //                    nextSong = KING_SLIME;
 //                } else if (boss.getType() == TEBossEntities.EYE_OF_CTHULHU.get()) {
@@ -125,70 +135,59 @@ public final class MusicHandler {
     }
 
     private static void selectMusic(LocalPlayer player) {
-//        if (player.level().dimension() != Level.OVERWORLD) return;
-//        BlockPos pos = player.blockPosition();
-//        int y = pos.getY();
-//        Level level = player.level();
-//        Holder<Biome> biome = lastBiome == null ? level.getBiome(pos) : lastBiome;
-//
-//        if (y > 260) {
-//            nextSong = SPACE_NIGHT;
-//        } else if (level.isRaining()) {
-//            long dayTime = level.getDayTime();
-//            if (dayTime >= 22500 || dayTime <= 1500) {
-//                nextSong = MORNING_RAIN;
-//            } else {
-//                nextSong = RAIN;
-//            }
-//        } else if (level.isThundering()) {
-//            nextSong = STORM;
-//        } else if (biome.is(ModBiomes.GLOWING_MUSHROOM)) {
-//            nextSong = MUSHROOMS;
-//        } else if (biome.is(Tags.Biomes.IS_ICY) || biome.is(Tags.Biomes.IS_SNOWY)) {
-//            switchMusic(y, ICE, UNDERGROUND_ICE);
-//        } else if (biome.is(ModTags.Biomes.THE_CORRUPTION)) {
-//            switchMusic(y, CORRUPTION, UNDERGROUND_CORRUPTION);
-//        } else if (biome.is(ModTags.Biomes.THE_CRIMSON)) {
-//            switchMusic(y, CRIMSON, UNDERGROUND_CRIMSON);
-//        } else if (biome.is(ModTags.Biomes.THE_HALLOW)) {
-//            switchMusic(y, THE_HALLOW, UNDERGROUND_HALLOW);
-//        } else if (biome.is(Tags.Biomes.IS_DESERT)) {
-//            nextSong = DESERT;
-//        } else if (biome.is(Tags.Biomes.IS_OCEAN)) {
-//            if (level.getDayTime() % 24000 < 12000) {
-//                nextSong = OCEAN_DAY;
-//            } else {
-//                nextSong = OCEAN_NIGHT;
-//            }
-//        } else if (biome.is(Tags.Biomes.IS_JUNGLE)) {
-//            if (y < 40) {
-//                nextSong = UNDERGROUND_JUNGLE;
-//            } else {
-//                if (level.getDayTime() % 24000 < 12000) {
-//                    nextSong = JUNGLE;
-//                } else {
-//                    nextSong = JUNGLE_NIGHT;
-//                }
-//            }
-//        } else {
-//            if (y < 40) {
-//                nextSong = player.getRandom().nextBoolean() ? UNDERGROUND : ALT_UNDERGROUND;
-//            } else {
-//                if (level.getDayTime() % 24000 < 12000) {
-//                    nextSong = player.getRandom().nextBoolean() ? OVERWORLD_DAY : ALT_OVERWORLD_DAY;
-//                } else {
-//                    nextSong = NIGHT;
-//                }
-//            }
-//        }
+        if (player.level().dimension() != Level.OVERWORLD) return;
+        BlockPos pos = player.blockPosition();
+        Level level = player.level();
+        Holder<Biome> biome = lastBiome == null ? level.getBiome(pos) : lastBiome;
+        long dayTime = level.getDayTime() % 24000;
+        boolean isDay = dayTime < 12000;
+        int y = pos.getY();
+        boolean isSurface = y >= 40;
+        MusicSelection selection;
+
+        if (y > 260) {
+            selection = isDay ? MusicSelection.SPACE_DAY : MusicSelection.SPACE_NIGHT;
+        } else if (level.isRaining()) {
+            if (dayTime >= 22500 || dayTime <= 1500) {
+                selection = MusicSelection.MORNING_RAIN;
+            } else {
+                selection = MusicSelection.RAIN;
+            }
+        } else if (level.isThundering()) {
+            selection = MusicSelection.STORM;
+        } else if (biome.is(ModBiomes.GLOWING_MUSHROOM)) {
+            selection = MusicSelection.MUSHROOMS;
+        } else if (biome.is(Tags.Biomes.IS_ICY)) {
+            selection = MusicSelection.ICE;
+        } else if (biome.is(Tags.Biomes.IS_SNOWY)) {
+            selection = MusicSelection.SNOW;
+        } else if (biome.is(ModTags.Biomes.THE_CORRUPTION)) {
+            selection = isSurface ? MusicSelection.CORRUPTION : MusicSelection.UNDERGROUND_CORRUPTION;
+        } else if (biome.is(ModTags.Biomes.THE_CRIMSON)) {
+            selection = isSurface ? MusicSelection.CRIMSON : MusicSelection.UNDERGROUND_CRIMSON;
+        } else if (biome.is(ModTags.Biomes.THE_HALLOW)) {
+            selection = isSurface ? MusicSelection.THE_HALLOW : MusicSelection.UNDERGROUND_HALLOW;
+        } else if (biome.is(Tags.Biomes.IS_DESERT)) {
+            selection = MusicSelection.DESERT;
+        } else if (biome.is(Tags.Biomes.IS_OCEAN)) {
+            selection = isDay ? MusicSelection.OCEAN_DAY : MusicSelection.OCEAN_NIGHT;
+        } else if (biome.is(Tags.Biomes.IS_JUNGLE)) {
+            selection = isSurface ? MusicSelection.JUNGLE : MusicSelection.UNDERGROUND_JUNGLE;
+        } else {
+            selection = isSurface ? (isDay ? MusicSelection.DAY : MusicSelection.NIGHT) : MusicSelection.UNDERGROUND;
+        }
+        nextSong = randomMusic(CMClientConfigs.musicType, selection);
     }
 
-    private static void switchMusic(int y, CachedLocationMusic surface, CachedLocationMusic underground) {
-        if (y < 40) {
-            nextSong = underground;
-        } else {
-            nextSong = surface;
-        }
+    private static @Nullable CachedLocationMusic randomMusic(ResourceLocation type, @Nullable MusicSelection selection) {
+        if (selection == null) return null;
+        Map<MusicSelection, List<CachedLocationMusic>> map = MusicSelectionLoader.getInstance().getRegisteredMusicSelections().get(type);
+        if (map == null) return null;
+        List<CachedLocationMusic> list = map.get(selection);
+        if (list == null) return null;
+        if (list.isEmpty()) return null;
+        if (list.size() == 1) return list.getFirst();
+        return Util.getRandom(list, RANDOM);
     }
 
     @SubscribeEvent

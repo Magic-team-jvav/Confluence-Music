@@ -20,18 +20,21 @@ import org.confluence.music.common.init.CMMusics;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.function.Function;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class MusicSelectionLoader implements PreparableReloadListener {
     private static MusicSelectionLoader INSTANCE;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    private static final Codec<Map<MusicSelection, CMMusics.CachedLocationMusic>> CODEC = Codec.unboundedMap(MusicSelection.CODEC, CMMusics.CachedLocationMusic.CODEC);
-    private Map<ResourceLocation, Map<MusicSelection, CMMusics.CachedLocationMusic>> registeredMusicSelections = ImmutableMap.of(); // <类型: <选项: 音乐>>
+    private static final Codec<EnumMap<MusicSelection, List<CMMusics.CachedLocationMusic>>> CODEC = Codec.unboundedMap(MusicSelection.CODEC, CMMusics.CachedLocationMusic.CODEC.listOf()).xmap(EnumMap::new, Function.identity());
+    private Map<ResourceLocation, Map<MusicSelection, List<CMMusics.CachedLocationMusic>>> registeredMusicSelections = ImmutableMap.of(); // <类型: <选项: 音乐>>
 
     @Override
     public final CompletableFuture<Void> reload(
@@ -65,7 +68,7 @@ public class MusicSelectionLoader implements PreparableReloadListener {
     }
 
     protected void apply(Map<ResourceLocation, JsonElement> resourceList) {
-        ImmutableMap.Builder<ResourceLocation, Map<MusicSelection, CMMusics.CachedLocationMusic>> builder = ImmutableMap.builder();
+        ImmutableMap.Builder<ResourceLocation, Map<MusicSelection, List<CMMusics.CachedLocationMusic>>> builder = ImmutableMap.builder();
         for (Map.Entry<ResourceLocation, JsonElement> entry : resourceList.entrySet()) {
             ResourceLocation location = entry.getKey();
             JsonElement json = entry.getValue();
@@ -76,7 +79,7 @@ public class MusicSelectionLoader implements PreparableReloadListener {
         this.registeredMusicSelections = builder.build();
     }
 
-    public Map<ResourceLocation, Map<MusicSelection, CMMusics.CachedLocationMusic>> getRegisteredMusicSelections() {
+    public Map<ResourceLocation, Map<MusicSelection, List<CMMusics.CachedLocationMusic>>> getRegisteredMusicSelections() {
         return registeredMusicSelections;
     }
 

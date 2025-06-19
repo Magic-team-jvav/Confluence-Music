@@ -18,6 +18,7 @@ public final class CMMusics {
     public static final CachedLocationMusic SNOW = register(CMSoundEvents.SNOW);
     public static final CachedLocationMusic ICE = register(CMSoundEvents.ICE);
     public static final CachedLocationMusic DESERT = register(CMSoundEvents.DESERT);
+    public static final CachedLocationMusic UNDERGROUND_DESERT = register(CMSoundEvents.UNDERGROUND_DESERT);
     public static final CachedLocationMusic OCEAN_DAY = register(CMSoundEvents.OCEAN_DAY);
     public static final CachedLocationMusic OCEAN_NIGHT = register(CMSoundEvents.OCEAN_NIGHT);
     public static final CachedLocationMusic SPACE_DAY = register(CMSoundEvents.SPACE_DAY);
@@ -26,6 +27,7 @@ public final class CMMusics {
     public static final CachedLocationMusic ALT_UNDERGROUND = register(CMSoundEvents.ALT_UNDERGROUND);
     public static final CachedLocationMusic MUSHROOMS = register(CMSoundEvents.MUSHROOMS);
     public static final CachedLocationMusic JUNGLE = register(CMSoundEvents.JUNGLE);
+    public static final CachedLocationMusic UNDERGROUND_JUNGLE = register(CMSoundEvents.UNDERGROUND_JUNGLE);
     public static final CachedLocationMusic CORRUPTION = register(CMSoundEvents.CORRUPTION);
     public static final CachedLocationMusic UNDERGROUND_CORRUPTION = register(CMSoundEvents.UNDERGROUND_CORRUPTION);
     public static final CachedLocationMusic CRIMSON = register(CMSoundEvents.CRIMSON);
@@ -72,9 +74,7 @@ public final class CMMusics {
     public static final CachedLocationMusic WINDY_DAY = register(CMSoundEvents.WINDY_DAY);
     public static final CachedLocationMusic STORM = register(CMSoundEvents.STORM);
     public static final CachedLocationMusic GRAVEYARD = register(CMSoundEvents.GRAVEYARD);
-    public static final CachedLocationMusic UNDERGROUND_JUNGLE = register(CMSoundEvents.UNDERGROUND_JUNGLE);
     public static final CachedLocationMusic MORNING_RAIN = register(CMSoundEvents.MORNING_RAIN);
-    public static final CachedLocationMusic UNDERGROUND_DESERT = register(CMSoundEvents.UNDERGROUND_DESERT);
 
     public static final CachedLocationMusic OTHERWORLDLY_RAIN = register(CMSoundEvents.OTHERWORLDLY_RAIN);
     public static final CachedLocationMusic OTHERWORLDLY_OVERWORLD_DAY = register(CMSoundEvents.OTHERWORLDLY_OVERWORLD_DAY);
