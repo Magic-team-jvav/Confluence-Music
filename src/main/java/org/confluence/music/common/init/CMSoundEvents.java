@@ -9,16 +9,22 @@ import org.confluence.music.ConfluenceMusic;
 public final class CMSoundEvents {
     public static final DeferredRegister<SoundEvent> EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, ConfluenceMusic.MODID);
 
+    // common
     public static final DeferredHolder<SoundEvent, SoundEvent> OTHERWORLD = register("otherworld"); // 汇流常规主题曲
-    // 群系
     public static final DeferredHolder<SoundEvent, SoundEvent> OVERWORLD_DAY = register("overworld_day");
     public static final DeferredHolder<SoundEvent, SoundEvent> ALT_OVERWORLD_DAY = register("alt_overworld_day");
-    public static final DeferredHolder<SoundEvent, SoundEvent> NIGHT = register("night");
-    public static final DeferredHolder<SoundEvent, SoundEvent> RAIN = register("rain");
+    public static final DeferredHolder<SoundEvent, SoundEvent> OVERWORLD_NIGHT = register("overworld_night");
+    public static final DeferredHolder<SoundEvent, SoundEvent> JOURNEYS_BEGINNING = register("journeys_beginning"); // 旅程开始
+    public static final DeferredHolder<SoundEvent, SoundEvent> JOURNEYS_END = register("journeys_end");
+    public static final DeferredHolder<SoundEvent, SoundEvent> TITLE = register("title");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ALT_TITLE = register("alt_title"); // 标题备选曲
+    public static final DeferredHolder<SoundEvent, SoundEvent> DAY_REMIX = register("day_remix"); // 白天混音
+    // location
     public static final DeferredHolder<SoundEvent, SoundEvent> SNOW = register("snow");
     public static final DeferredHolder<SoundEvent, SoundEvent> ICE = register("ice");
     public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_ICE = register("underground_ice");
     public static final DeferredHolder<SoundEvent, SoundEvent> DESERT = register("desert");
+    public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_DESERT = register("underground_desert");
     public static final DeferredHolder<SoundEvent, SoundEvent> OCEAN_DAY = register("ocean_day");
     public static final DeferredHolder<SoundEvent, SoundEvent> OCEAN_NIGHT = register("ocean_night");
     public static final DeferredHolder<SoundEvent, SoundEvent> SPACE_DAY = register("space_day");
@@ -28,6 +34,7 @@ public final class CMSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSHROOMS = register("mushrooms");
     public static final DeferredHolder<SoundEvent, SoundEvent> JUNGLE = register("jungle");
     public static final DeferredHolder<SoundEvent, SoundEvent> JUNGLE_NIGHT = register("jungle_night");
+    public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_JUNGLE = register("underground_jungle");
     public static final DeferredHolder<SoundEvent, SoundEvent> CORRUPTION = register("corruption");
     public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_CORRUPTION = register("underground_corruption");
     public static final DeferredHolder<SoundEvent, SoundEvent> CRIMSON = register("crimson");
@@ -38,12 +45,9 @@ public final class CMSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> DUNGEON = register("dungeon");
     public static final DeferredHolder<SoundEvent, SoundEvent> TEMPLE = register("temple");
     public static final DeferredHolder<SoundEvent, SoundEvent> AETHER = register("aether");
-
-    public static final DeferredHolder<SoundEvent, SoundEvent> JOURNEYS_BEGINNING = register("journeys_beginning"); // 旅程开始
-    public static final DeferredHolder<SoundEvent, SoundEvent> JOURNEYS_END = register("journeys_end");
-    public static final DeferredHolder<SoundEvent, SoundEvent> TITLE = register("title");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ALT_TITLE = register("alt_title"); // 标题备选曲
-    public static final DeferredHolder<SoundEvent, SoundEvent> DAY_REMIX = register("day_remix"); // 白天混音
+    public static final DeferredHolder<SoundEvent, SoundEvent> GRAVEYARD = register("graveyard");
+    public static final DeferredHolder<SoundEvent, SoundEvent> TOWN_DAY = register("town_day");
+    public static final DeferredHolder<SoundEvent, SoundEvent> TOWN_NIGHT = register("town_night");
     // boss
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_1 = register("boss_1");
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_2 = register("boss_2");
@@ -55,11 +59,11 @@ public final class CMSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> PLANTERA = register("plantera");
     public static final DeferredHolder<SoundEvent, SoundEvent> EMPRESS_OF_LIGHT = register("empress_of_light");
     public static final DeferredHolder<SoundEvent, SoundEvent> DUKE_FISHRON = register("duke_fishron");
-    public static final DeferredHolder<SoundEvent, SoundEvent> LUNAR_BOSS = register("lunar_boss");
-    // 事件
+    public static final DeferredHolder<SoundEvent, SoundEvent> MOON_LORD = register("moon_lord");
+    // event
     public static final DeferredHolder<SoundEvent, SoundEvent> EERIE = register("eerie"); // 血月
     public static final DeferredHolder<SoundEvent, SoundEvent> ECLIPSE = register("eclipse"); // 日食
-    public static final DeferredHolder<SoundEvent, SoundEvent> GOBLIN_INVASION = register("goblin_invasion");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GOBLIN_ARMY = register("goblin_army");
     public static final DeferredHolder<SoundEvent, SoundEvent> PIRATE_INVASION = register("pirate_invasion");
     public static final DeferredHolder<SoundEvent, SoundEvent> MARTIAN_MADNESS = register("martian_madness"); // 火星暴乱
     public static final DeferredHolder<SoundEvent, SoundEvent> PUMPKIN_MOON = register("pumpkin_moon");
@@ -68,15 +72,11 @@ public final class CMSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> SANDSTORM = register("sandstorm");
     public static final DeferredHolder<SoundEvent, SoundEvent> OLD_ONES_ARMY = register("old_ones_army");
     public static final DeferredHolder<SoundEvent, SoundEvent> SLIME_RAIN = register("slime_rain");
-    public static final DeferredHolder<SoundEvent, SoundEvent> TOWN_DAY = register("town_day");
-    public static final DeferredHolder<SoundEvent, SoundEvent> TOWN_NIGHT = register("town_night");
     public static final DeferredHolder<SoundEvent, SoundEvent> WINDY_DAY = register("windy_day");
-    public static final DeferredHolder<SoundEvent, SoundEvent> STORM = register("storm");
-    public static final DeferredHolder<SoundEvent, SoundEvent> GRAVEYARD = register("graveyard");
-    public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_JUNGLE = register("underground_jungle");
+    public static final DeferredHolder<SoundEvent, SoundEvent> RAIN = register("rain");
     public static final DeferredHolder<SoundEvent, SoundEvent> MORNING_RAIN = register("morning_rain");
-    public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_DESERT = register("underground_desert");
-    // 来世
+    public static final DeferredHolder<SoundEvent, SoundEvent> STORM = register("storm");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> OTHERWORLDLY_RAIN = register("otherworldly_rain");
     public static final DeferredHolder<SoundEvent, SoundEvent> OTHERWORLDLY_OVERWORLD_DAY = register("otherworldly_overworld_day");
     public static final DeferredHolder<SoundEvent, SoundEvent> OTHERWORLDLY_NIGHT = register("otherworldly_night");

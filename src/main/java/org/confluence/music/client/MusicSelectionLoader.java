@@ -26,7 +26,7 @@ public class MusicSelectionLoader extends SimpleJsonResourceReloadListener {
     public static final Codec<EnumMap<MusicSelection, List<CMMusics.CachedLocationMusic>>> CODEC = Codec.unboundedMap(MusicSelection.CODEC, CMMusics.CachedLocationMusic.CODEC.listOf()).xmap(EnumMap::new, Function.identity());
     private static MusicSelectionLoader INSTANCE;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    private Map<ResourceLocation, Map<MusicSelection, List<CMMusics.CachedLocationMusic>>> registeredMusicSelections = ImmutableMap.of(); // <类型: <选项: 音乐>>
+    private Map<ResourceLocation, Map<MusicSelection, List<CMMusics.CachedLocationMusic>>> registeredMusicSelections = ImmutableMap.of(); // <类型: <选项: [音乐,]>>
 
     public MusicSelectionLoader() {
         super(GSON, "music_selection");

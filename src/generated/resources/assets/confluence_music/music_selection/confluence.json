@@ -5,6 +5,12 @@
       "sound": "confluence_music:aether"
     }
   ],
+  "blood_moon": [
+    {
+      "type": "event",
+      "sound": "confluence_music:eerie"
+    }
+  ],
   "brain_of_cthulhu": [
     {
       "type": "boss",
@@ -25,11 +31,11 @@
   ],
   "day": [
     {
-      "type": "location",
+      "type": "common",
       "sound": "confluence_music:overworld_day"
     },
     {
-      "type": "location",
+      "type": "common",
       "sound": "confluence_music:alt_overworld_day"
     }
   ],
@@ -39,10 +45,22 @@
       "sound": "confluence_music:day_remix"
     }
   ],
+  "deerclops": [
+    {
+      "type": "boss",
+      "sound": "confluence_music:deerclops"
+    }
+  ],
   "desert": [
     {
       "type": "location",
       "sound": "confluence_music:desert"
+    }
+  ],
+  "duke_fishron": [
+    {
+      "type": "boss",
+      "sound": "confluence_music:duke_fishron"
     }
   ],
   "dungeon": [
@@ -63,10 +81,10 @@
       "sound": "confluence_music:eclipse"
     }
   ],
-  "eerie": [
+  "empress_of_light": [
     {
-      "type": "event",
-      "sound": "confluence_music:eerie"
+      "type": "boss",
+      "sound": "confluence_music:empress_of_light"
     }
   ],
   "eye_of_cthulhu": [
@@ -81,10 +99,16 @@
       "sound": "confluence_music:frost_moon"
     }
   ],
-  "goblin_invasion": [
+  "goblin_army": [
     {
       "type": "event",
-      "sound": "confluence_music:goblin_invasion"
+      "sound": "confluence_music:goblin_army"
+    }
+  ],
+  "golem": [
+    {
+      "type": "boss",
+      "sound": "confluence_music:boss_4"
     }
   ],
   "graveyard": [
@@ -129,15 +153,39 @@
       "sound": "confluence_music:boss_1"
     }
   ],
+  "lunar_events": [
+    {
+      "type": "event",
+      "sound": "confluence_music:the_towers"
+    }
+  ],
+  "lunatic_cultist": [
+    {
+      "type": "boss",
+      "sound": "confluence_music:boss_4"
+    }
+  ],
   "martian_madness": [
     {
       "type": "event",
       "sound": "confluence_music:martian_madness"
     }
   ],
+  "meteorite": [
+    {
+      "type": "event",
+      "sound": "confluence_music:eerie"
+    }
+  ],
+  "moon_lord": [
+    {
+      "type": "boss",
+      "sound": "confluence_music:moon_lord"
+    }
+  ],
   "morning_rain": [
     {
-      "type": "common",
+      "type": "event",
       "sound": "confluence_music:morning_rain"
     }
   ],
@@ -149,8 +197,8 @@
   ],
   "night": [
     {
-      "type": "location",
-      "sound": "confluence_music:night"
+      "type": "common",
+      "sound": "confluence_music:overworld_night"
     }
   ],
   "ocean_day": [
@@ -177,6 +225,12 @@
       "sound": "confluence_music:pirate_invasion"
     }
   ],
+  "plantera": [
+    {
+      "type": "boss",
+      "sound": "confluence_music:plantera"
+    }
+  ],
   "pumpkin_moon": [
     {
       "type": "event",
@@ -189,9 +243,21 @@
       "sound": "confluence_music:boss_5"
     }
   ],
-  "rain": [
+  "queen_slime": [
     {
-      "type": "common",
+      "type": "boss",
+      "sound": "confluence_music:queen_slime"
+    }
+  ],
+  "rain_day": [
+    {
+      "type": "event",
+      "sound": "confluence_music:rain"
+    }
+  ],
+  "rain_night": [
+    {
+      "type": "event",
       "sound": "confluence_music:rain"
     }
   ],
@@ -202,6 +268,12 @@
     }
   ],
   "skeletron": [
+    {
+      "type": "boss",
+      "sound": "confluence_music:boss_1"
+    }
+  ],
+  "skeletron_prime": [
     {
       "type": "boss",
       "sound": "confluence_music:boss_1"
@@ -247,22 +319,40 @@
       "sound": "confluence_music:temple"
     }
   ],
-  "the_hallow": [
+  "the_destroyer": [
+    {
+      "type": "boss",
+      "sound": "confluence_music:boss_3"
+    }
+  ],
+  "the_hallow_day": [
     {
       "type": "location",
       "sound": "confluence_music:the_hallow"
     }
   ],
-  "the_towers": [
+  "the_hallow_night": [
     {
-      "type": "event",
-      "sound": "confluence_music:the_towers"
+      "type": "common",
+      "sound": "confluence_music:overworld_night"
+    }
+  ],
+  "the_twins": [
+    {
+      "type": "boss",
+      "sound": "confluence_music:boss_2"
     }
   ],
   "title": [
     {
       "type": "common",
       "sound": "confluence_music:title"
+    }
+  ],
+  "torch_god": [
+    {
+      "type": "boss",
+      "sound": "confluence_music:boss_3"
     }
   ],
   "town_day": [
@@ -297,6 +387,12 @@
     {
       "type": "location",
       "sound": "confluence_music:underground_crimson"
+    }
+  ],
+  "underground_desert": [
+    {
+      "type": "location",
+      "sound": "confluence_music:underground_desert"
     }
   ],
   "underground_hallow": [

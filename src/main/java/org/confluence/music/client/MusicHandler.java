@@ -167,7 +167,7 @@ public final class MusicHandler {
                 if (dayTime >= 22500 || dayTime <= 1500) {
                     selection = MusicSelection.MORNING_RAIN; // 4:30 -> 7:30
                 } else {
-                    selection = MusicSelection.RAIN;
+                    selection = isDay ? MusicSelection.RAIN_DAY : MusicSelection.RAIN_NIGHT;
                 }
             } else if (level.isThundering()) {
                 selection = MusicSelection.STORM;
@@ -182,7 +182,7 @@ public final class MusicHandler {
             } else if (biome.is(ModTags.Biomes.THE_CRIMSON)) {
                 selection = isSurface ? MusicSelection.CRIMSON : MusicSelection.UNDERGROUND_CRIMSON;
             } else if (biome.is(ModTags.Biomes.THE_HALLOW)) {
-                selection = isSurface ? MusicSelection.THE_HALLOW : MusicSelection.UNDERGROUND_HALLOW;
+                selection = isSurface ? (isDay ? MusicSelection.THE_HALLOW_DAY : MusicSelection.THE_HALLOW_NIGHT) : MusicSelection.UNDERGROUND_HALLOW;
             } else if (biome.is(Tags.Biomes.IS_DESERT)) {
                 selection = isSurface ? MusicSelection.DESERT : MusicSelection.UNDERGROUND_DESERT;
             } else if (biome.is(Tags.Biomes.IS_OCEAN)) {
@@ -200,10 +200,15 @@ public final class MusicHandler {
 
     private static @Nullable CachedLocationMusic randomMusic(ResourceLocation type, @Nullable MusicSelection selection) {
         if (selection == null) return null;
-        Map<MusicSelection, List<CachedLocationMusic>> map = MusicSelectionLoader.getInstance().getRegisteredMusicSelections().get(type);
-        if (map == null) return null;
+        Map<ResourceLocation, Map<MusicSelection, List<CachedLocationMusic>>> selections = MusicSelectionLoader.getInstance().getRegisteredMusicSelections();
+        Map<MusicSelection, List<CachedLocationMusic>> map = selections.get(type);
+        if (map == null) {
+            if (CONFLUENCE.equals(type) || (map = selections.get(CONFLUENCE)) == null) return null;
+        }
         List<CachedLocationMusic> list = map.get(selection);
-        if (list == null) return null;
+        if (list == null) {
+            if (CONFLUENCE.equals(type) || (list = map.get(selection)) == null) return null;
+        }
         if (list.isEmpty()) return null;
         if (list.size() == 1) return list.getFirst();
         return Util.getRandom(list, RANDOM);

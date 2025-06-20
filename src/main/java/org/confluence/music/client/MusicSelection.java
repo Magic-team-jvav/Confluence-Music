@@ -9,12 +9,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
-// todo 补充选项
 @NetworkedEnum(NetworkedEnum.NetworkCheck.BIDIRECTIONAL)
 public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     DAY,
     NIGHT,
-    RAIN,
+    JOURNEYS_BEGINNING,
+    JOURNEYS_END,
+    TITLE,
+    DAY_REMIX,
+
     SNOW,
     ICE,
     UNDERGROUND_ICE,
@@ -33,46 +36,55 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     UNDERGROUND_CORRUPTION,
     CRIMSON,
     UNDERGROUND_CRIMSON,
-    THE_HALLOW,
+    THE_HALLOW_DAY,
+    THE_HALLOW_NIGHT,
     UNDERGROUND_HALLOW,
     UNDERWORLD,
     DUNGEON,
     TEMPLE,
     AETHER,
-
-    JOURNEYS_BEGINNING,
-    JOURNEYS_END,
-    TITLE,
-    DAY_REMIX,
+    METEORITE,
+    GRAVEYARD,
+    TOWN_DAY,
+    TOWN_NIGHT,
 
     KING_SLIME,
     EYE_OF_CTHULHU,
     EATER_OF_WORLDS,
     BRAIN_OF_CTHULHU,
     QUEEN_BEE,
+    DEERCLOPS,
     SKELETRON,
     WALL_OF_FLESH,
-    // todo boss
+    QUEEN_SLIME,
+    THE_TWINS,
+    THE_DESTROYER,
+    SKELETRON_PRIME,
+    PLANTERA,
+    GOLEM,
+    DUKE_FISHRON,
+    EMPRESS_OF_LIGHT,
+    LUNATIC_CULTIST, // 拜月教徒
+    MOON_LORD,
 
-    EERIE,
+    BLOOD_MOON,
     ECLIPSE,
-    GOBLIN_INVASION,
+    GOBLIN_ARMY,
     PIRATE_INVASION,
     MARTIAN_MADNESS,
     PUMPKIN_MOON,
     FROST_MOON,
-    THE_TOWERS,
+    LUNAR_EVENTS,
     SANDSTORM,
-    OLD_ONES_ARMY,
+    OLD_ONES_ARMY, // 旧日军团
     SLIME_RAIN,
-    TOWN_DAY,
-    TOWN_NIGHT,
     WINDY_DAY,
-    STORM,
-    GRAVEYARD,
+    TORCH_GOD,
+    FROST_LEGION, // 雪人军团
+    RAIN_DAY,
+    RAIN_NIGHT,
     MORNING_RAIN,
-
-    /* otherworldly */
+    STORM,
     ;
 
     public static final Codec<MusicSelection> CODEC = StringRepresentable.fromEnum(MusicSelection::values);
