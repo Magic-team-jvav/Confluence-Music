@@ -26,5 +26,9 @@ public class CMDataGenerators {
         generator.addProvider(client, new CMItemModelProvider(output, helper));
 
         boolean server = event.includeServer();
+        CMBlockTagsProvider blockTagsProvider = new CMBlockTagsProvider(output, lookup, helper);
+        generator.addProvider(server, blockTagsProvider);
+        generator.addProvider(server, new CMItemTagsProvider(output, lookup, blockTagsProvider.contentsGetter(), helper));
+        generator.addProvider(server, new CMDataMapProvider(output, lookup));
     }
 }
