@@ -12,7 +12,7 @@ import org.confluence.music.ConfluenceMusic;
 import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = ConfluenceMusic.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class CMDataGenerators {
+public final class CMDataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
@@ -24,6 +24,7 @@ public class CMDataGenerators {
         generator.addProvider(client, new CMLanguageProvider(output, true));
         generator.addProvider(client, new CMLanguageProvider(output, false));
         generator.addProvider(client, new CMItemModelProvider(output, helper));
+        generator.addProvider(client, new CMMusicSelectionProvider(output, lookup));
 
         boolean server = event.includeServer();
         CMBlockTagsProvider blockTagsProvider = new CMBlockTagsProvider(output, lookup, helper);

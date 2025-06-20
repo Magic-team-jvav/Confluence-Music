@@ -165,7 +165,7 @@ public final class MusicHandler {
                 selection = isDay ? MusicSelection.SPACE_DAY : MusicSelection.SPACE_NIGHT;
             } else if (level.isRaining()) {
                 if (dayTime >= 22500 || dayTime <= 1500) {
-                    selection = MusicSelection.MORNING_RAIN;
+                    selection = MusicSelection.MORNING_RAIN; // 4:30 -> 7:30
                 } else {
                     selection = MusicSelection.RAIN;
                 }
@@ -174,7 +174,7 @@ public final class MusicHandler {
             } else if (biome.is(ModBiomes.GLOWING_MUSHROOM)) {
                 selection = MusicSelection.MUSHROOMS;
             } else if (biome.is(Tags.Biomes.IS_ICY)) {
-                selection = MusicSelection.ICE;
+                selection = isSurface ? MusicSelection.ICE : MusicSelection.UNDERGROUND_ICE;
             } else if (biome.is(Tags.Biomes.IS_SNOWY)) {
                 selection = MusicSelection.SNOW;
             } else if (biome.is(ModTags.Biomes.THE_CORRUPTION)) {
@@ -188,12 +188,12 @@ public final class MusicHandler {
             } else if (biome.is(Tags.Biomes.IS_OCEAN)) {
                 selection = isDay ? MusicSelection.OCEAN_DAY : MusicSelection.OCEAN_NIGHT;
             } else if (biome.is(Tags.Biomes.IS_JUNGLE)) {
-                selection = isSurface ? MusicSelection.JUNGLE : MusicSelection.UNDERGROUND_JUNGLE;
+                selection = isSurface ? (isDay ? MusicSelection.JUNGLE_DAY : MusicSelection.JUNGLE_NIGHT) : MusicSelection.UNDERGROUND_JUNGLE;
             } else {
                 selection = isSurface ? (isDay ? MusicSelection.DAY : MusicSelection.NIGHT) : MusicSelection.UNDERGROUND;
             }
         } else if (dimension == Level.NETHER) {
-            selection = MusicSelection.HELL;
+            selection = MusicSelection.UNDERWORLD;
         }
         nextSong = randomMusic(CMClientConfigs.musicType, selection);
     }

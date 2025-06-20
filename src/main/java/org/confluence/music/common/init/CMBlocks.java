@@ -22,7 +22,7 @@ public final class CMBlocks {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, ConfluenceMusic.MODID);
     private static List<Supplier<? extends Block>> MUSIC_BOXES = new ArrayList<>();
 
-    public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX = register(null);
+    public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX = register("music_box", null);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_OTHERWORLD = register(CMMusics.OTHERWORLD);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_OVERWORLD_DAY = register(CMMusics.OVERWORLD_DAY);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_ALT_OVERWORLD_DAY = register(CMMusics.ALT_OVERWORLD_DAY);
@@ -47,7 +47,7 @@ public final class CMBlocks {
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_UNDERGROUND_CRIMSON = register(CMMusics.UNDERGROUND_CRIMSON);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_THE_HALLOW = register(CMMusics.THE_HALLOW);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_UNDERGROUND_HALLOW = register(CMMusics.UNDERGROUND_HALLOW);
-    public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_HELL = register(CMMusics.HELL);
+    public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_HELL = register("music_box_hell", CMMusics.UNDERWORLD);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_DUNGEON = register(CMMusics.DUNGEON);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_TEMPLE = register(CMMusics.TEMPLE);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_AETHER = register(CMMusics.AETHER);
@@ -120,16 +120,16 @@ public final class CMBlocks {
 
     private static DeferredBlock<MusicBoxBlock> register(@Nullable Music music) {
         String id;
-        if (music == null) {
-            id = "music_box";
+        String path = music.getEvent().getKey().location().getPath();
+        if (path.startsWith("otherworldly_")) {
+            id = "otherworldly_music_box_" + path.substring(13);
         } else {
-            String path = music.getEvent().getKey().location().getPath();
-            if (path.startsWith("otherworldly_")) {
-                id = "otherworldly_music_box_" + path.substring(13);
-            } else {
-                id = "music_box_" + path;
-            }
+            id = "music_box_" + path;
         }
+        return register(id, music);
+    }
+
+    private static DeferredBlock<MusicBoxBlock> register(String id, @Nullable Music music) {
         DeferredBlock<MusicBoxBlock> object = BLOCKS.register(id, () -> new MusicBoxBlock(music));
         CMItems.ITEMS.register(id, () -> new MusicBoxItem(object.get()));
         MUSIC_BOXES.add(object);

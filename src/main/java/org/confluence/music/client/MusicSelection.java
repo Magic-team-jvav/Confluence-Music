@@ -17,6 +17,7 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     RAIN,
     SNOW,
     ICE,
+    UNDERGROUND_ICE,
     DESERT,
     UNDERGROUND_DESERT,
     OCEAN_DAY,
@@ -25,7 +26,8 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     SPACE_NIGHT,
     UNDERGROUND,
     MUSHROOMS,
-    JUNGLE,
+    JUNGLE_DAY,
+    JUNGLE_NIGHT,
     UNDERGROUND_JUNGLE,
     CORRUPTION,
     UNDERGROUND_CORRUPTION,
@@ -33,14 +35,13 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     UNDERGROUND_CRIMSON,
     THE_HALLOW,
     UNDERGROUND_HALLOW,
-    HELL,
+    UNDERWORLD,
     DUNGEON,
     TEMPLE,
     AETHER,
 
-    JOURNEYS_END,
-
     JOURNEYS_BEGINNING,
+    JOURNEYS_END,
     TITLE,
     DAY_REMIX,
 
@@ -51,6 +52,7 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     QUEEN_BEE,
     SKELETRON,
     WALL_OF_FLESH,
+    // todo boss
 
     EERIE,
     ECLIPSE,
