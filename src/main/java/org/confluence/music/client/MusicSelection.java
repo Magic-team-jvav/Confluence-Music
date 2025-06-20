@@ -44,7 +44,13 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     TITLE,
     DAY_REMIX,
 
-    /* boss */
+    KING_SLIME,
+    EYE_OF_CTHULHU,
+    EATER_OF_WORLDS,
+    BRAIN_OF_CTHULHU,
+    QUEEN_BEE,
+    SKELETRON,
+    WALL_OF_FLESH,
 
     EERIE,
     ECLIPSE,

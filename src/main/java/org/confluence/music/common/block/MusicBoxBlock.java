@@ -1,5 +1,6 @@
 package org.confluence.music.common.block;
 
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.sounds.MusicManager;
@@ -35,6 +36,10 @@ import org.confluence.music.mixed.IMusicManager;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class MusicBoxBlock extends AbstractMechanicalBlock {
     public final @Nullable Music music;
 

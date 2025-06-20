@@ -23,6 +23,7 @@ public class CMDataGenerators {
         boolean client = event.includeClient();
         generator.addProvider(client, new CMLanguageProvider(output, true));
         generator.addProvider(client, new CMLanguageProvider(output, false));
+        generator.addProvider(client, new CMItemModelProvider(output, helper));
 
         boolean server = event.includeServer();
     }
