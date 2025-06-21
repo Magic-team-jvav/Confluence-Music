@@ -10,12 +10,12 @@ public final class CMSoundEvents {
     public static final DeferredRegister<SoundEvent> EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, ConfluenceMusic.MODID);
 
     // common
-    public static final DeferredHolder<SoundEvent, SoundEvent> OTHERWORLD = register("otherworld"); // 汇流常规主题曲
-    public static final DeferredHolder<SoundEvent, SoundEvent> OVERWORLD_DAY = register("overworld_day");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ALT_OVERWORLD_DAY = register("alt_overworld_day");
-    public static final DeferredHolder<SoundEvent, SoundEvent> OVERWORLD_NIGHT = register("overworld_night");
+    public static final DeferredHolder<SoundEvent, SoundEvent> NEW_JOURNEY = register("new_journey"); // 汇流主题曲
+    public static final DeferredHolder<SoundEvent, SoundEvent> OVERWORLD_DAY = register("overworld_day");  // 常规白天
+    public static final DeferredHolder<SoundEvent, SoundEvent> ALT_OVERWORLD_DAY = register("alt_overworld_day"); // 常规白天备选
+    public static final DeferredHolder<SoundEvent, SoundEvent> OVERWORLD_NIGHT = register("overworld_night"); // 常规夜晚
     public static final DeferredHolder<SoundEvent, SoundEvent> JOURNEYS_BEGINNING = register("journeys_beginning"); // 旅程开始
-    public static final DeferredHolder<SoundEvent, SoundEvent> JOURNEYS_END = register("journeys_end");
+    public static final DeferredHolder<SoundEvent, SoundEvent> JOURNEYS_END = register("journeys_end"); // 旅程结束
     public static final DeferredHolder<SoundEvent, SoundEvent> TITLE = register("title");
     public static final DeferredHolder<SoundEvent, SoundEvent> ALT_TITLE = register("alt_title"); // 标题备选曲
     public static final DeferredHolder<SoundEvent, SoundEvent> DAY_REMIX = register("day_remix"); // 白天混音

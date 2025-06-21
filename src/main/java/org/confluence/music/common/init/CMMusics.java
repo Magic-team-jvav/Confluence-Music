@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Locale;
 
 public final class CMMusics {
-    public static final CachedLocationMusic OTHERWORLD = register(CMSoundEvents.OTHERWORLD, Type.COMMON);
+    public static final CachedLocationMusic OTHERWORLD = register(CMSoundEvents.NEW_JOURNEY, Type.COMMON);
     public static final CachedLocationMusic OVERWORLD_DAY = register(CMSoundEvents.OVERWORLD_DAY, Type.COMMON);
     public static final CachedLocationMusic ALT_OVERWORLD_DAY = register(CMSoundEvents.ALT_OVERWORLD_DAY, Type.COMMON);
     public static final CachedLocationMusic OVERWORLD_NIGHT = register(CMSoundEvents.OVERWORLD_NIGHT, Type.COMMON);
