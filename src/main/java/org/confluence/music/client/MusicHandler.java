@@ -22,6 +22,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
@@ -71,7 +72,7 @@ public final class MusicHandler {
         }
     };
     private static CachedLocationMusic nextSong;
-    private static int nextSongDelay = 2400;
+    private static int nextSongDelay = 10;
     private static Holder<Biome> lastBiome;
     private static int nextBiomeCheck = 100;
     private static float volume = 1.0F;
@@ -111,7 +112,7 @@ public final class MusicHandler {
             } else {
                 minecraft.getMusicManager().stopPlaying();
                 event.setMusic(nextSong);
-                nextSongDelay = 2400;
+                nextSongDelay = CMClientConfigs.nextSongDelay;
                 volume = 1.0F;
                 nextSong = null;
             }
@@ -124,7 +125,7 @@ public final class MusicHandler {
 
     public static void clear() {
         nextSong = null;
-        nextSongDelay = 1200;
+        nextSongDelay = CMClientConfigs.nextSongDelay;
         lastBiome = null;
         nextBiomeCheck = 100;
         volume = 1.0F;
@@ -240,5 +241,11 @@ public final class MusicHandler {
 
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(CMClientConfigs::onLoad);
+    }
+
+    public static void modConfig$reloading(ModConfigEvent.Reloading event) {
+        if (ConfluenceMusic.MODID.equals(event.getConfig().getModId())) {
+            CMClientConfigs.onLoad();
+        }
     }
 }

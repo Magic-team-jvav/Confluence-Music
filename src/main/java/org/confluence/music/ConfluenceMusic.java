@@ -34,6 +34,7 @@ public class ConfluenceMusic {
             container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
             eventBus.addListener(MusicHandler::registerClientReloadListeners);
             eventBus.addListener(MusicHandler::clientSetup);
+            eventBus.addListener(MusicHandler::modConfig$reloading);
         }
         CMBlocks.BLOCKS.register(eventBus);
         CMItems.ITEMS.register(eventBus);

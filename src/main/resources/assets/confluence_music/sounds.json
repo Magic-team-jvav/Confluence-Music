@@ -1,280 +1,452 @@
 {
     "new_journey": {
-        "sounds": ["confluence:new_journey"]
+        "sounds": [
+            "confluence_music:new_journey"
+        ]
     },
     "overworld_day": {
-        "sounds": ["confluence:overworld_day"]
+        "sounds": [
+            "confluence_music:overworld_day"
+        ]
     },
     "alt_overworld_day": {
-        "sounds": ["confluence:alt_overworld_day"]
+        "sounds": [
+            "confluence_music:alt_overworld_day"
+        ]
     },
     "overworld_night": {
-        "sounds": ["confluence:overworld_night"]
+        "sounds": [
+            "confluence_music:overworld_night"
+        ]
     },
     "journeys_beginning": {
-        "sounds": ["confluence:journeys_beginning"]
+        "sounds": [
+            "confluence_music:journeys_beginning"
+        ]
     },
     "journeys_end": {
-        "sounds": ["confluence:journeys_end"]
+        "sounds": [
+            "confluence_music:journeys_end"
+        ]
     },
     "title": {
-        "sounds": ["confluence:title"]
+        "sounds": [
+            "confluence_music:title"
+        ]
     },
     "alt_title": {
-        "sounds": ["confluence:alt_title"]
+        "sounds": [
+            "confluence_music:alt_title"
+        ]
     },
     "day_remix": {
-        "sounds": ["confluence:day_remix"]
+        "sounds": [
+            "confluence_music:day_remix"
+        ]
     },
-
-
     "snow": {
-        "sounds": ["confluence:snow"]
+        "sounds": [
+            "confluence_music:snow"
+        ]
     },
     "ice": {
-        "sounds": ["confluence:ice"]
+        "sounds": [
+            "confluence_music:ice"
+        ]
     },
     "underground_ice": {
-        "sounds": ["confluence:underground_ice"]
+        "sounds": [
+            "confluence_music:underground_ice"
+        ]
     },
     "desert": {
-        "sounds": ["confluence:desert"]
+        "sounds": [
+            "confluence_music:desert"
+        ]
     },
     "underground_desert": {
-        "sounds": ["confluence:underground_desert"]
+        "sounds": [
+            "confluence_music:underground_desert"
+        ]
     },
     "ocean_day": {
-        "sounds": ["confluence:ocean_day"]
+        "sounds": [
+            "confluence_music:ocean_day"
+        ]
     },
     "ocean_night": {
-        "sounds": ["confluence:ocean_night"]
+        "sounds": [
+            "confluence_music:ocean_night"
+        ]
     },
     "space_day": {
-        "sounds": ["confluence:space_day"]
+        "sounds": [
+            "confluence_music:space_day"
+        ]
     },
     "space_night": {
-        "sounds": ["confluence:space_night"]
+        "sounds": [
+            "confluence_music:space_night"
+        ]
     },
     "underground": {
-        "sounds": ["confluence:underground"]
+        "sounds": [
+            "confluence_music:underground"
+        ]
     },
     "alt_underground": {
-        "sounds": ["confluence:alt_underground"]
+        "sounds": [
+            "confluence_music:alt_underground"
+        ]
     },
     "mushrooms": {
-        "sounds": ["confluence:mushrooms"]
+        "sounds": [
+            "confluence_music:mushrooms"
+        ]
     },
     "jungle": {
-        "sounds": ["confluence:jungle"]
+        "sounds": [
+            "confluence_music:jungle"
+        ]
     },
     "jungle_night": {
-        "sounds": ["confluence:jungle_night"]
+        "sounds": [
+            "confluence_music:jungle_night"
+        ]
     },
     "underground_jungle": {
-        "sounds": ["confluence:underground_jungle"]
+        "sounds": [
+            "confluence_music:underground_jungle"
+        ]
     },
     "corruption": {
-        "sounds": ["confluence:corruption"]
+        "sounds": [
+            "confluence_music:corruption"
+        ]
     },
     "underground_corruption": {
-        "sounds": ["confluence:underground_corruption"]
+        "sounds": [
+            "confluence_music:underground_corruption"
+        ]
     },
     "crimson": {
-        "sounds": ["confluence:crimson"]
+        "sounds": [
+            "confluence_music:crimson"
+        ]
     },
     "underground_crimson": {
-        "sounds": ["confluence:underground_crimson"]
+        "sounds": [
+            "confluence_music:underground_crimson"
+        ]
     },
     "the_hallow": {
-        "sounds": ["confluence:the_hallow"]
+        "sounds": [
+            "confluence_music:the_hallow"
+        ]
     },
     "underground_hallow": {
-        "sounds": ["confluence:underground_hallow"]
+        "sounds": [
+            "confluence_music:underground_hallow"
+        ]
     },
     "underworld": {
-        "sounds": ["confluence:underworld"]
+        "sounds": [
+            "confluence_music:underworld"
+        ]
     },
     "dungeon": {
-        "sounds": ["confluence:dungeon"]
+        "sounds": [
+            "confluence_music:dungeon"
+        ]
     },
     "temple": {
-        "sounds": ["confluence:temple"]
+        "sounds": [
+            "confluence_music:temple"
+        ]
     },
     "aether": {
-        "sounds": ["confluence:aether"]
+        "sounds": [
+            "confluence_music:aether"
+        ]
     },
     "graveyard": {
-        "sounds": ["confluence:graveyard"]
+        "sounds": [
+            "confluence_music:graveyard"
+        ]
     },
     "town_day": {
-        "sounds": ["confluence:town_day"]
+        "sounds": [
+            "confluence_music:town_day"
+        ]
     },
     "town_night": {
-        "sounds": ["confluence:town_night"]
+        "sounds": [
+            "confluence_music:town_night"
+        ]
     },
-
-
     "boss_1": {
-        "sounds": ["confluence:boss_1"]
+        "sounds": [
+            "confluence_music:boss_1"
+        ]
     },
     "boss_2": {
-        "sounds": ["confluence:boss_2"]
+        "sounds": [
+            "confluence_music:boss_2"
+        ]
     },
     "boss_3": {
-        "sounds": ["confluence:boss_3"]
+        "sounds": [
+            "confluence_music:boss_3"
+        ]
     },
     "boss_4": {
-        "sounds": ["confluence:boss_4"]
+        "sounds": [
+            "confluence_music:boss_4"
+        ]
     },
     "boss_5": {
-        "sounds": ["confluence:boss_5"]
+        "sounds": [
+            "confluence_music:boss_5"
+        ]
     },
     "deerclops": {
-        "sounds": ["confluence:deerclops"]
+        "sounds": [
+            "confluence_music:deerclops"
+        ]
     },
     "queen_slime": {
-        "sounds": ["confluence:queen_slime"]
+        "sounds": [
+            "confluence_music:queen_slime"
+        ]
     },
     "plantera": {
-        "sounds": ["confluence:plantera"]
+        "sounds": [
+            "confluence_music:plantera"
+        ]
     },
     "empress_of_light": {
-        "sounds": ["confluence:empress_of_light"]
+        "sounds": [
+            "confluence_music:empress_of_light"
+        ]
     },
     "duke_fishron": {
-        "sounds": ["confluence:duke_fishron"]
+        "sounds": [
+            "confluence_music:duke_fishron"
+        ]
     },
     "moon_lord": {
-        "sounds": ["confluence:moon_lord"]
+        "sounds": [
+            "confluence_music:moon_lord"
+        ]
     },
-
-
     "eerie": {
-        "sounds": ["confluence:eerie"]
+        "sounds": [
+            "confluence_music:eerie"
+        ]
     },
     "eclipse": {
-        "sounds": ["confluence:eclipse"]
+        "sounds": [
+            "confluence_music:eclipse"
+        ]
     },
     "goblin_army": {
-        "sounds": ["confluence:goblin_army"]
+        "sounds": [
+            "confluence_music:goblin_army"
+        ]
     },
     "pirate_invasion": {
-        "sounds": ["confluence:pirate_invasion"]
+        "sounds": [
+            "confluence_music:pirate_invasion"
+        ]
     },
     "martian_madness": {
-        "sounds": ["confluence:martian_madness"]
+        "sounds": [
+            "confluence_music:martian_madness"
+        ]
     },
     "pumpkin_moon": {
-        "sounds": ["confluence:pumpkin_moon"]
+        "sounds": [
+            "confluence_music:pumpkin_moon"
+        ]
     },
     "frost_moon": {
-        "sounds": ["confluence:frost_moon"]
+        "sounds": [
+            "confluence_music:frost_moon"
+        ]
     },
     "the_towers": {
-        "sounds": ["confluence:the_towers"]
+        "sounds": [
+            "confluence_music:the_towers"
+        ]
     },
     "sandstorm": {
-        "sounds": ["confluence:sandstorm"]
+        "sounds": [
+            "confluence_music:sandstorm"
+        ]
     },
     "old_ones_army": {
-        "sounds": ["confluence:old_ones_army"]
+        "sounds": [
+            "confluence_music:old_ones_army"
+        ]
     },
     "slime_rain": {
-        "sounds": ["confluence:slime_rain"]
+        "sounds": [
+            "confluence_music:slime_rain"
+        ]
     },
     "windy_day": {
-        "sounds": ["confluence:windy_day"]
+        "sounds": [
+            "confluence_music:windy_day"
+        ]
     },
     "rain": {
-        "sounds": ["confluence:rain"]
+        "sounds": [
+            "confluence_music:rain"
+        ]
     },
     "morning_rain": {
-        "sounds": ["confluence:morning_rain"]
+        "sounds": [
+            "confluence_music:morning_rain"
+        ]
     },
     "storm": {
-        "sounds": ["confluence:storm"]
+        "sounds": [
+            "confluence_music:storm"
+        ]
     },
-
-
     "otherworldly_rain": {
-        "sounds": ["confluence:otherworldly_rain"]
+        "sounds": [
+            "confluence_music:otherworldly_rain"
+        ]
     },
     "otherworldly_overworld_day": {
-        "sounds": ["confluence:otherworldly_overworld_day"]
+        "sounds": [
+            "confluence_music:otherworldly_overworld_day"
+        ]
     },
     "otherworldly_night": {
-        "sounds": ["confluence:otherworldly_night"]
+        "sounds": [
+            "confluence_music:otherworldly_night"
+        ]
     },
     "otherworldly_underground": {
-        "sounds": ["confluence:otherworldly_underground"]
+        "sounds": [
+            "confluence_music:otherworldly_underground"
+        ]
     },
     "otherworldly_desert": {
-        "sounds": ["confluence:otherworldly_desert"]
+        "sounds": [
+            "confluence_music:otherworldly_desert"
+        ]
     },
     "otherworldly_ocean": {
-        "sounds": ["confluence:otherworldly_ocean"]
+        "sounds": [
+            "confluence_music:otherworldly_ocean"
+        ]
     },
     "otherworldly_mushrooms": {
-        "sounds": ["confluence:otherworldly_mushrooms"]
+        "sounds": [
+            "confluence_music:otherworldly_mushrooms"
+        ]
     },
     "otherworldly_jungle": {
-        "sounds": ["confluence:otherworldly_jungle"]
+        "sounds": [
+            "confluence_music:otherworldly_jungle"
+        ]
     },
     "otherworldly_dungeon": {
-        "sounds": ["confluence:otherworldly_dungeon"]
+        "sounds": [
+            "confluence_music:otherworldly_dungeon"
+        ]
     },
     "otherworldly_space": {
-        "sounds": ["confluence:otherworldly_space"]
+        "sounds": [
+            "confluence_music:otherworldly_space"
+        ]
     },
     "otherworldly_underworld": {
-        "sounds": ["confluence:otherworldly_underworld"]
+        "sounds": [
+            "confluence_music:otherworldly_underworld"
+        ]
     },
     "otherworldly_snow": {
-        "sounds": ["confluence:otherworldly_snow"]
+        "sounds": [
+            "confluence_music:otherworldly_snow"
+        ]
     },
     "otherworldly_ice": {
-        "sounds": ["confluence:otherworldly_ice"]
+        "sounds": [
+            "confluence_music:otherworldly_ice"
+        ]
     },
     "otherworldly_corruption": {
-        "sounds": ["confluence:otherworldly_corruption"]
+        "sounds": [
+            "confluence_music:otherworldly_corruption"
+        ]
     },
     "otherworldly_underground_corruption": {
-        "sounds": ["confluence:otherworldly_underground_corruption"]
+        "sounds": [
+            "confluence_music:otherworldly_underground_corruption"
+        ]
     },
     "otherworldly_crimson": {
-        "sounds": ["confluence:otherworldly_crimson"]
+        "sounds": [
+            "confluence_music:otherworldly_crimson"
+        ]
     },
     "otherworldly_underground_crimson": {
-        "sounds": ["confluence:otherworldly_underground_crimson"]
+        "sounds": [
+            "confluence_music:otherworldly_underground_crimson"
+        ]
     },
     "otherworldly_hallow": {
-        "sounds": ["confluence:otherworldly_hallow"]
+        "sounds": [
+            "confluence_music:otherworldly_hallow"
+        ]
     },
     "otherworldly_underground_hallow": {
-        "sounds": ["confluence:otherworldly_underground_hallow"]
+        "sounds": [
+            "confluence_music:otherworldly_underground_hallow"
+        ]
     },
     "otherworldly_eerie": {
-        "sounds": ["confluence:otherworldly_eerie"]
+        "sounds": [
+            "confluence_music:otherworldly_eerie"
+        ]
     },
     "otherworldly_boss_1": {
-        "sounds": ["confluence:otherworldly_boss_1"]
+        "sounds": [
+            "confluence_music:otherworldly_boss_1"
+        ]
     },
     "otherworldly_boss_2": {
-        "sounds": ["confluence:otherworldly_boss_2"]
+        "sounds": [
+            "confluence_music:otherworldly_boss_2"
+        ]
     },
     "otherworldly_invasion": {
-        "sounds": ["confluence:otherworldly_invasion"]
+        "sounds": [
+            "confluence_music:otherworldly_invasion"
+        ]
     },
     "otherworldly_the_towers": {
-        "sounds": ["confluence:otherworldly_the_towers"]
+        "sounds": [
+            "confluence_music:otherworldly_the_towers"
+        ]
     },
     "otherworldly_lunar_boss": {
-        "sounds": ["confluence:otherworldly_lunar_boss"]
+        "sounds": [
+            "confluence_music:otherworldly_lunar_boss"
+        ]
     },
     "otherworldly_plantera": {
-        "sounds": ["confluence:otherworldly_plantera"]
+        "sounds": [
+            "confluence_music:otherworldly_plantera"
+        ]
     },
     "otherworldly_wall_of_flesh": {
-        "sounds": ["confluence:otherworldly_wall_of_flesh"]
+        "sounds": [
+            "confluence_music:otherworldly_wall_of_flesh"
+        ]
     }
 }
