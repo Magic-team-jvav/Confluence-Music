@@ -16,9 +16,11 @@ public final class CMJukeboxSongs {
     public static final DeferredRegister<JukeboxSong> SONGS = DeferredRegister.create(Registries.JUKEBOX_SONG, ConfluenceMusic.MODID);
 
     public static final ResourceKey<JukeboxSong> ALPHA = ResourceKey.create(Registries.JUKEBOX_SONG, ConfluenceMusic.asResource("alpha"));
-
     public static final DeferredHolder<JukeboxSong, JukeboxSong> ALPHA_SONG = register(ALPHA, SoundEvents.MUSIC_CREDITS, 603.0F, 0);
 
+
+    public static final ResourceKey<JukeboxSong> NEW_JOURNEY = ResourceKey.create(Registries.JUKEBOX_SONG, ConfluenceMusic.asResource("new_journey"));
+    public static final DeferredHolder<JukeboxSong, JukeboxSong> NEW_JOURNEY_SONG = register(ALPHA, SoundEvents.MUSIC_CREDITS, 603.0F, 0);
     public static DeferredHolder<JukeboxSong, JukeboxSong> register(ResourceKey<JukeboxSong> key, Holder<SoundEvent> soundEvent, float lengthInSeconds, int comparatorOutput) {
         return SONGS.register(key.location().getPath(), () -> new JukeboxSong(soundEvent, Component.translatable(Util.makeDescriptionId("jukebox_song", key.location())), lengthInSeconds, comparatorOutput));
     }

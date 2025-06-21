@@ -11,4 +11,5 @@ public final class CMItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ConfluenceMusic.MODID);
 
     public static final DeferredItem<CustomRarityItem> ALPHA = ITEMS.register("alpha", () -> new CustomRarityItem(new Item.Properties().stacksTo(1).fireResistant().jukeboxPlayable(CMJukeboxSongs.ALPHA), ModRarity.EXPERT));
+    public static final DeferredItem<CustomRarityItem> OTHERWORLD = ITEMS.register("otherworld", () -> new CustomRarityItem(new Item.Properties().stacksTo(1).fireResistant().jukeboxPlayable(CMJukeboxSongs.NEW_JOURNEY), ModRarity.EXPERT));
 }
