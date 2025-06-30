@@ -1,6 +1,7 @@
 package org.confluence.music;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -11,11 +12,11 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import org.confluence.mod.common.init.ModTabs;
 import org.confluence.music.client.CMClientConfigs;
 import org.confluence.music.client.MusicHandler;
 import org.confluence.music.common.init.CMBlocks;
 import org.confluence.music.common.init.CMItems;
-import org.confluence.music.common.init.CMJukeboxSongs;
 import org.confluence.music.common.init.CMSoundEvents;
 import org.confluence.music.common.item.MusicBoxItem;
 import org.confluence.music.common.network.ReplaceMusicBoxItemPacketC2S;
@@ -38,7 +39,6 @@ public class ConfluenceMusic {
         }
         CMBlocks.BLOCKS.register(eventBus);
         CMItems.ITEMS.register(eventBus);
-        CMJukeboxSongs.SONGS.register(eventBus);
         CMSoundEvents.EVENTS.register(eventBus);
         eventBus.addListener(ConfluenceMusic::registerPayloadHandlers);
         eventBus.addListener(ConfluenceMusic::loadComplete);
@@ -61,6 +61,12 @@ public class ConfluenceMusic {
     private static void buildCreativeModeTabContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTab() == TCTabs.ACCESSORIES.get()) {
             CMBlocks.BLOCKS.getEntries().forEach(block -> event.accept(block.get()));
+        } else if (event.getTab() == ModTabs.MISC.get()) {
+            CMItems.ITEMS.getEntries().forEach(item -> {
+                if (!(item.get() instanceof BlockItem)) {
+                    event.accept(item.get());
+                }
+            });
         }
     }
 }
