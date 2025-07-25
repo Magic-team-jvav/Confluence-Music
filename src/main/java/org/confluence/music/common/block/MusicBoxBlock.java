@@ -37,13 +37,14 @@ import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class MusicBoxBlock extends AbstractMechanicalBlock {
-    public final @Nullable Music music;
+    public final @Nullable Supplier<? extends Music> music;
 
-    public MusicBoxBlock(@Nullable Music music) {
+    public MusicBoxBlock(@Nullable Supplier<? extends Music> music) {
         super(Properties.ofFullCopy(Blocks.JUKEBOX));
         this.music = music;
         registerDefaultState(stateDefinition.any().setValue(StateProperties.DRIVE, true));
@@ -78,13 +79,13 @@ public class MusicBoxBlock extends AbstractMechanicalBlock {
     }
 
     public static class Entity extends AbstractMechanicalBlock.Entity {
-        private @Nullable Music music;
+        private @Nullable Supplier<? extends Music> music;
 
         public Entity(BlockPos pos, BlockState blockState) {
             super(CMBlocks.MUSIC_BOX_ENTITY.get(), pos, blockState);
         }
 
-        public Entity(BlockPos pos, BlockState blockState, @Nullable Music music) {
+        public Entity(BlockPos pos, BlockState blockState, @Nullable Supplier<? extends Music> music) {
             this(pos, blockState);
             this.music = music;
         }
@@ -93,7 +94,7 @@ public class MusicBoxBlock extends AbstractMechanicalBlock {
         protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
             super.loadAdditional(tag, registries);
             if (tag.contains("music")) {
-                this.music = Music.CODEC.parse(NbtOps.INSTANCE, tag.get("music")).getOrThrow();
+                this.music = () -> Music.CODEC.parse(NbtOps.INSTANCE, tag.get("music")).getOrThrow();
             }
         }
 
@@ -101,7 +102,7 @@ public class MusicBoxBlock extends AbstractMechanicalBlock {
         protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
             super.saveAdditional(tag, registries);
             if (music != null) {
-                tag.put("music", Music.CODEC.encodeStart(NbtOps.INSTANCE, music).getOrThrow());
+                tag.put("music", Music.CODEC.encodeStart(NbtOps.INSTANCE, music.get()).getOrThrow());
             }
         }
 
@@ -109,13 +110,13 @@ public class MusicBoxBlock extends AbstractMechanicalBlock {
         public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
             CompoundTag tag = super.getUpdateTag(registries);
             if (music != null) {
-                tag.put("music", Music.CODEC.encodeStart(NbtOps.INSTANCE, music).getOrThrow());
+                tag.put("music", Music.CODEC.encodeStart(NbtOps.INSTANCE, music.get()).getOrThrow());
             }
             return tag;
         }
 
         private static void clientTick(Level level, BlockPos pos, BlockState state, Entity entity) {
-            Music music = entity.music;
+            Music music = entity.music.get();
             if (music == null || !state.getValue(StateProperties.DRIVE)) return;
             MusicManager musicManager = Minecraft.getInstance().getMusicManager();
             IMusicManager manager = (IMusicManager) musicManager;

@@ -6,6 +6,7 @@ import net.minecraft.sounds.Music;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.music.ConfluenceMusic;
 import org.confluence.music.common.block.MusicBoxBlock;
@@ -52,7 +53,7 @@ public final class CMBlocks {
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_THE_HALLOW = register(CMMusics.THE_HALLOW);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_UNDERGROUND_HALLOW = register(CMMusics.UNDERGROUND_HALLOW);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_HELL = register("music_box_hell", CMMusics.UNDERWORLD);
-    public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_DUNGEON = register(CMMusics.DUNGEON);
+    public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_DUNGEON = register(CMMusics.DUNGEON_FLOOR_1);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_TEMPLE = register(CMMusics.TEMPLE);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_AETHER = register(CMMusics.AETHER);
     public static final DeferredBlock<MusicBoxBlock> MUSIC_BOX_GRAVEYARD = register(CMMusics.GRAVEYARD);
@@ -118,9 +119,9 @@ public final class CMBlocks {
         return BlockEntityType.Builder.of(MusicBoxBlock.Entity::new, validBlocks).build(DSL.remainderType());
     });
 
-    private static DeferredBlock<MusicBoxBlock> register(@Nullable Music music) {
+    private static DeferredBlock<MusicBoxBlock> register(DeferredHolder<CMMusics.CachedLocationMusic, CMMusics.CachedLocationMusic> music) {
         String id;
-        String path = music.getEvent().getKey().location().getPath();
+        String path = music.getId().getPath();
         if (path.startsWith("otherworldly_")) {
             id = "otherworldly_music_box_" + path.substring(13);
         } else {
@@ -129,7 +130,7 @@ public final class CMBlocks {
         return register(id, music);
     }
 
-    private static DeferredBlock<MusicBoxBlock> register(String id, @Nullable Music music) {
+    private static DeferredBlock<MusicBoxBlock> register(String id, @Nullable Supplier<? extends Music> music) {
         DeferredBlock<MusicBoxBlock> object = BLOCKS.register(id, () -> new MusicBoxBlock(music));
         CMItems.ITEMS.register(id, () -> new MusicBoxItem(object.get()));
         MUSIC_BOXES.add(object);

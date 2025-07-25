@@ -28,11 +28,12 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class MusicBoxItem extends BlockItem implements ICurioItem, IFunctionCouldEnable {
-    private static Map<Music, MusicBoxItem> MUSIC_2_ITEM = new HashMap<>();
+    private static Map<Supplier<? extends Music>, MusicBoxItem> MUSIC_2_ITEM = new HashMap<>();
     private static final Map<ResourceLocation, MusicBoxItem> SOUND_ID_2_ITEM = new Hashtable<>();
-    public final @Nullable Music music;
+    public final @Nullable Supplier<? extends Music> music;
 
     public MusicBoxItem(MusicBoxBlock block) {
         super(block, new Properties().stacksTo(1).component(ConfluenceMagicLib.MOD_RARITY, ModRarity.ORANGE));
@@ -67,9 +68,9 @@ public class MusicBoxItem extends BlockItem implements ICurioItem, IFunctionCoul
                     ReplaceMusicBoxItemPacketC2S.sendToServer(slotContext.index(), item);
                 }
             } else {
-                if (!musicManager.isPlayingMusic(music)) {
+                if (!musicManager.isPlayingMusic(music.get())) {
                     musicManager.stopPlaying();
-                    musicManager.startPlaying(music);
+                    musicManager.startPlaying(music.get());
                 }
                 /**
                  * @see MusicHandler#clientTick$Post(ClientTickEvent.Post) 1st
@@ -81,8 +82,8 @@ public class MusicBoxItem extends BlockItem implements ICurioItem, IFunctionCoul
     }
 
     public static void initialize() {
-        for (Map.Entry<Music, MusicBoxItem> entry : MUSIC_2_ITEM.entrySet()) {
-            SOUND_ID_2_ITEM.put(entry.getKey().getEvent().value().getLocation(), entry.getValue());
+        for (Map.Entry<Supplier<? extends Music>, MusicBoxItem> entry : MUSIC_2_ITEM.entrySet()) {
+            SOUND_ID_2_ITEM.put(entry.getKey().get().getEvent().value().getLocation(), entry.getValue());
         }
         MUSIC_2_ITEM = null;
     }

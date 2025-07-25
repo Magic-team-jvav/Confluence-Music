@@ -1,0 +1,1 @@
+D:\ffmpeg-7.0.2\bin\ffmpeg.exe -i input.mp3 -acodec libvorbis -ab 320k output.ogg

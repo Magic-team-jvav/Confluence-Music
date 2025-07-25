@@ -18,7 +18,8 @@ import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = ConfluenceMusic.MODID, bus = EventBusSubscriber.Bus.MOD)
 public final class CMDataGenerators {
-    private static final RegistrySetBuilder DATA_BUILDER = new RegistrySetBuilder().add(Registries.JUKEBOX_SONG, CMJukeboxSongs::boostrap);
+    private static final RegistrySetBuilder DATA_BUILDER = new RegistrySetBuilder()
+            .add(Registries.JUKEBOX_SONG, CMJukeboxSongs::boostrap);
 
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {

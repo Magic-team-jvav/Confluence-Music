@@ -22,18 +22,21 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.SelectMusicEvent;
 import net.neoforged.neoforge.common.Tags;
 import org.confluence.mod.common.init.ModBiomes;
 import org.confluence.mod.common.init.ModTags;
+import org.confluence.mod.util.DateUtils;
 import org.confluence.music.ConfluenceMusic;
+import org.confluence.music.common.CMCommonConfigs;
 import org.confluence.music.common.block.MusicBoxBlock;
 import org.confluence.music.common.init.CMMusics;
 import org.confluence.music.common.item.MusicBoxItem;
+import org.confluence.music.common.network.StructureFoundPacketS2C;
 import org.confluence.music.mixed.IMusicManager;
 import org.confluence.terraentity.entity.ai.Boss;
 import org.confluence.terraentity.init.entity.TEBossEntities;
@@ -71,15 +74,17 @@ public final class MusicHandler {
             return cache.get(entityType);
         }
     };
+    private static final int _07$30 = DateUtils.getDayTime(7, 30);
     private static CachedLocationMusic nextSong;
     private static int nextSongDelay = 10;
     private static Holder<Biome> lastBiome;
-    private static int nextBiomeCheck = 100;
+    static int nextBiomeCheck = 20;
     private static float volume = 1.0F;
     private static boolean hasBossMusic = false;
+    private static byte structureMusic = StructureFoundPacketS2C.NOT_FOUND;
 
     public static void handle(SelectMusicEvent event, LocalPlayer player, Minecraft minecraft) {
-        if (!CMClientConfigs.playerOurMusic || !((IMusicManager) minecraft.getMusicManager()).confluence$getMusicBoxOccupied().isNone()) return;
+        if (!((IMusicManager) minecraft.getMusicManager()).confluence$getMusicBoxOccupied().isNone()) return;
         if (nextBiomeCheck-- <= 0) {
             Holder<Biome> biome = player.level().getBiome(player.blockPosition());
             if (biome != lastBiome) {
@@ -87,19 +92,17 @@ public final class MusicHandler {
                 nextSongDelay = 0;
                 nextSong = null;
             }
-            nextBiomeCheck = 100;
+            nextBiomeCheck = CMCommonConfigs.checkInterval;
         }
         selectBossMusic(player, minecraft);
-        if (nextSong == null) {
-            selectMusic(player);
-        }
+        selectStructureMusic();
+        selectBiomeMusic(player);
         SoundInstance playingMusic = event.getPlayingMusic();
         if ((playingMusic == null || (nextSong != null && isSameModButDifferentSong(nextSong.getLocation(), playingMusic.getLocation()))) && nextSongDelay-- <= 0) {
             if (volume > 0.0F) {
                 volume -= 0.01F;
                 float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) * volume;
-                Map<SoundInstance, ChannelAccess.ChannelHandle> instanceToChannel = minecraft.getSoundManager().soundEngine.instanceToChannel;
-                for (Map.Entry<SoundInstance, ChannelAccess.ChannelHandle> entry : instanceToChannel.entrySet()) {
+                for (Map.Entry<SoundInstance, ChannelAccess.ChannelHandle> entry : minecraft.getSoundManager().soundEngine.instanceToChannel.entrySet()) {
                     if (entry.getKey().getSource() != SoundSource.MUSIC) continue;
                     entry.getValue().execute(channel -> {
                         if (volume <= 0.0F) {
@@ -112,9 +115,16 @@ public final class MusicHandler {
             } else {
                 minecraft.getMusicManager().stopPlaying();
                 event.setMusic(nextSong);
-                nextSongDelay = CMClientConfigs.nextSongDelay;
+                nextSongDelay = CMClientConfigs.NEXT_SONG_DELAY.get();
                 volume = 1.0F;
                 nextSong = null;
+            }
+        } else if (volume < 1.0F) {
+            volume = 1.0F;
+            float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC);
+            for (Map.Entry<SoundInstance, ChannelAccess.ChannelHandle> entry : minecraft.getSoundManager().soundEngine.instanceToChannel.entrySet()) {
+                if (entry.getKey().getSource() != SoundSource.MUSIC) continue;
+                entry.getValue().execute(channel -> channel.setVolume(v));
             }
         }
     }
@@ -125,9 +135,9 @@ public final class MusicHandler {
 
     public static void clear() {
         nextSong = null;
-        nextSongDelay = CMClientConfigs.nextSongDelay;
+        nextSongDelay = CMClientConfigs.NEXT_SONG_DELAY.get();
         lastBiome = null;
-        nextBiomeCheck = 100;
+        nextBiomeCheck = CMCommonConfigs.checkInterval;
         volume = 1.0F;
         hasBossMusic = false;
     }
@@ -150,23 +160,34 @@ public final class MusicHandler {
         }
     }
 
-    private static void selectMusic(LocalPlayer player) {
+    private static void selectStructureMusic() {
+        if (nextSong == null) {
+            nextSong = randomMusic(CMClientConfigs.musicType, switch (structureMusic) {
+                case StructureFoundPacketS2C.DUNGEON_FLOOR_1 -> MusicSelection.DUNGEON_FLOOR_1;
+                case StructureFoundPacketS2C.DUNGEON_FLOOR_2 -> MusicSelection.DUNGEON_FLOOR_2;
+                default -> null;
+            });
+        }
+    }
+
+    private static void selectBiomeMusic(LocalPlayer player) {
+        if (nextSong != null) return;
         BlockPos pos = player.blockPosition();
         Level level = player.level();
         Holder<Biome> biome = lastBiome == null ? level.getBiome(pos) : lastBiome;
         MusicSelection selection = null;
         ResourceKey<Level> dimension = player.level().dimension();
         if (dimension == Level.OVERWORLD) {
-            long dayTime = level.getDayTime() % 24000;
-            boolean isDay = dayTime < 12000;
+            int dayTime = DateUtils.getDayTime(level);
+            boolean isDay = DateUtils.isDay(dayTime);
             int y = pos.getY();
             boolean isSurface = y >= 40;
 
             if (y > 260) {
                 selection = isDay ? MusicSelection.SPACE_DAY : MusicSelection.SPACE_NIGHT;
             } else if (level.isRaining()) {
-                if (dayTime >= 22500 || dayTime <= 1500) {
-                    selection = MusicSelection.MORNING_RAIN; // 4:30 -> 7:30
+                if (DateUtils.isWithinDayTime(DateUtils._04$30, _07$30, dayTime)) {
+                    selection = MusicSelection.MORNING_RAIN;
                 } else {
                     selection = isDay ? MusicSelection.RAIN_DAY : MusicSelection.RAIN_NIGHT;
                 }
@@ -239,13 +260,23 @@ public final class MusicHandler {
         event.registerReloadListener(MusicSelectionLoader.getInstance());
     }
 
-    public static void clientSetup(FMLClientSetupEvent event) {
-        event.enqueueWork(CMClientConfigs::onLoad);
+    public static void modConfig$Loading(ModConfigEvent.Reloading event) {
+        if (event.getConfig().getType() == ModConfig.Type.CLIENT && ConfluenceMusic.MODID.equals(event.getConfig().getModId())) {
+            CMClientConfigs.onLoad();
+        }
     }
 
-    public static void modConfig$reloading(ModConfigEvent.Reloading event) {
-        if (ConfluenceMusic.MODID.equals(event.getConfig().getModId())) {
+    public static void modConfig$Reloading(ModConfigEvent.Reloading event) {
+        if (event.getConfig().getType() == ModConfig.Type.CLIENT && ConfluenceMusic.MODID.equals(event.getConfig().getModId())) {
             CMClientConfigs.onLoad();
+        }
+    }
+
+    public static void handleStructure(byte data) {
+        if (structureMusic != data) {
+            structureMusic = data;
+            nextSong = null;
+            nextSongDelay = 0;
         }
     }
 }

@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 public class CMMusicSelectionProvider extends AbstractRecipeProvider {
     private final PackOutput.PathProvider pathProvider;
@@ -75,7 +76,8 @@ public class CMMusicSelectionProvider extends AbstractRecipeProvider {
                 .add(MusicSelection.UNDERGROUND_DESERT, CMMusics.UNDERGROUND_DESERT)
                 .add(MusicSelection.OCEAN_DAY, CMMusics.OCEAN_DAY)
                 .add(MusicSelection.OCEAN_NIGHT, CMMusics.OCEAN_NIGHT)
-                .add(MusicSelection.DUNGEON, CMMusics.DUNGEON)
+                .add(MusicSelection.DUNGEON_FLOOR_1, CMMusics.DUNGEON_FLOOR_1)
+                .add(MusicSelection.DUNGEON_FLOOR_2, CMMusics.DUNGEON_FLOOR_2)
                 .add(MusicSelection.TEMPLE, CMMusics.TEMPLE)
                 .add(MusicSelection.AETHER, CMMusics.AETHER)
                 .add(MusicSelection.ECLIPSE, CMMusics.ECLIPSE)
@@ -117,7 +119,8 @@ public class CMMusicSelectionProvider extends AbstractRecipeProvider {
                 .add(MusicSelection.OCEAN_DAY, CMMusics.OTHERWORLDLY_OCEAN)
                 .add(MusicSelection.OCEAN_NIGHT, CMMusics.OTHERWORLDLY_OCEAN)
                 .add(MusicSelection.MUSHROOMS, CMMusics.OTHERWORLDLY_MUSHROOMS)
-                .add(MusicSelection.DUNGEON, CMMusics.OTHERWORLDLY_DUNGEON)
+                .add(MusicSelection.DUNGEON_FLOOR_1, CMMusics.OTHERWORLDLY_DUNGEON)
+                .add(MusicSelection.DUNGEON_FLOOR_2, CMMusics.OTHERWORLDLY_DUNGEON)
                 .add(MusicSelection.TEMPLE, CMMusics.OTHERWORLDLY_DUNGEON)
                 .add(MusicSelection.SPACE_DAY, CMMusics.OTHERWORLDLY_SPACE)
                 .add(MusicSelection.SPACE_NIGHT, CMMusics.OTHERWORLDLY_SPACE)
@@ -177,8 +180,9 @@ public class CMMusicSelectionProvider extends AbstractRecipeProvider {
     public static class Builder {
         private final EnumMap<MusicSelection, List<CMMusics.CachedLocationMusic>> map = new EnumMap<>(MusicSelection.class);
 
-        public Builder add(MusicSelection selection, CMMusics.CachedLocationMusic... musics) {
-            map.put(selection, Arrays.stream(musics).toList());
+        @SafeVarargs
+        public final Builder add(MusicSelection selection, Supplier<CMMusics.CachedLocationMusic>... musics) {
+            map.put(selection, Arrays.stream(musics).map(Supplier::get).toList());
             return this;
         }
     }

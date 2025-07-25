@@ -154,9 +154,14 @@
             "confluence_music:underworld"
         ]
     },
-    "dungeon": {
+    "dungeon_floor_1": {
         "sounds": [
-            "confluence_music:dungeon"
+            "confluence_music:dungeon_floor_1"
+        ]
+    },
+    "dungeon_floor_2": {
+        "sounds": [
+            "confluence_music:dungeon_floor_2"
         ]
     },
     "temple": {

@@ -1,434 +1,218 @@
 {
   "aether": [
-    {
-      "type": "location",
-      "sound": "confluence_music:aether"
-    }
+    "confluence_music:aether"
   ],
   "blood_moon": [
-    {
-      "type": "event",
-      "sound": "confluence_music:eerie"
-    }
+    "confluence_music:eerie"
   ],
   "brain_of_cthulhu": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_3"
-    }
+    "confluence_music:boss_3"
   ],
   "corruption": [
-    {
-      "type": "location",
-      "sound": "confluence_music:corruption"
-    }
+    "confluence_music:corruption"
   ],
   "crimson": [
-    {
-      "type": "location",
-      "sound": "confluence_music:crimson"
-    }
+    "confluence_music:crimson"
   ],
   "day": [
-    {
-      "type": "common",
-      "sound": "confluence_music:overworld_day"
-    },
-    {
-      "type": "common",
-      "sound": "confluence_music:alt_overworld_day"
-    }
+    "confluence_music:overworld_day",
+    "confluence_music:alt_overworld_day"
   ],
   "day_remix": [
-    {
-      "type": "common",
-      "sound": "confluence_music:day_remix"
-    }
+    "confluence_music:day_remix"
   ],
   "deerclops": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:deerclops"
-    }
+    "confluence_music:deerclops"
   ],
   "desert": [
-    {
-      "type": "location",
-      "sound": "confluence_music:desert"
-    }
+    "confluence_music:desert"
   ],
   "duke_fishron": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:duke_fishron"
-    }
+    "confluence_music:duke_fishron"
   ],
-  "dungeon": [
-    {
-      "type": "location",
-      "sound": "confluence_music:dungeon"
-    }
+  "dungeon_floor_1": [
+    "confluence_music:dungeon_floor_1"
+  ],
+  "dungeon_floor_2": [
+    "confluence_music:dungeon_floor_2"
   ],
   "eater_of_worlds": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_1"
-    }
+    "confluence_music:boss_1"
   ],
   "eclipse": [
-    {
-      "type": "event",
-      "sound": "confluence_music:eclipse"
-    }
+    "confluence_music:eclipse"
   ],
   "empress_of_light": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:empress_of_light"
-    }
+    "confluence_music:empress_of_light"
   ],
   "eye_of_cthulhu": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_1"
-    }
+    "confluence_music:boss_1"
   ],
   "frost_moon": [
-    {
-      "type": "event",
-      "sound": "confluence_music:frost_moon"
-    }
+    "confluence_music:frost_moon"
   ],
   "goblin_army": [
-    {
-      "type": "event",
-      "sound": "confluence_music:goblin_army"
-    }
+    "confluence_music:goblin_army"
   ],
   "golem": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_4"
-    }
+    "confluence_music:boss_4"
   ],
   "graveyard": [
-    {
-      "type": "location",
-      "sound": "confluence_music:graveyard"
-    }
+    "confluence_music:graveyard"
   ],
   "ice": [
-    {
-      "type": "location",
-      "sound": "confluence_music:ice"
-    }
+    "confluence_music:ice"
   ],
   "journeys_beginning": [
-    {
-      "type": "common",
-      "sound": "confluence_music:journeys_beginning"
-    }
+    "confluence_music:journeys_beginning"
   ],
   "journeys_end": [
-    {
-      "type": "common",
-      "sound": "confluence_music:journeys_end"
-    }
+    "confluence_music:journeys_end"
   ],
   "jungle_day": [
-    {
-      "type": "location",
-      "sound": "confluence_music:jungle"
-    }
+    "confluence_music:jungle"
   ],
   "jungle_night": [
-    {
-      "type": "location",
-      "sound": "confluence_music:jungle_night"
-    }
+    "confluence_music:jungle_night"
   ],
   "king_slime": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_1"
-    }
+    "confluence_music:boss_1"
   ],
   "lunar_events": [
-    {
-      "type": "event",
-      "sound": "confluence_music:the_towers"
-    }
+    "confluence_music:the_towers"
   ],
   "lunatic_cultist": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_4"
-    }
+    "confluence_music:boss_4"
   ],
   "martian_madness": [
-    {
-      "type": "event",
-      "sound": "confluence_music:martian_madness"
-    }
+    "confluence_music:martian_madness"
   ],
   "meteorite": [
-    {
-      "type": "event",
-      "sound": "confluence_music:eerie"
-    }
+    "confluence_music:eerie"
   ],
   "moon_lord": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:moon_lord"
-    }
+    "confluence_music:moon_lord"
   ],
   "morning_rain": [
-    {
-      "type": "event",
-      "sound": "confluence_music:morning_rain"
-    }
+    "confluence_music:morning_rain"
   ],
   "mushrooms": [
-    {
-      "type": "location",
-      "sound": "confluence_music:mushrooms"
-    }
+    "confluence_music:mushrooms"
   ],
   "night": [
-    {
-      "type": "common",
-      "sound": "confluence_music:overworld_night"
-    }
+    "confluence_music:overworld_night"
   ],
   "ocean_day": [
-    {
-      "type": "location",
-      "sound": "confluence_music:ocean_day"
-    }
+    "confluence_music:ocean_day"
   ],
   "ocean_night": [
-    {
-      "type": "location",
-      "sound": "confluence_music:ocean_night"
-    }
+    "confluence_music:ocean_night"
   ],
   "old_ones_army": [
-    {
-      "type": "event",
-      "sound": "confluence_music:old_ones_army"
-    }
+    "confluence_music:old_ones_army"
   ],
   "pirate_invasion": [
-    {
-      "type": "event",
-      "sound": "confluence_music:pirate_invasion"
-    }
+    "confluence_music:pirate_invasion"
   ],
   "plantera": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:plantera"
-    }
+    "confluence_music:plantera"
   ],
   "pumpkin_moon": [
-    {
-      "type": "event",
-      "sound": "confluence_music:pumpkin_moon"
-    }
+    "confluence_music:pumpkin_moon"
   ],
   "queen_bee": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_5"
-    }
+    "confluence_music:boss_5"
   ],
   "queen_slime": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:queen_slime"
-    }
+    "confluence_music:queen_slime"
   ],
   "rain_day": [
-    {
-      "type": "event",
-      "sound": "confluence_music:rain"
-    }
+    "confluence_music:rain"
   ],
   "rain_night": [
-    {
-      "type": "event",
-      "sound": "confluence_music:rain"
-    }
+    "confluence_music:rain"
   ],
   "sandstorm": [
-    {
-      "type": "event",
-      "sound": "confluence_music:sandstorm"
-    }
+    "confluence_music:sandstorm"
   ],
   "skeletron": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_1"
-    }
+    "confluence_music:boss_1"
   ],
   "skeletron_prime": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_1"
-    }
+    "confluence_music:boss_1"
   ],
   "slime_rain": [
-    {
-      "type": "event",
-      "sound": "confluence_music:slime_rain"
-    }
+    "confluence_music:slime_rain"
   ],
   "snow": [
-    {
-      "type": "location",
-      "sound": "confluence_music:snow"
-    },
-    {
-      "type": "location",
-      "sound": "confluence_music:ice"
-    }
+    "confluence_music:snow",
+    "confluence_music:ice"
   ],
   "space_day": [
-    {
-      "type": "location",
-      "sound": "confluence_music:space_day"
-    }
+    "confluence_music:space_day"
   ],
   "space_night": [
-    {
-      "type": "location",
-      "sound": "confluence_music:space_night"
-    }
+    "confluence_music:space_night"
   ],
   "storm": [
-    {
-      "type": "event",
-      "sound": "confluence_music:storm"
-    }
+    "confluence_music:storm"
   ],
   "temple": [
-    {
-      "type": "location",
-      "sound": "confluence_music:temple"
-    }
+    "confluence_music:temple"
   ],
   "the_destroyer": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_3"
-    }
+    "confluence_music:boss_3"
   ],
   "the_hallow_day": [
-    {
-      "type": "location",
-      "sound": "confluence_music:the_hallow"
-    }
+    "confluence_music:the_hallow"
   ],
   "the_hallow_night": [
-    {
-      "type": "common",
-      "sound": "confluence_music:overworld_night"
-    }
+    "confluence_music:overworld_night"
   ],
   "the_twins": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_2"
-    }
+    "confluence_music:boss_2"
   ],
   "title": [
-    {
-      "type": "common",
-      "sound": "confluence_music:title"
-    }
+    "confluence_music:title"
   ],
   "torch_god": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_3"
-    }
+    "confluence_music:boss_3"
   ],
   "town_day": [
-    {
-      "type": "location",
-      "sound": "confluence_music:town_day"
-    }
+    "confluence_music:town_day"
   ],
   "town_night": [
-    {
-      "type": "location",
-      "sound": "confluence_music:town_night"
-    }
+    "confluence_music:town_night"
   ],
   "underground": [
-    {
-      "type": "location",
-      "sound": "confluence_music:underground"
-    },
-    {
-      "type": "location",
-      "sound": "confluence_music:alt_underground"
-    }
+    "confluence_music:underground",
+    "confluence_music:alt_underground"
   ],
   "underground_corruption": [
-    {
-      "type": "location",
-      "sound": "confluence_music:underground_corruption"
-    }
+    "confluence_music:underground_corruption"
   ],
   "underground_crimson": [
-    {
-      "type": "location",
-      "sound": "confluence_music:underground_crimson"
-    }
+    "confluence_music:underground_crimson"
   ],
   "underground_desert": [
-    {
-      "type": "location",
-      "sound": "confluence_music:underground_desert"
-    }
+    "confluence_music:underground_desert"
   ],
   "underground_hallow": [
-    {
-      "type": "location",
-      "sound": "confluence_music:underground_hallow"
-    }
+    "confluence_music:underground_hallow"
   ],
   "underground_ice": [
-    {
-      "type": "location",
-      "sound": "confluence_music:underground_ice"
-    }
+    "confluence_music:underground_ice"
   ],
   "underground_jungle": [
-    {
-      "type": "location",
-      "sound": "confluence_music:underground_jungle"
-    }
+    "confluence_music:underground_jungle"
   ],
   "underworld": [
-    {
-      "type": "location",
-      "sound": "confluence_music:underworld"
-    }
+    "confluence_music:underworld"
   ],
   "wall_of_flesh": [
-    {
-      "type": "boss",
-      "sound": "confluence_music:boss_2"
-    }
+    "confluence_music:boss_2"
   ],
   "windy_day": [
-    {
-      "type": "event",
-      "sound": "confluence_music:windy_day"
-    }
+    "confluence_music:windy_day"
   ]
 }

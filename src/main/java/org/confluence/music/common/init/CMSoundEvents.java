@@ -48,6 +48,8 @@ public final class CMSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> GRAVEYARD = register("graveyard");
     public static final DeferredHolder<SoundEvent, SoundEvent> TOWN_DAY = register("town_day");
     public static final DeferredHolder<SoundEvent, SoundEvent> TOWN_NIGHT = register("town_night");
+    public static final DeferredHolder<SoundEvent, SoundEvent> DUNGEON_FLOOR_1 = register("dungeon_floor_1");
+    public static final DeferredHolder<SoundEvent, SoundEvent> DUNGEON_FLOOR_2 = register("dungeon_floor_2");
     // boss
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_1 = register("boss_1");
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_2 = register("boss_2");
