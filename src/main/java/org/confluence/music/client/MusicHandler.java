@@ -69,7 +69,7 @@ public final class MusicHandler {
                 cache.put(TEBossEntities.BRAIN_OF_CTHULHU.get(), MusicSelection.BRAIN_OF_CTHULHU);
                 cache.put(TEBossEntities.QUEEN_BEE.get(), MusicSelection.QUEEN_BEE);
                 cache.put(TEBossEntities.SKELETRON.get(), MusicSelection.SKELETRON);
-                // todo
+                cache.put(TEBossEntities.WALL_OF_FLESH.get(), MusicSelection.WALL_OF_FLESH);
             }
             return cache.get(entityType);
         }
@@ -145,7 +145,7 @@ public final class MusicHandler {
     private static void selectBossMusic(LocalPlayer player, Minecraft minecraft) {
         if (minecraft.gui.getBossOverlay().shouldPlayMusic()) {
             AABB area = new AABB(player.blockPosition()).inflate(minecraft.levelRenderer.getLastViewDistance());
-            for (Entity boss : player.level().getEntities((Entity) null, area, entity -> entity instanceof Boss)) { // todo
+            for (Entity boss : player.level().getEntities((Entity) null, area, entity -> entity instanceof Boss)) {
                 nextSong = randomMusic(CMClientConfigs.musicType, bossMusicSelector.apply(boss.getType()));
                 if (nextSong != null) {
                     hasBossMusic = true;

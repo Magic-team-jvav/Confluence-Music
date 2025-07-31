@@ -191,7 +191,10 @@
     },
     "boss_1": {
         "sounds": [
-            "confluence_music:boss_1"
+            {
+                "name": "confluence_music:boss_1",
+                "stream": true
+            }
         ]
     },
     "boss_2": {
