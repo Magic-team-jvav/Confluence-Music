@@ -74,7 +74,7 @@ public class MusicBoxItem extends BlockItem implements ICurioItem, IFunctionCoul
                 }
                 /**
                  * @see MusicHandler#clientTick$Post(ClientTickEvent.Post) 1st
-                 * @see MusicBoxBlock.Entity#clientTick(Level, BlockPos, BlockState, MusicBoxBlock.Entity) 3rd
+                 * @see MusicBoxBlock.BEntity#clientTick(Level, BlockPos, BlockState, MusicBoxBlock.BEntity) 3rd
                  */
                 manager.confluence$setMusicBoxOccupied(IMusicManager.State.ACCESSORY); // 2nd
             }

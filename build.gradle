@@ -88,7 +88,7 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    implementation files("libs/ConfluenceOtherworld-1.1.5-alpha.jar")
+    implementation files("libs/ConfluenceOtherworld-1.1.5-beta-250805.jar")
     compileOnly "org.confluence.lib:Confluence-Magic-Lib:0.0.2a-SNAPSHOT"
     compileOnly "curse.maven:terra-entity-1173196:6791221"
     compileOnly "curse.maven:terra-curio-1027625:6545988"

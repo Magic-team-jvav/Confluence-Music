@@ -65,7 +65,7 @@ public class MusicBoxBlock extends AbstractMechanicalBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new Entity(pos, state, music);
+        return new BEntity(pos, state, music);
     }
 
     @Override
@@ -75,17 +75,17 @@ public class MusicBoxBlock extends AbstractMechanicalBlock {
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? LibUtils.getTicker(blockEntityType, CMBlocks.MUSIC_BOX_ENTITY.get(), Entity::clientTick) : null;
+        return level.isClientSide ? LibUtils.getTicker(blockEntityType, CMBlocks.MUSIC_BOX_ENTITY.get(), BEntity::clientTick) : null;
     }
 
-    public static class Entity extends AbstractMechanicalBlock.Entity {
+    public static class BEntity extends AbstractMechanicalBlock.BEntity {
         private @Nullable Supplier<? extends Music> music;
 
-        public Entity(BlockPos pos, BlockState blockState) {
+        public BEntity(BlockPos pos, BlockState blockState) {
             super(CMBlocks.MUSIC_BOX_ENTITY.get(), pos, blockState);
         }
 
-        public Entity(BlockPos pos, BlockState blockState, @Nullable Supplier<? extends Music> music) {
+        public BEntity(BlockPos pos, BlockState blockState, @Nullable Supplier<? extends Music> music) {
             this(pos, blockState);
             this.music = music;
         }
@@ -115,7 +115,7 @@ public class MusicBoxBlock extends AbstractMechanicalBlock {
             return tag;
         }
 
-        private static void clientTick(Level level, BlockPos pos, BlockState state, Entity entity) {
+        private static void clientTick(Level level, BlockPos pos, BlockState state, BEntity entity) {
             Music music = entity.music.get();
             if (music == null || !state.getValue(StateProperties.DRIVE)) return;
             MusicManager musicManager = Minecraft.getInstance().getMusicManager();

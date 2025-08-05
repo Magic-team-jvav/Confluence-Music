@@ -240,7 +240,7 @@ public final class MusicHandler {
     public static void clientTick$Post(ClientTickEvent.Post event) {
         /**
          * @see MusicBoxItem#curioTick(SlotContext, ItemStack) 2nd
-         * @see MusicBoxBlock.Entity#clientTick(Level, BlockPos, BlockState, MusicBoxBlock.Entity) 3rd
+         * @see MusicBoxBlock.BEntity#clientTick(Level, BlockPos, BlockState, MusicBoxBlock.BEntity) 3rd
          */
         IMusicManager.reset(Minecraft.getInstance().getMusicManager()); // 1st
     }

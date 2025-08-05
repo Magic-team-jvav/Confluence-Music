@@ -113,10 +113,10 @@ public final class CMBlocks {
     public static final DeferredBlock<MusicBoxBlock> OTHERWORLDLY_MUSIC_BOX_PLANTERA = register(CMMusics.OTHERWORLDLY_PLANTERA);
     public static final DeferredBlock<MusicBoxBlock> OTHERWORLDLY_MUSIC_BOX_WALL_OF_FLESH = register(CMMusics.OTHERWORLDLY_WALL_OF_FLESH);
 
-    public static final Supplier<BlockEntityType<MusicBoxBlock.Entity>> MUSIC_BOX_ENTITY = BLOCK_ENTITIES.register("music_box_entity", () -> {
+    public static final Supplier<BlockEntityType<MusicBoxBlock.BEntity>> MUSIC_BOX_ENTITY = BLOCK_ENTITIES.register("music_box_entity", () -> {
         Block[] validBlocks = MUSIC_BOXES.stream().map(Supplier::get).toArray(Block[]::new);
         MUSIC_BOXES = null;
-        return BlockEntityType.Builder.of(MusicBoxBlock.Entity::new, validBlocks).build(DSL.remainderType());
+        return BlockEntityType.Builder.of(MusicBoxBlock.BEntity::new, validBlocks).build(DSL.remainderType());
     });
 
     private static DeferredBlock<MusicBoxBlock> register(DeferredHolder<CMMusics.CachedLocationMusic, CMMusics.CachedLocationMusic> music) {
