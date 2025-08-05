@@ -59,6 +59,7 @@ public class ConfluenceMusic {
             eventBus.addListener(MusicHandler::modConfig$Reloading);
         }
         CMBlocks.BLOCKS.register(eventBus);
+        CMBlocks.BLOCK_ENTITIES.register(eventBus);
         CMItems.ITEMS.register(eventBus);
         CMSoundEvents.EVENTS.register(eventBus);
         CMMusics.MUSICS.register(eventBus);
