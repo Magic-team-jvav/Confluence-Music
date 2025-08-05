@@ -17,6 +17,14 @@ repositories {
         name = "Curios"
         url = uri("https://maven.theillusivec4.top/")
     }
+    maven {
+        name "org.confluenceReleases"
+        url "https://maven.confluence.ink/releases"
+    }
+    maven {
+        name "org.confluenceSnapshots"
+        url "https://maven.confluence.ink/snapshots"
+    }
 }
 
 base {
@@ -81,7 +89,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     implementation files("libs/ConfluenceOtherworld-1.1.5-alpha.jar")
-    compileOnly files("libs/confluence_magic_lib-0.0.1.jar")
+    compileOnly "org.confluence.lib:Confluence-Magic-Lib:0.0.2a-SNAPSHOT"
     compileOnly "curse.maven:terra-entity-1173196:6791221"
     compileOnly "curse.maven:terra-curio-1027625:6545988"
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
