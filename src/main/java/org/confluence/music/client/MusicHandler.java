@@ -115,7 +115,7 @@ public final class MusicHandler {
             } else {
                 minecraft.getMusicManager().stopPlaying();
                 event.setMusic(nextSong);
-                nextSongDelay = CMClientConfigs.NEXT_SONG_DELAY.get();
+                nextSongDelay = CMClientConfigs.nextSongDelay;
                 volume = 1.0F;
                 nextSong = null;
             }
@@ -135,7 +135,7 @@ public final class MusicHandler {
 
     public static void clear() {
         nextSong = null;
-        nextSongDelay = CMClientConfigs.NEXT_SONG_DELAY.get();
+        nextSongDelay = CMClientConfigs.nextSongDelay;
         lastBiome = null;
         nextBiomeCheck = CMCommonConfigs.checkInterval;
         volume = 1.0F;

@@ -10,12 +10,14 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 @OnlyIn(Dist.CLIENT)
 public class CMClientConfigs {
     public static ResourceLocation musicType = MusicHandler.CONFLUENCE;
+    public static int nextSongDelay = 2400;
 
     private static ModConfigSpec.ConfigValue<String> MUSIC_TYPE;
-    public static ModConfigSpec.IntValue NEXT_SONG_DELAY;
+    private static ModConfigSpec.IntValue NEXT_SONG_DELAY;
 
     public static void onLoad() {
         musicType = ResourceLocation.parse(MUSIC_TYPE.get());
+        nextSongDelay = NEXT_SONG_DELAY.get();
     }
 
     public static void register(ModContainer container) {
