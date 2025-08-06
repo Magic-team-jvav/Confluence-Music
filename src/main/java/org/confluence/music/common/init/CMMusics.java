@@ -20,6 +20,7 @@ public final class CMMusics {
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> OVERWORLD_DAY = register(CMSoundEvents.OVERWORLD_DAY, Type.COMMON);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> ALT_OVERWORLD_DAY = register(CMSoundEvents.ALT_OVERWORLD_DAY, Type.COMMON);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> OVERWORLD_NIGHT = register(CMSoundEvents.OVERWORLD_NIGHT, Type.COMMON);
+    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> ALT_OVERWORLD_NIGHT = register(CMSoundEvents.ALT_OVERWORLD_NIGHT, Type.COMMON);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> JOURNEYS_BEGINNING = register(CMSoundEvents.JOURNEYS_BEGINNING, Type.COMMON);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> JOURNEYS_END = register(CMSoundEvents.JOURNEYS_END, Type.COMMON);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> TITLE = register(CMSoundEvents.TITLE, Type.COMMON);

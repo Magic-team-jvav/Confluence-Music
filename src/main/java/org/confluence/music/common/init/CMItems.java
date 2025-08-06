@@ -20,6 +20,7 @@ public final class CMItems {
     public static final DeferredItem<CustomRarityItem> OVERWORLD_DAY = registerMusicDisc(CMJukeboxSongs.OVERWORLD_DAY, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> ALT_OVERWORLD_DAY = registerMusicDisc(CMJukeboxSongs.ALT_OVERWORLD_DAY, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> OVERWORLD_NIGHT = registerMusicDisc(CMJukeboxSongs.OVERWORLD_NIGHT, ModRarity.RARE);
+    public static final DeferredItem<CustomRarityItem> ALT_OVERWORLD_NIGHT = registerMusicDisc(CMJukeboxSongs.ALT_OVERWORLD_NIGHT, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> JOURNEYS_BEGINNING = registerMusicDisc(CMJukeboxSongs.JOURNEYS_BEGINNING, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> JOURNEYS_END = registerMusicDisc(CMJukeboxSongs.JOURNEYS_END, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> TITLE = registerMusicDisc(CMJukeboxSongs.TITLE, ModRarity.RARE);
@@ -48,7 +49,8 @@ public final class CMItems {
     public static final DeferredItem<CustomRarityItem> THE_HALLOW = registerMusicDisc(CMJukeboxSongs.THE_HALLOW, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> UNDERGROUND_HALLOW = registerMusicDisc(CMJukeboxSongs.UNDERGROUND_HALLOW, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> UNDERWORLD = registerMusicDisc(CMJukeboxSongs.UNDERWORLD, ModRarity.RARE);
-    public static final DeferredItem<CustomRarityItem> DUNGEON = registerMusicDisc(CMJukeboxSongs.DUNGEON, ModRarity.RARE);
+    public static final DeferredItem<CustomRarityItem> DUNGEON_FLOOR_1 = registerMusicDisc(CMJukeboxSongs.DUNGEON_FLOOR_1, ModRarity.RARE);
+    public static final DeferredItem<CustomRarityItem> DUNGEON_FLOOR_2 = registerMusicDisc(CMJukeboxSongs.DUNGEON_FLOOR_2, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> TEMPLE = registerMusicDisc(CMJukeboxSongs.TEMPLE, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> AETHER = registerMusicDisc(CMJukeboxSongs.AETHER, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> GRAVEYARD = registerMusicDisc(CMJukeboxSongs.GRAVEYARD, ModRarity.RARE);
@@ -76,6 +78,7 @@ public final class CMItems {
     public static final DeferredItem<CustomRarityItem> FROST_MOON = registerMusicDisc(CMJukeboxSongs.FROST_MOON, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> THE_TOWERS = registerMusicDisc(CMJukeboxSongs.THE_TOWERS, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> SANDSTORM = registerMusicDisc(CMJukeboxSongs.SANDSTORM, ModRarity.RARE);
+    public static final DeferredItem<CustomRarityItem> BLIZZARD = registerMusicDisc(CMJukeboxSongs.BLIZZARD, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> OLD_ONES_ARMY = registerMusicDisc(CMJukeboxSongs.OLD_ONES_ARMY, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> SLIME_RAIN = registerMusicDisc(CMJukeboxSongs.SLIME_RAIN, ModRarity.RARE);
     public static final DeferredItem<CustomRarityItem> WINDY_DAY = registerMusicDisc(CMJukeboxSongs.WINDY_DAY, ModRarity.RARE);

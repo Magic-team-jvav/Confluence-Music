@@ -31,6 +31,14 @@
       }
     ]
   },
+  "alt_overworld_night": {
+    "sounds": [
+      {
+        "name": "confluence_music:alt_overworld_night",
+        "volume": 0.77
+      }
+    ]
+  },
   "journeys_beginning": {
     "sounds": [
       {
@@ -459,6 +467,14 @@
     "sounds": [
       {
         "name": "confluence_music:sandstorm",
+        "volume": 0.77
+      }
+    ]
+  },
+  "blizzard": {
+    "sounds": [
+      {
+        "name": "confluence_music:blizzard",
         "volume": 0.77
       }
     ]
