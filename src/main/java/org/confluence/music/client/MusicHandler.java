@@ -102,16 +102,14 @@ public final class MusicHandler {
             if (volume > 0.0F) {
                 volume -= 0.01F;
                 float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) * volume;
-                for (Map.Entry<SoundInstance, ChannelAccess.ChannelHandle> entry : minecraft.getSoundManager().soundEngine.instanceToChannel.entrySet()) {
-                    if (entry.getKey().getSource() != SoundSource.MUSIC) continue;
-                    entry.getValue().execute(channel -> {
-                        if (volume <= 0.0F) {
-                            channel.stop();
-                        } else {
-                            channel.setVolume(v);
-                        }
-                    });
-                }
+                ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
+                if (handle != null) handle.execute(channel -> {
+                    if (volume <= 0.0F) {
+                        channel.stop();
+                    } else {
+                        channel.setVolume(v);
+                    }
+                });
             } else {
                 minecraft.getMusicManager().stopPlaying();
                 event.setMusic(nextSong);
@@ -120,12 +118,10 @@ public final class MusicHandler {
                 nextSong = null;
             }
         } else if (volume < 1.0F) {
-            volume = 1.0F;
-            float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC);
-            for (Map.Entry<SoundInstance, ChannelAccess.ChannelHandle> entry : minecraft.getSoundManager().soundEngine.instanceToChannel.entrySet()) {
-                if (entry.getKey().getSource() != SoundSource.MUSIC) continue;
-                entry.getValue().execute(channel -> channel.setVolume(v));
-            }
+            volume = Math.min(volume + 0.01F, 1.0F);
+            float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) * volume;
+            ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
+            if (handle != null) handle.execute(channel -> channel.setVolume(v));
         }
     }
 
