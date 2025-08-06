@@ -42,7 +42,6 @@ public final class CMSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> THE_HALLOW = register("the_hallow");
     public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_HALLOW = register("underground_hallow");
     public static final DeferredHolder<SoundEvent, SoundEvent> UNDERWORLD = register("underworld"); // 下界
-    public static final DeferredHolder<SoundEvent, SoundEvent> DUNGEON = register("dungeon");
     public static final DeferredHolder<SoundEvent, SoundEvent> TEMPLE = register("temple");
     public static final DeferredHolder<SoundEvent, SoundEvent> AETHER = register("aether");
     public static final DeferredHolder<SoundEvent, SoundEvent> GRAVEYARD = register("graveyard");

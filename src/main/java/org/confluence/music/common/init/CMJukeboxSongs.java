@@ -105,7 +105,7 @@ public final class CMJukeboxSongs {
     public static final ResourceKey<JukeboxSong> OTHERWORLDLY_WALL_OF_FLESH = ResourceKey.create(Registries.JUKEBOX_SONG, ConfluenceMusic.asResource("otherworldly_wall_of_flesh"));
 
     public static void boostrap(BootstrapContext<JukeboxSong> context) {
-        register(context, ALPHA, SoundEvents.MUSIC_CREDITS, 603, 0);
+        register(context, ALPHA, SoundEvents.MUSIC_CREDITS, 603.0F, 0);
         register(context, NEW_JOURNEY, CMSoundEvents.NEW_JOURNEY, 1, 1);
         register(context, OVERWORLD_DAY, CMSoundEvents.OVERWORLD_DAY, 1, 1);
         register(context, ALT_OVERWORLD_DAY, CMSoundEvents.ALT_OVERWORLD_DAY, 1, 1);
@@ -137,7 +137,7 @@ public final class CMJukeboxSongs {
         register(context, THE_HALLOW, CMSoundEvents.THE_HALLOW, 1, 1);
         register(context, UNDERGROUND_HALLOW, CMSoundEvents.UNDERGROUND_HALLOW, 1, 1);
         register(context, UNDERWORLD, CMSoundEvents.UNDERWORLD, 1, 1);
-        register(context, DUNGEON, CMSoundEvents.DUNGEON, 1, 1);
+        register(context, DUNGEON, CMSoundEvents.DUNGEON_FLOOR_1, 1, 1);
         register(context, TEMPLE, CMSoundEvents.TEMPLE, 1, 1);
         register(context, AETHER, CMSoundEvents.AETHER, 1, 1);
         register(context, GRAVEYARD, CMSoundEvents.GRAVEYARD, 1, 1);
