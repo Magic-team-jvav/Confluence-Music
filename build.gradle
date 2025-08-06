@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 plugins {
     id 'java-library'
     id 'maven-publish'
@@ -5,7 +7,7 @@ plugins {
     id 'net.neoforged.moddev' version '2.0.95'
 }
 
-version = mod_version
+version = mod_version + "-${new SimpleDateFormat("yyMMdd").format(new Date())}"
 group = mod_group_id
 
 repositories {
@@ -88,7 +90,7 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    implementation files("libs/ConfluenceOtherworld-1.1.5-beta-250805.jar")
+    implementation files("libs/ConfluenceOtherworld-1.1.5-beta-250806.jar")
     compileOnly "org.confluence.lib:Confluence-Magic-Lib:0.0.2a-SNAPSHOT"
     compileOnly "curse.maven:terra-entity-1173196:6791221"
     compileOnly "curse.maven:terra-curio-1027625:6545988"
