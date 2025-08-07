@@ -3,6 +3,6 @@
   "description": {
     "translate": "jukebox_song.confluence_music.morning_rain"
   },
-  "length_in_seconds": 1.0,
+  "length_in_seconds": 260.0,
   "sound_event": "confluence_music:morning_rain"
 }

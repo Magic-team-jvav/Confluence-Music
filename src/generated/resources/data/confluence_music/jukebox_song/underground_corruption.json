@@ -3,6 +3,6 @@
   "description": {
     "translate": "jukebox_song.confluence_music.underground_corruption"
   },
-  "length_in_seconds": 1.0,
+  "length_in_seconds": 120.0,
   "sound_event": "confluence_music:underground_corruption"
 }
