@@ -38,7 +38,7 @@ import org.confluence.music.common.init.CMMusics;
 import org.confluence.music.common.item.MusicBoxItem;
 import org.confluence.music.common.network.StructureFoundPacketS2C;
 import org.confluence.music.mixed.IMusicManager;
-import org.confluence.terraentity.entity.ai.Boss;
+import org.confluence.terraentity.api.entity.Boss;
 import org.confluence.terraentity.init.entity.TEBossEntities;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
