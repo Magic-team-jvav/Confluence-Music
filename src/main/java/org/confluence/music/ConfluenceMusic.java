@@ -1,6 +1,7 @@
 package org.confluence.music;
 
 import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,12 +19,14 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.registries.RegistryBuilder;
+import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.common.init.ModTabs;
 import org.confluence.mod.common.worldgen.structure.DungeonStructure;
 import org.confluence.mod.mixed.IStructureStart;
@@ -118,25 +121,36 @@ public class ConfluenceMusic {
         @SubscribeEvent
         public static void playerTick(PlayerTickEvent.Post event) {
             if (event.getEntity() instanceof ServerPlayer player && player.level().getGameTime() % CMCommonConfigs.checkInterval == 0) {
-                boolean found = DungeonStructure.iterateDungeon(player.serverLevel(), player.chunkPosition(), structureStart -> {
+                CompoundTag data = LibUtils.getOrCreatePersistedData(player);
+                byte B = data.getByte("confluence_music:structure_found");
+                boolean notFound = !DungeonStructure.iterateDungeon(player.serverLevel(), player.chunkPosition(), structureStart -> {
                     IStructureStart start = IStructureStart.of(structureStart);
                     BoundingBox boundingBox = start.confluence$cachedBoundingBox();
                     if (boundingBox.isInside(player.blockPosition())) {
-                        boolean inMainPart = player.getY() <= boundingBox.minY() + DungeonStructure.getUpperBoundsFloor1();
-                        boolean inSecondFloor = player.getY() <= boundingBox.minY() + DungeonStructure.getUpperBoundsFloor2();
-                        if (inSecondFloor) {
-                            PacketDistributor.sendToPlayer(player, new StructureFoundPacketS2C(StructureFoundPacketS2C.DUNGEON_FLOOR_2));
-                        } else if (inMainPart) {
-                            PacketDistributor.sendToPlayer(player, new StructureFoundPacketS2C(StructureFoundPacketS2C.DUNGEON_FLOOR_1));
+                        byte b = StructureFoundPacketS2C.NOT_FOUND;
+                        if (player.getY() <= boundingBox.minY() + DungeonStructure.getUpperBoundsFloor2()) {
+                            b = StructureFoundPacketS2C.DUNGEON_FLOOR_2;
+                        } else if (player.getY() <= boundingBox.minY() + DungeonStructure.getUpperBoundsFloor1()) {
+                            b = StructureFoundPacketS2C.DUNGEON_FLOOR_1;
+                        }
+                        if (b != B) {
+                            PacketDistributor.sendToPlayer(player, new StructureFoundPacketS2C(b));
+                            data.putByte("confluence_music:structure_found", b);
                         }
                         return true;
                     }
                     return false;
                 });
-                if (!found) {
+                if (notFound && B != StructureFoundPacketS2C.NOT_FOUND) {
                     PacketDistributor.sendToPlayer(player, new StructureFoundPacketS2C(StructureFoundPacketS2C.NOT_FOUND));
+                    data.putByte("confluence_music:structure_found", StructureFoundPacketS2C.NOT_FOUND);
                 }
             }
+        }
+
+        @SubscribeEvent
+        public static void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+            LibUtils.getOrCreatePersistedData(event.getEntity()).putByte("confluence_music:structure_found", StructureFoundPacketS2C.NOT_FOUND);
         }
     }
 }
