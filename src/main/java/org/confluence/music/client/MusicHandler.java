@@ -100,7 +100,7 @@ public final class MusicHandler {
         SoundInstance playingMusic = event.getPlayingMusic();
         if ((playingMusic == null || (nextSong != null && isSameModButDifferentSong(nextSong.getLocation(), playingMusic.getLocation()))) && nextSongDelay-- <= 0) {
             if (volume > 0.0F) {
-                volume -= 0.01F;
+                volume = Math.min(volume, playingMusic == null ? 1.0F : playingMusic.getSound().getVolume().sample(player.getRandom())) - 0.01F;
                 float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) * volume;
                 ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
                 if (handle != null) handle.execute(channel -> {
@@ -118,7 +118,7 @@ public final class MusicHandler {
                 nextSong = null;
             }
         } else if (volume < 1.0F) {
-            volume = Math.min(volume + 0.01F, 1.0F);
+            volume = Math.min(volume, playingMusic == null ? 1.0F : playingMusic.getSound().getVolume().sample(player.getRandom())) + 0.01F;
             float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) * volume;
             ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
             if (handle != null) handle.execute(channel -> channel.setVolume(v));
