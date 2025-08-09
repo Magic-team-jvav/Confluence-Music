@@ -31,6 +31,7 @@ import net.neoforged.neoforge.common.Tags;
 import org.confluence.mod.common.init.ModBiomes;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.util.DateUtils;
+import org.confluence.mod.util.OverworldUtils;
 import org.confluence.music.ConfluenceMusic;
 import org.confluence.music.common.CMCommonConfigs;
 import org.confluence.music.common.block.MusicBoxBlock;
@@ -173,7 +174,7 @@ public final class MusicHandler {
         Holder<Biome> biome = lastBiome == null ? level.getBiome(pos) : lastBiome;
         MusicSelection selection = null;
         ResourceKey<Level> dimension = player.level().dimension();
-        if (dimension == Level.OVERWORLD) {
+        if (dimension == OverworldUtils.dimension()) {
             int dayTime = DateUtils.getDayTime(level);
             boolean isDay = DateUtils.isDay(dayTime);
             int y = pos.getY();
