@@ -15,11 +15,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import org.confluence.lib.ConfluenceMagicLib;
 import org.confluence.lib.common.component.ModRarity;
+import org.confluence.lib.common.item.IFunctionCouldEnable;
 import org.confluence.music.client.MusicHandler;
 import org.confluence.music.common.block.MusicBoxBlock;
 import org.confluence.music.common.network.ReplaceMusicBoxItemPacketC2S;
 import org.confluence.music.mixed.IMusicManager;
-import org.confluence.terra_curio.common.item.IFunctionCouldEnable;
 import org.confluence.terra_curio.util.CuriosUtils;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -56,7 +56,7 @@ public class MusicBoxItem extends BlockItem implements ICurioItem, IFunctionCoul
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         Level level = slotContext.entity().level();
-        if (level.isClientSide && isEnabled(stack, null)) {
+        if (level.isClientSide && isEnabled(stack)) {
             MusicManager musicManager = Minecraft.getInstance().getMusicManager();
             IMusicManager manager = (IMusicManager) musicManager;
             if (music == null) {

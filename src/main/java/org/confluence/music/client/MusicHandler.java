@@ -19,7 +19,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.config.ModConfig;
@@ -28,9 +27,9 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.SelectMusicEvent;
 import net.neoforged.neoforge.common.Tags;
+import org.confluence.lib.util.LibDateUtils;
 import org.confluence.mod.common.init.ModBiomes;
 import org.confluence.mod.common.init.ModTags;
-import org.confluence.mod.util.DateUtils;
 import org.confluence.mod.util.OverworldUtils;
 import org.confluence.music.ConfluenceMusic;
 import org.confluence.music.common.CMCommonConfigs;
@@ -51,7 +50,6 @@ import java.util.function.Function;
 
 import static org.confluence.music.common.init.CMMusics.CachedLocationMusic;
 
-@OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(modid = ConfluenceMusic.MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 public final class MusicHandler {
     public static final ResourceLocation CONFLUENCE = ConfluenceMusic.asResource("confluence"); // 汇流来世
@@ -71,11 +69,12 @@ public final class MusicHandler {
                 cache.put(TEBossEntities.QUEEN_BEE.get(), MusicSelection.QUEEN_BEE);
                 cache.put(TEBossEntities.SKELETRON.get(), MusicSelection.SKELETRON);
                 cache.put(TEBossEntities.WALL_OF_FLESH.get(), MusicSelection.WALL_OF_FLESH);
+                cache.put(TEBossEntities.HILL_OF_FLESH.get(), MusicSelection.WALL_OF_FLESH);
             }
             return cache.get(entityType);
         }
     };
-    private static final int _07$30 = DateUtils.getDayTime(7, 30);
+    private static final int _07$30 = LibDateUtils.getDayTime(7, 30);
     private static CachedLocationMusic nextSong;
     private static int nextSongDelay = 10;
     private static Holder<Biome> lastBiome;
@@ -175,15 +174,15 @@ public final class MusicHandler {
         MusicSelection selection = null;
         ResourceKey<Level> dimension = player.level().dimension();
         if (dimension == OverworldUtils.dimension()) {
-            int dayTime = DateUtils.getDayTime(level);
-            boolean isDay = DateUtils.isDay(dayTime);
+            int dayTime = LibDateUtils.getDayTime(level);
+            boolean isDay = LibDateUtils.isDay(dayTime);
             int y = pos.getY();
             boolean isSurface = y >= 40;
 
             if (y > 260) {
                 selection = isDay ? MusicSelection.SPACE_DAY : MusicSelection.SPACE_NIGHT;
             } else if (level.isRaining()) {
-                if (DateUtils.isWithinDayTime(DateUtils._04$30, _07$30, dayTime)) {
+                if (LibDateUtils.isWithinDayTime(LibDateUtils._04$30, _07$30, dayTime)) {
                     selection = MusicSelection.MORNING_RAIN;
                 } else {
                     selection = isDay ? MusicSelection.RAIN_DAY : MusicSelection.RAIN_NIGHT;
