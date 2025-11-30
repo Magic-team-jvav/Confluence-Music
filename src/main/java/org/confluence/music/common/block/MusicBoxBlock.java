@@ -5,9 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.Music;
 import net.minecraft.util.Mth;
@@ -47,7 +44,7 @@ public class MusicBoxBlock extends AbstractMechanicalBlock {
     public MusicBoxBlock(@Nullable Supplier<? extends Music> music) {
         super(Properties.ofFullCopy(Blocks.JUKEBOX));
         this.music = music;
-        registerDefaultState(stateDefinition.any().setValue(StateProperties.DRIVE, true));
+        registerDefaultState(stateDefinition.any().setValue(StateProperties.DRIVE, false));
     }
 
     @Override
@@ -65,7 +62,7 @@ public class MusicBoxBlock extends AbstractMechanicalBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new BEntity(pos, state, music);
+        return new BEntity(pos, state);
     }
 
     @Override
@@ -79,18 +76,12 @@ public class MusicBoxBlock extends AbstractMechanicalBlock {
     }
 
     public static class BEntity extends AbstractMechanicalBlock.BEntity {
-        private @Nullable Supplier<? extends Music> music;
 
         public BEntity(BlockPos pos, BlockState blockState) {
             super(CMBlocks.MUSIC_BOX_ENTITY.get(), pos, blockState);
         }
 
-        public BEntity(BlockPos pos, BlockState blockState, @Nullable Supplier<? extends Music> music) {
-            this(pos, blockState);
-            this.music = music;
-        }
-
-        @Override
+        /*@Override
         protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
             super.loadAdditional(tag, registries);
             if (tag.contains("music")) {
@@ -109,14 +100,15 @@ public class MusicBoxBlock extends AbstractMechanicalBlock {
         @Override
         public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
             CompoundTag tag = super.getUpdateTag(registries);
+            Music
             if (music != null) {
                 tag.put("music", Music.CODEC.encodeStart(NbtOps.INSTANCE, music.get()).getOrThrow());
             }
             return tag;
-        }
+        }*/
 
         private static void clientTick(Level level, BlockPos pos, BlockState state, BEntity entity) {
-            Music music = entity.music.get();
+            Music music = getMusic(pos, level);
             if (music == null || !state.getValue(StateProperties.DRIVE)) return;
             MusicManager musicManager = Minecraft.getInstance().getMusicManager();
             IMusicManager manager = (IMusicManager) musicManager;
@@ -153,6 +145,13 @@ public class MusicBoxBlock extends AbstractMechanicalBlock {
             double dy = block.y - player.y;
             double dz = block.z - player.z;
             return dx * dx + dy * dy + dz * dz <= maxRangeSqr;
+        }
+
+        @Nullable
+        private static Music getMusic(BlockPos pos, Level level) {
+            return level.getBlockState(pos).getBlock() instanceof MusicBoxBlock musicBoxBlock
+                ? musicBoxBlock.music != null ? musicBoxBlock.music.get(): null
+                : null;
         }
     }
 }
