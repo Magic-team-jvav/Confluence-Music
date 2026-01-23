@@ -24,9 +24,7 @@ public class CMMusicSelectionProvider extends AbstractRecipeProvider {
         this.pathProvider = output.createPathProvider(PackOutput.Target.RESOURCE_PACK, "music_selection");
     }
 
-    /**
-     * <a href="https://terraria.wiki.gg/zh/wiki/%E9%9F%B3%E4%B9%90">音乐如何选择</a>
-     */
+    /// [音乐如何选择](https://terraria.wiki.gg/zh/wiki/%E9%9F%B3%E4%B9%90)
     @Override
     protected void buildRecipes(@NotNull RecipeOutput recipeOutput, HolderLookup.@NotNull Provider holderLookup) {
         recipe(MusicSelectionLoader.CODEC, pathProvider().json(MusicHandler.CONFLUENCE)).addRecipe(new Builder()
@@ -99,6 +97,7 @@ public class CMMusicSelectionProvider extends AbstractRecipeProvider {
                 .add(MusicSelection.JOURNEYS_END, CMMusics.JOURNEYS_END)
                 .add(MusicSelection.TITLE, CMMusics.TITLE)
                 .add(MusicSelection.DAY_REMIX, CMMusics.DAY_REMIX)
+                .add(MusicSelection.CREATIVE_MODE, CMMusics.CREATIVE_MODE)
                 .add(MusicSelection.STORM, CMMusics.STORM)
                 .add(MusicSelection.GRAVEYARD, CMMusics.GRAVEYARD)
                 .add(MusicSelection.MORNING_RAIN, CMMusics.MORNING_RAIN)

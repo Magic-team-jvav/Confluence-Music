@@ -10,38 +10,32 @@ import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.SelectMusicEvent;
 import net.neoforged.neoforge.common.Tags;
+import org.confluence.lib.api.entity.Boss;
 import org.confluence.lib.util.LibDateUtils;
 import org.confluence.mod.common.init.ModBiomes;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.util.OverworldUtils;
 import org.confluence.music.ConfluenceMusic;
 import org.confluence.music.common.CMCommonConfigs;
-import org.confluence.music.common.block.MusicBoxBlock;
 import org.confluence.music.common.init.CMMusics;
-import org.confluence.music.common.item.MusicBoxItem;
 import org.confluence.music.common.network.StructureFoundPacketS2C;
-import org.confluence.music.mixed.IMusicManager;
-import org.confluence.terraentity.api.entity.Boss;
 import org.confluence.terraentity.init.entity.TEBossEntities;
 import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -50,10 +44,10 @@ import java.util.function.Function;
 
 import static org.confluence.music.common.init.CMMusics.CachedLocationMusic;
 
-@EventBusSubscriber(modid = ConfluenceMusic.MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
+@EventBusSubscriber(modid = ConfluenceMusic.MODID, value = Dist.CLIENT)
 public final class MusicHandler {
-    public static final ResourceLocation CONFLUENCE = ConfluenceMusic.asResource("confluence"); // 汇流来世
-    public static final ResourceLocation OTHERWORLDLY = ConfluenceMusic.asResource("otherworldly"); // 泰拉瑞亚来世
+    public static final ResourceLocation CONFLUENCE = ConfluenceMusic.asResource("confluence"); // 汇流来世类型
+    public static final ResourceLocation OTHERWORLDLY = ConfluenceMusic.asResource("otherworldly"); // 原版来世类型
     private static final RandomSource RANDOM = RandomSource.create();
     private static final Function<EntityType<?>, MusicSelection> bossMusicSelector = new Function<>() {
         private Map<EntityType<?>, MusicSelection> cache;
@@ -66,10 +60,15 @@ public final class MusicHandler {
                 cache.put(TEBossEntities.EYE_OF_CTHULHU.get(), MusicSelection.EYE_OF_CTHULHU);
                 cache.put(TEBossEntities.EATER_OF_WORLDS.get(), MusicSelection.EATER_OF_WORLDS);
                 cache.put(TEBossEntities.BRAIN_OF_CTHULHU.get(), MusicSelection.BRAIN_OF_CTHULHU);
+                cache.put(TEBossEntities.DEERCLOPS.get(), MusicSelection.DEERCLOPS);
                 cache.put(TEBossEntities.QUEEN_BEE.get(), MusicSelection.QUEEN_BEE);
                 cache.put(TEBossEntities.SKELETRON.get(), MusicSelection.SKELETRON);
                 cache.put(TEBossEntities.WALL_OF_FLESH.get(), MusicSelection.WALL_OF_FLESH);
                 cache.put(TEBossEntities.HILL_OF_FLESH.get(), MusicSelection.WALL_OF_FLESH);
+                cache.put(TEBossEntities.THE_TWINS.get(), MusicSelection.THE_TWINS);
+                cache.put(TEBossEntities.SKELETRON_PRIME.get(), MusicSelection.SKELETRON_PRIME);
+                cache.put(TEBossEntities.THE_DESTROYER.get(), MusicSelection.THE_DESTROYER);
+                cache.put(TEBossEntities.PLANTERA.get(), MusicSelection.PLANTERA);
             }
             return cache.get(entityType);
         }
@@ -82,15 +81,16 @@ public final class MusicHandler {
     private static float volume = 1.0F;
     private static boolean hasBossMusic = false;
     private static byte structureMusic = StructureFoundPacketS2C.NOT_FOUND;
+    private static MusicSelection lastSelection;
 
     public static void handle(SelectMusicEvent event, LocalPlayer player, Minecraft minecraft) {
-        if (!((IMusicManager) minecraft.getMusicManager()).confluence$getMusicBoxOccupied().isNone()) return;
         if (nextBiomeCheck-- <= 0) {
             Holder<Biome> biome = player.level().getBiome(player.blockPosition());
             if (biome != lastBiome) {
                 lastBiome = biome;
                 nextSongDelay = 0;
                 nextSong = null;
+                lastSelection = null;
             }
             nextBiomeCheck = CMCommonConfigs.checkInterval;
         }
@@ -100,7 +100,7 @@ public final class MusicHandler {
         SoundInstance playingMusic = event.getPlayingMusic();
         if ((playingMusic == null || (nextSong != null && isSameModButDifferentSong(nextSong.getLocation(), playingMusic.getLocation()))) && nextSongDelay-- <= 0) {
             if (volume > 0.0F) {
-                volume = Math.min(volume, playingMusic == null ? 1.0F : playingMusic.getSound().getVolume().sample(player.getRandom())) - 0.01F;
+                volume = Mth.clamp(Math.min(volume, playingMusic == null ? 1.0F : playingMusic.getSound().getVolume().sample(player.getRandom())) - CMClientConfigs.lastSongFadeOutStep, 0.0F, 1.0F);
                 float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) * volume;
                 ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
                 if (handle != null) handle.execute(channel -> {
@@ -116,9 +116,10 @@ public final class MusicHandler {
                 nextSongDelay = CMClientConfigs.nextSongDelay;
                 volume = 1.0F;
                 nextSong = null;
+                lastSelection = null;
             }
         } else if (volume < 1.0F) {
-            volume = Math.min(volume, playingMusic == null ? 1.0F : playingMusic.getSound().getVolume().sample(player.getRandom())) + 0.01F;
+            volume = Mth.clamp(Math.min(volume, playingMusic == null ? 1.0F : playingMusic.getSound().getVolume().sample(player.getRandom())) + CMClientConfigs.lastSongFadeOutStep, 0.0F, 1.0F);
             float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) * volume;
             ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
             if (handle != null) handle.execute(channel -> channel.setVolume(v));
@@ -131,6 +132,7 @@ public final class MusicHandler {
 
     public static void clear() {
         nextSong = null;
+        lastSelection = null;
         nextSongDelay = CMClientConfigs.nextSongDelay;
         lastBiome = null;
         nextBiomeCheck = CMCommonConfigs.checkInterval;
@@ -152,6 +154,7 @@ public final class MusicHandler {
         } else if (hasBossMusic && (nextSong == null || nextSong.getType() == CMMusics.Type.BOSS)) {
             hasBossMusic = false;
             nextSong = null;
+            lastSelection = null;
             nextSongDelay = 0;
         }
     }
@@ -177,9 +180,9 @@ public final class MusicHandler {
             int dayTime = LibDateUtils.getDayTime(level);
             boolean isDay = LibDateUtils.isDay(dayTime);
             int y = pos.getY();
-            boolean isSurface = y >= 40;
+            boolean isSurface = y > OverworldUtils.getSurfaceY();
 
-            if (y > 260) {
+            if (y > OverworldUtils.getSpaceY()) {
                 selection = isDay ? MusicSelection.SPACE_DAY : MusicSelection.SPACE_NIGHT;
             } else if (level.isRaining()) {
                 if (LibDateUtils.isWithinDayTime(LibDateUtils._04$30, _07$30, dayTime)) {
@@ -208,9 +211,21 @@ public final class MusicHandler {
             } else if (biome.is(Tags.Biomes.IS_JUNGLE)) {
                 selection = isSurface ? (isDay ? MusicSelection.JUNGLE_DAY : MusicSelection.JUNGLE_NIGHT) : MusicSelection.UNDERGROUND_JUNGLE;
             } else {
-                selection = isSurface ? (isDay ? MusicSelection.DAY : MusicSelection.NIGHT) : MusicSelection.UNDERGROUND;
+                if (isSurface) {
+                    if (isDay) {
+                        if (player.getAbilities().instabuild && player.mayFly()) {
+                            selection = MusicSelection.CREATIVE_MODE;
+                        } else {
+                            selection = MusicSelection.DAY;
+                        }
+                    } else {
+                        selection = MusicSelection.NIGHT;
+                    }
+                } else {
+                    selection = MusicSelection.UNDERWORLD;
+                }
             }
-        } else if (dimension == Level.NETHER) {
+        } else if (dimension == OverworldUtils.underworld()) {
             selection = MusicSelection.UNDERWORLD;
         }
         nextSong = randomMusic(CMClientConfigs.musicType, selection);
@@ -218,6 +233,8 @@ public final class MusicHandler {
 
     private static @Nullable CachedLocationMusic randomMusic(ResourceLocation type, @Nullable MusicSelection selection) {
         if (selection == null) return null;
+        if (selection == lastSelection) return nextSong;
+        lastSelection = selection;
         Map<ResourceLocation, Map<MusicSelection, List<CachedLocationMusic>>> selections = MusicSelectionLoader.getInstance().getRegisteredMusicSelections();
         Map<MusicSelection, List<CachedLocationMusic>> map = selections.get(type);
         if (map == null) {
@@ -230,15 +247,6 @@ public final class MusicHandler {
         if (list.isEmpty()) return null;
         if (list.size() == 1) return list.getFirst();
         return Util.getRandom(list, RANDOM);
-    }
-
-    @SubscribeEvent
-    public static void clientTick$Post(ClientTickEvent.Post event) {
-        /**
-         * @see MusicBoxItem#curioTick(SlotContext, ItemStack) 2nd
-         * @see MusicBoxBlock.BEntity#clientTick(Level, BlockPos, BlockState, MusicBoxBlock.BEntity) 3rd
-         */
-        IMusicManager.reset(Minecraft.getInstance().getMusicManager()); // 1st
     }
 
     @SubscribeEvent
@@ -272,6 +280,7 @@ public final class MusicHandler {
         if (structureMusic != data) {
             structureMusic = data;
             nextSong = null;
+            lastSelection = null;
             nextSongDelay = 0;
         }
     }

@@ -5,7 +5,6 @@ import net.minecraft.util.StringRepresentable;
 import net.neoforged.fml.common.asm.enumextension.ExtensionInfo;
 import net.neoforged.fml.common.asm.enumextension.IExtensibleEnum;
 import net.neoforged.fml.common.asm.enumextension.NetworkedEnum;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
@@ -17,6 +16,7 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     JOURNEYS_END,
     TITLE,
     DAY_REMIX,
+    CREATIVE_MODE,
 
     SNOW,
     ICE,
@@ -91,7 +91,7 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     public static final Codec<MusicSelection> CODEC = StringRepresentable.fromEnum(MusicSelection::values);
 
     @Override
-    public @NotNull String getSerializedName() {
+    public String getSerializedName() {
         return name().toLowerCase(Locale.ROOT);
     }
 

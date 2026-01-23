@@ -26,6 +26,7 @@ public final class CMMusics {
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> TITLE = register(CMSoundEvents.TITLE, Type.COMMON);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> ALT_TITLE = register(CMSoundEvents.ALT_TITLE, Type.COMMON);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> DAY_REMIX = register(CMSoundEvents.DAY_REMIX, Type.COMMON);
+    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> CREATIVE_MODE = register(CMSoundEvents.CREATIVE_MODE, Type.COMMON);
 
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> SNOW = register(CMSoundEvents.SNOW, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> ICE = register(CMSoundEvents.ICE, Type.LOCATION);

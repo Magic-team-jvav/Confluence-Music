@@ -89,6 +89,15 @@
             }
         ]
     },
+    "creative_mode": {
+        "sounds": [
+            {
+                "name": "confluence_music:creative_mode",
+                "volume": 0.4,
+                "stream": true
+            }
+        ]
+    },
     "snow": {
         "sounds": [
             {

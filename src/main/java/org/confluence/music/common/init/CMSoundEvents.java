@@ -20,6 +20,7 @@ public final class CMSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> TITLE = register("title");
     public static final DeferredHolder<SoundEvent, SoundEvent> ALT_TITLE = register("alt_title"); // 标题备选曲
     public static final DeferredHolder<SoundEvent, SoundEvent> DAY_REMIX = register("day_remix"); // 白天混音
+    public static final DeferredHolder<SoundEvent, SoundEvent> CREATIVE_MODE = register("creative_mode");
     // location
     public static final DeferredHolder<SoundEvent, SoundEvent> SNOW = register("snow");
     public static final DeferredHolder<SoundEvent, SoundEvent> ICE = register("ice");

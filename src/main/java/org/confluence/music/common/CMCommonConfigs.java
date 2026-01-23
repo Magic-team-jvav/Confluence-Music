@@ -15,7 +15,7 @@ public final class CMCommonConfigs {
 
     public static void register(ModContainer container) {
         ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
-        CHECK_INTERVAL = BUILDER.defineInRange("checkInterval", 0, 20, 200);
+        CHECK_INTERVAL = BUILDER.defineInRange("checkInterval", 20, 20, 200);
         container.registerConfig(ModConfig.Type.COMMON, BUILDER.build());
     }
 }

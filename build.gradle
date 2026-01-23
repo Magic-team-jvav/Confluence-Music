@@ -39,6 +39,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 neoForge {
     version = project.neo_version
+    validateAccessTransformers = true
 
     parchment {
         mappingsVersion = project.parchment_mappings_version
@@ -71,9 +72,13 @@ neoForge {
 
         configureEach {
             systemProperty 'forge.logging.markers', 'REGISTRIES'
-
             logLevel = org.slf4j.event.Level.DEBUG
-
+            jvmArguments.addAll([
+                    // 忽略无效指令，避免有的人没安装 JetBrain Runtime 无法启动游戏
+                    "-XX:+IgnoreUnrecognizedVMOptions",
+                    // 启用 JetBrain Runtime 热重载功能
+                    "-XX:+AllowEnhancedClassRedefinition"
+            ])
             if (isRunningInIdea) {
                 systemProperty "terminal.jline", "true"
             }
@@ -90,10 +95,9 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    implementation files("libs/ConfluenceOtherworld-1.2.0-beta-251009.jar")
-    compileOnly "org.confluence.lib:Confluence-Magic-Lib:0.0.2d-SNAPSHOT"
+    implementation files("libs/ConfluenceOtherworld-1.2.0-beta-260123.jar")
+    compileOnly files("libs/confluence_magic_lib-0.0.3.jar")
     compileOnly files("libs/terra_entity-1.1.17-hotfix.jar")
-    compileOnly files("libs/terra_curio-1.1.2.jar")
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 }

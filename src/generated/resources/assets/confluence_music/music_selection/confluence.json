@@ -11,6 +11,9 @@
   "corruption": [
     "confluence_music:corruption"
   ],
+  "creative_mode": [
+    "confluence_music:creative_mode"
+  ],
   "crimson": [
     "confluence_music:crimson"
   ],
