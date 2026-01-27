@@ -47,7 +47,7 @@ public final class CMMusics {
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> UNDERGROUND_CORRUPTION = register(CMSoundEvents.UNDERGROUND_CORRUPTION, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> THE_CRIMSON = register(CMSoundEvents.THE_CRIMSON, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> UNDERGROUND_CRIMSON = register(CMSoundEvents.UNDERGROUND_CRIMSON, Type.LOCATION);
-    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> THE_HALLOW = register(CMSoundEvents.THE_HALLOW, Type.LOCATION);
+    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> THE_HALLOW_DAY = register(CMSoundEvents.THE_HALLOW_DAY, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> UNDERGROUND_HALLOW = register(CMSoundEvents.UNDERGROUND_HALLOW, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> UNDERWORLD = register(CMSoundEvents.UNDERWORLD, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> TEMPLE = register(CMSoundEvents.TEMPLE, Type.LOCATION);

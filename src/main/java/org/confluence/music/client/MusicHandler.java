@@ -234,7 +234,7 @@ public final class MusicHandler {
                 } else if (isSurface) {
                     selection = isDay ? MusicSelection.OVERWORLD_DAY : MusicSelection.OVERWORLD_NIGHT;
                 } else {
-                    selection = MusicSelection.UNDERWORLD;
+                    selection = MusicSelection.UNDERGROUND;
                 }
             }
         } else if (dimension == OverworldUtils.underworld()) {

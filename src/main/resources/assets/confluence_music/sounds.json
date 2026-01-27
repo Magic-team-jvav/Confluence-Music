@@ -269,10 +269,10 @@
             }
         ]
     },
-    "the_hallow": {
+    "the_hallow_day": {
         "sounds": [
             {
-                "name": "confluence_music:the_hallow",
+                "name": "confluence_music:the_hallow_day",
                 "volume": 0.4,
                 "stream": true
             }

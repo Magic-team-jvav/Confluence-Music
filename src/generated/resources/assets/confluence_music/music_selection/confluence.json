@@ -142,7 +142,6 @@
     "confluence_music:slime_rain"
   ],
   "snow": [
-    "confluence_music:snow",
     "confluence_music:ice"
   ],
   "space_day": [
@@ -167,7 +166,7 @@
     "confluence_music:boss_3"
   ],
   "the_hallow_day": [
-    "confluence_music:the_hallow"
+    "confluence_music:the_hallow_day"
   ],
   "the_hallow_night": [
     "confluence_music:overworld_night"
