@@ -14,6 +14,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.npc.Npc;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.phys.AABB;
@@ -27,6 +28,9 @@ import net.neoforged.neoforge.client.event.SelectMusicEvent;
 import net.neoforged.neoforge.common.Tags;
 import org.confluence.lib.api.entity.Boss;
 import org.confluence.lib.util.LibDateUtils;
+import org.confluence.mod.client.gameevent.ClientGameEventSystem;
+import org.confluence.mod.client.handler.WeatherHandler;
+import org.confluence.mod.common.data.saved.SpecificMoonVariant;
 import org.confluence.mod.common.init.ModBiomes;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.util.OverworldUtils;
@@ -176,7 +180,9 @@ public final class MusicHandler {
         Holder<Biome> biome = lastBiome == null ? level.getBiome(pos) : lastBiome;
         MusicSelection selection = null;
         ResourceKey<Level> dimension = player.level().dimension();
-        if (dimension == OverworldUtils.dimension()) {
+        if (dimension != OverworldUtils.underworld() && player.getAbilities().instabuild && player.mayFly()) {
+            selection = MusicSelection.CREATIVE_MODE;
+        } else if (dimension == OverworldUtils.dimension()) {
             int dayTime = LibDateUtils.getDayTime(level);
             boolean isDay = LibDateUtils.isDay(dayTime);
             int y = pos.getY();
@@ -184,14 +190,6 @@ public final class MusicHandler {
 
             if (y > OverworldUtils.getSpaceY()) {
                 selection = isDay ? MusicSelection.SPACE_DAY : MusicSelection.SPACE_NIGHT;
-            } else if (level.isRaining()) {
-                if (LibDateUtils.isWithinDayTime(LibDateUtils._04$30, _07$30, dayTime)) {
-                    selection = MusicSelection.MORNING_RAIN;
-                } else {
-                    selection = isDay ? MusicSelection.RAIN_DAY : MusicSelection.RAIN_NIGHT;
-                }
-            } else if (level.isThundering()) {
-                selection = MusicSelection.STORM;
             } else if (biome.is(ModBiomes.GLOWING_MUSHROOM)) {
                 selection = MusicSelection.MUSHROOMS;
             } else if (biome.is(Tags.Biomes.IS_ICY)) {
@@ -199,28 +197,42 @@ public final class MusicHandler {
             } else if (biome.is(Tags.Biomes.IS_SNOWY)) {
                 selection = MusicSelection.SNOW;
             } else if (biome.is(ModTags.Biomes.THE_CORRUPTION)) {
-                selection = isSurface ? MusicSelection.CORRUPTION : MusicSelection.UNDERGROUND_CORRUPTION;
+                selection = isSurface ? MusicSelection.THE_CORRUPTION : MusicSelection.UNDERGROUND_CORRUPTION;
             } else if (biome.is(ModTags.Biomes.THE_CRIMSON)) {
-                selection = isSurface ? MusicSelection.CRIMSON : MusicSelection.UNDERGROUND_CRIMSON;
+                selection = isSurface ? MusicSelection.THE_CRIMSON : MusicSelection.UNDERGROUND_CRIMSON;
             } else if (biome.is(ModTags.Biomes.THE_HALLOW)) {
-                selection = isSurface ? (isDay ? MusicSelection.THE_HALLOW_DAY : MusicSelection.THE_HALLOW_NIGHT) : MusicSelection.UNDERGROUND_HALLOW;
+                if (isSurface) {
+                    selection = isDay ? MusicSelection.THE_HALLOW_DAY : MusicSelection.THE_HALLOW_NIGHT;
+                } else {
+                    selection = MusicSelection.UNDERGROUND_HALLOW;
+                }
             } else if (biome.is(Tags.Biomes.IS_DESERT)) {
                 selection = isSurface ? MusicSelection.DESERT : MusicSelection.UNDERGROUND_DESERT;
             } else if (biome.is(Tags.Biomes.IS_OCEAN)) {
                 selection = isDay ? MusicSelection.OCEAN_DAY : MusicSelection.OCEAN_NIGHT;
             } else if (biome.is(Tags.Biomes.IS_JUNGLE)) {
-                selection = isSurface ? (isDay ? MusicSelection.JUNGLE_DAY : MusicSelection.JUNGLE_NIGHT) : MusicSelection.UNDERGROUND_JUNGLE;
-            } else {
                 if (isSurface) {
-                    if (isDay) {
-                        if (player.getAbilities().instabuild && player.mayFly()) {
-                            selection = MusicSelection.CREATIVE_MODE;
-                        } else {
-                            selection = MusicSelection.DAY;
-                        }
+                    selection = isDay ? MusicSelection.JUNGLE_DAY : MusicSelection.JUNGLE_NIGHT;
+                } else {
+                    selection = MusicSelection.UNDERGROUND_JUNGLE;
+                }
+            } else { // todo 沙尘暴，陨石
+                if (ClientGameEventSystem.moonTexture == SpecificMoonVariant.TR_BLOOD_FULL_MOON.texture) { // todo换成别的方式
+                    selection = MusicSelection.BLOOD_MOON;
+                } else if (level.isThundering()) {
+                    selection = MusicSelection.STORM;
+                } else if (level.isRaining()) {
+                    if (LibDateUtils.isWithinDayTime(LibDateUtils._04$30, _07$30, dayTime)) {
+                        selection = MusicSelection.MORNING_RAIN;
                     } else {
-                        selection = MusicSelection.NIGHT;
+                        selection = isDay ? MusicSelection.RAIN_DAY : MusicSelection.RAIN_NIGHT;
                     }
+                } else if (WeatherHandler.WIND_SPEED.length() > 0.447F) {
+                    selection = MusicSelection.WINDY_DAY;
+                } else if (player.level().getEntities(player, new AABB(player.blockPosition()).inflate(80), entity -> entity instanceof Npc).size() >= 3) {
+                    selection = isDay ? MusicSelection.TOWN_DAY : MusicSelection.TOWN_NIGHT;
+                } else if (isSurface) {
+                    selection = isDay ? MusicSelection.OVERWORLD_DAY : MusicSelection.OVERWORLD_NIGHT;
                 } else {
                     selection = MusicSelection.UNDERWORLD;
                 }

@@ -8,18 +8,8 @@
   "brain_of_cthulhu": [
     "confluence_music:boss_3"
   ],
-  "corruption": [
-    "confluence_music:corruption"
-  ],
   "creative_mode": [
     "confluence_music:creative_mode"
-  ],
-  "crimson": [
-    "confluence_music:crimson"
-  ],
-  "day": [
-    "confluence_music:overworld_day",
-    "confluence_music:alt_overworld_day"
   ],
   "day_remix": [
     "confluence_music:day_remix"
@@ -73,7 +63,7 @@
     "confluence_music:journeys_end"
   ],
   "jungle_day": [
-    "confluence_music:jungle"
+    "confluence_music:jungle_day"
   ],
   "jungle_night": [
     "confluence_music:jungle_night"
@@ -102,9 +92,6 @@
   "mushrooms": [
     "confluence_music:mushrooms"
   ],
-  "night": [
-    "confluence_music:overworld_night"
-  ],
   "ocean_day": [
     "confluence_music:ocean_day"
   ],
@@ -113,6 +100,13 @@
   ],
   "old_ones_army": [
     "confluence_music:old_ones_army"
+  ],
+  "overworld_day": [
+    "confluence_music:creative_mode"
+  ],
+  "overworld_night": [
+    "confluence_music:overworld_night",
+    "confluence_music:alt_overworld_night"
   ],
   "pirate_invasion": [
     "confluence_music:pirate_invasion"
@@ -162,6 +156,12 @@
   ],
   "temple": [
     "confluence_music:temple"
+  ],
+  "the_corruption": [
+    "confluence_music:the_corruption"
+  ],
+  "the_crimson": [
+    "confluence_music:the_crimson"
   ],
   "the_destroyer": [
     "confluence_music:boss_3"
@@ -213,7 +213,7 @@
     "confluence_music:underworld"
   ],
   "wall_of_flesh": [
-    "confluence_music:boss_2"
+    "confluence_music:wall_of_flesh"
   ],
   "windy_day": [
     "confluence_music:windy_day"

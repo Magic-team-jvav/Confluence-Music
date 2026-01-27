@@ -40,12 +40,12 @@ public final class CMMusics {
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> UNDERGROUND = register(CMSoundEvents.UNDERGROUND, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> ALT_UNDERGROUND = register(CMSoundEvents.ALT_UNDERGROUND, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> MUSHROOMS = register(CMSoundEvents.MUSHROOMS, Type.LOCATION);
-    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> JUNGLE = register(CMSoundEvents.JUNGLE, Type.LOCATION);
+    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> JUNGLE_DAY = register(CMSoundEvents.JUNGLE_DAY, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> JUNGLE_NIGHT = register(CMSoundEvents.JUNGLE_NIGHT, Type.LOCATION); // 没有八音盒
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> UNDERGROUND_JUNGLE = register(CMSoundEvents.UNDERGROUND_JUNGLE, Type.LOCATION);
-    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> CORRUPTION = register(CMSoundEvents.CORRUPTION, Type.LOCATION);
+    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> THE_CORRUPTION = register(CMSoundEvents.THE_CORRUPTION, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> UNDERGROUND_CORRUPTION = register(CMSoundEvents.UNDERGROUND_CORRUPTION, Type.LOCATION);
-    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> CRIMSON = register(CMSoundEvents.CRIMSON, Type.LOCATION);
+    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> THE_CRIMSON = register(CMSoundEvents.THE_CRIMSON, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> UNDERGROUND_CRIMSON = register(CMSoundEvents.UNDERGROUND_CRIMSON, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> THE_HALLOW = register(CMSoundEvents.THE_HALLOW, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> UNDERGROUND_HALLOW = register(CMSoundEvents.UNDERGROUND_HALLOW, Type.LOCATION);
@@ -64,6 +64,7 @@ public final class CMMusics {
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> BOSS_4 = register(CMSoundEvents.BOSS_4, Type.BOSS);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> BOSS_5 = register(CMSoundEvents.BOSS_5, Type.BOSS);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> DEERCLOPS = register(CMSoundEvents.DEERCLOPS, Type.BOSS);
+    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> WALL_OF_FLESH = register(CMSoundEvents.WALL_OF_FLESH, Type.BOSS);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> QUEEN_SLIME = register(CMSoundEvents.QUEEN_SLIME, Type.BOSS);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> PLANTERA = register(CMSoundEvents.PLANTERA, Type.BOSS);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> EMPRESS_OF_LIGHT = register(CMSoundEvents.EMPRESS_OF_LIGHT, Type.BOSS);

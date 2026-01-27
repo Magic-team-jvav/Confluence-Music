@@ -8,15 +8,6 @@
   "brain_of_cthulhu": [
     "confluence_music:otherworldly_boss_1"
   ],
-  "corruption": [
-    "confluence_music:otherworldly_corruption"
-  ],
-  "crimson": [
-    "confluence_music:otherworldly_crimson"
-  ],
-  "day": [
-    "confluence_music:otherworldly_overworld_day"
-  ],
   "deerclops": [
     "confluence_music:otherworldly_boss_2"
   ],
@@ -92,9 +83,6 @@
   "mushrooms": [
     "confluence_music:otherworldly_mushrooms"
   ],
-  "night": [
-    "confluence_music:otherworldly_night"
-  ],
   "ocean_day": [
     "confluence_music:otherworldly_ocean"
   ],
@@ -103,6 +91,12 @@
   ],
   "old_ones_army": [
     "confluence_music:otherworldly_invasion"
+  ],
+  "overworld_day": [
+    "confluence_music:otherworldly_overworld_day"
+  ],
+  "overworld_night": [
+    "confluence_music:otherworldly_night"
   ],
   "pirate_invasion": [
     "confluence_music:otherworldly_invasion"
@@ -148,6 +142,12 @@
   ],
   "temple": [
     "confluence_music:otherworldly_dungeon"
+  ],
+  "the_corruption": [
+    "confluence_music:otherworldly_corruption"
+  ],
+  "the_crimson": [
+    "confluence_music:otherworldly_crimson"
   ],
   "the_destroyer": [
     "confluence_music:otherworldly_boss_2"

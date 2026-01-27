@@ -206,10 +206,10 @@
             }
         ]
     },
-    "jungle": {
+    "jungle_day": {
         "sounds": [
             {
-                "name": "confluence_music:jungle",
+                "name": "confluence_music:jungle_day",
                 "volume": 0.4,
                 "stream": true
             }
@@ -233,10 +233,10 @@
             }
         ]
     },
-    "corruption": {
+    "the_corruption": {
         "sounds": [
             {
-                "name": "confluence_music:corruption",
+                "name": "confluence_music:the_corruption",
                 "volume": 0.4,
                 "stream": true
             }
@@ -251,10 +251,10 @@
             }
         ]
     },
-    "crimson": {
+    "the_crimson": {
         "sounds": [
             {
-                "name": "confluence_music:crimson",
+                "name": "confluence_music:the_crimson",
                 "volume": 0.4,
                 "stream": true
             }

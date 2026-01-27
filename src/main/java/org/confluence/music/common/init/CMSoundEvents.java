@@ -34,12 +34,12 @@ public final class CMSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND = register("underground");
     public static final DeferredHolder<SoundEvent, SoundEvent> ALT_UNDERGROUND = register("alt_underground");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSHROOMS = register("mushrooms");
-    public static final DeferredHolder<SoundEvent, SoundEvent> JUNGLE = register("jungle");
+    public static final DeferredHolder<SoundEvent, SoundEvent> JUNGLE_DAY = register("jungle_day");
     public static final DeferredHolder<SoundEvent, SoundEvent> JUNGLE_NIGHT = register("jungle_night");
     public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_JUNGLE = register("underground_jungle");
-    public static final DeferredHolder<SoundEvent, SoundEvent> CORRUPTION = register("corruption");
+    public static final DeferredHolder<SoundEvent, SoundEvent> THE_CORRUPTION = register("the_corruption");
     public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_CORRUPTION = register("underground_corruption");
-    public static final DeferredHolder<SoundEvent, SoundEvent> CRIMSON = register("crimson");
+    public static final DeferredHolder<SoundEvent, SoundEvent> THE_CRIMSON = register("the_crimson");
     public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_CRIMSON = register("underground_crimson");
     public static final DeferredHolder<SoundEvent, SoundEvent> THE_HALLOW = register("the_hallow");
     public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_HALLOW = register("underground_hallow");
@@ -58,6 +58,7 @@ public final class CMSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_4 = register("boss_4");
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_5 = register("boss_5");
     public static final DeferredHolder<SoundEvent, SoundEvent> DEERCLOPS = register("deerclops");
+    public static final DeferredHolder<SoundEvent, SoundEvent> WALL_OF_FLESH = register("wall_of_flesh");
     public static final DeferredHolder<SoundEvent, SoundEvent> QUEEN_SLIME = register("queen_slime");
     public static final DeferredHolder<SoundEvent, SoundEvent> PLANTERA = register("plantera");
     public static final DeferredHolder<SoundEvent, SoundEvent> EMPRESS_OF_LIGHT = register("empress_of_light");

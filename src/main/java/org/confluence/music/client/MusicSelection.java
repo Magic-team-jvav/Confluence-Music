@@ -10,8 +10,8 @@ import java.util.Locale;
 
 @NetworkedEnum(NetworkedEnum.NetworkCheck.BIDIRECTIONAL)
 public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
-    DAY,
-    NIGHT,
+    OVERWORLD_DAY,
+    OVERWORLD_NIGHT,
     JOURNEYS_BEGINNING,
     JOURNEYS_END,
     TITLE,
@@ -32,9 +32,9 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     JUNGLE_DAY,
     JUNGLE_NIGHT,
     UNDERGROUND_JUNGLE,
-    CORRUPTION,
+    THE_CORRUPTION,
     UNDERGROUND_CORRUPTION,
-    CRIMSON,
+    THE_CRIMSON,
     UNDERGROUND_CRIMSON,
     THE_HALLOW_DAY,
     THE_HALLOW_NIGHT,
