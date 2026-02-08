@@ -95,9 +95,9 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    implementation files("libs/ConfluenceOtherworld-1.2.0-260125.jar")
-    compileOnly files("libs/confluence_magic_lib-0.0.3.jar")
-    compileOnly files("libs/terra_entity-1.1.17-hotfix.jar")
+    implementation files("libs/ConfluenceOtherworld-1.2.2-260208.jar")
+    compileOnly files("libs/confluence_magic_lib-0.0.5.jar")
+    compileOnly files("libs/terra_entity-1.2.0.jar")
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 }

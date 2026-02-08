@@ -217,7 +217,7 @@ public final class MusicHandler {
                     selection = MusicSelection.UNDERGROUND_JUNGLE;
                 }
             } else { // todo 沙尘暴，陨石
-                if (ClientGameEventSystem.moonTexture == SpecificMoonVariant.TR_BLOOD_FULL_MOON.texture) { // todo换成别的方式
+                if (ClientGameEventSystem.moonTexture == SpecificMoonVariant.TR_BLOOD.texture) { // todo换成别的方式
                     selection = MusicSelection.BLOOD_MOON;
                 } else if (level.isThundering()) {
                     selection = MusicSelection.STORM;
