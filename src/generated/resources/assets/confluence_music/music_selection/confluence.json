@@ -2,6 +2,9 @@
   "aether": [
     "confluence_music:aether"
   ],
+  "blizzard": [
+    "confluence_music:blizzard"
+  ],
   "blood_moon": [
     "confluence_music:eerie"
   ],
@@ -102,7 +105,7 @@
     "confluence_music:old_ones_army"
   ],
   "overworld_day": [
-    "confluence_music:creative_mode"
+    "confluence_music:overworld_day"
   ],
   "overworld_night": [
     "confluence_music:overworld_night",
@@ -142,7 +145,7 @@
     "confluence_music:slime_rain"
   ],
   "snow": [
-    "confluence_music:ice"
+    "confluence_music:snow"
   ],
   "space_day": [
     "confluence_music:space_day"
@@ -201,9 +204,6 @@
   ],
   "underground_hallow": [
     "confluence_music:underground_hallow"
-  ],
-  "underground_ice": [
-    "confluence_music:underground_ice"
   ],
   "underground_jungle": [
     "confluence_music:underground_jungle"

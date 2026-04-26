@@ -16,7 +16,7 @@ import java.util.Locale;
 public final class CMMusics {
     public static final DeferredRegister<CachedLocationMusic> MUSICS = DeferredRegister.create(ConfluenceMusic.CACHED_LOCATION_MUSIC_KEY, ConfluenceMusic.MODID);
 
-    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> OTHERWORLD = register(CMSoundEvents.NEW_JOURNEY, Type.COMMON);
+    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> NEW_JOURNEY = register(CMSoundEvents.NEW_JOURNEY, Type.COMMON);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> OVERWORLD_DAY = register(CMSoundEvents.OVERWORLD_DAY, Type.COMMON);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> ALT_OVERWORLD_DAY = register(CMSoundEvents.ALT_OVERWORLD_DAY, Type.COMMON);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> OVERWORLD_NIGHT = register(CMSoundEvents.OVERWORLD_NIGHT, Type.COMMON);
@@ -30,7 +30,6 @@ public final class CMMusics {
 
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> SNOW = register(CMSoundEvents.SNOW, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> ICE = register(CMSoundEvents.ICE, Type.LOCATION);
-    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> UNDERGROUND_ICE = register(CMSoundEvents.UNDERGROUND_ICE, Type.LOCATION); // 没有八音盒
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> DESERT = register(CMSoundEvents.DESERT, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> UNDERGROUND_DESERT = register(CMSoundEvents.UNDERGROUND_DESERT, Type.LOCATION);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> OCEAN_DAY = register(CMSoundEvents.OCEAN_DAY, Type.LOCATION);
@@ -80,6 +79,7 @@ public final class CMMusics {
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> FROST_MOON = register(CMSoundEvents.FROST_MOON, Type.EVENT);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> THE_TOWERS = register(CMSoundEvents.THE_TOWERS, Type.EVENT);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> SANDSTORM = register(CMSoundEvents.SANDSTORM, Type.EVENT);
+    public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> BLIZZARD = register(CMSoundEvents.BLIZZARD, Type.EVENT);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> OLD_ONES_ARMY = register(CMSoundEvents.OLD_ONES_ARMY, Type.EVENT);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> SLIME_RAIN = register(CMSoundEvents.SLIME_RAIN, Type.EVENT);
     public static final DeferredHolder<CachedLocationMusic, CachedLocationMusic> WINDY_DAY = register(CMSoundEvents.WINDY_DAY, Type.EVENT);

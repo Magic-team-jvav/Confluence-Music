@@ -9,9 +9,8 @@
 | title                  | title                                | both                     |
 | day_remix              | day_remix                            | both                     |
 | creative_mode          | creative_mode                        | none                     |
-| snow                   | snow, ice                            | music:snow               |
-| ice                    | ice                                  | none                     |
-| underground_ice        | underground_ice                      | music:underground_ice    |
+| snow                   | snow                                 | none                     |
+| ice                    | ice                                  | music:ice                |
 | desert                 | desert                               | none                     |
 | underground_desert     | underground_desert                   | music:underground_desert |
 | ocean_day              | ocean_day                            | none                     |
@@ -66,6 +65,7 @@
 | frost_moon             | frost_moon                           | both                     |
 | lunar_events           | the_towers                           | both                     |
 | sandstorm              | sandstorm                            | code:sandstorm           |
+| blizzard               | blizzard                             | none                     |
 | old_ones_army          | old_ones_army                        | both                     |
 | slime_rain             | slime_rain                           | both                     |
 | windy_day              | windy_day                            | both                     |

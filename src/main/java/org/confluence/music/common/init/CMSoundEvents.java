@@ -11,7 +11,7 @@ public final class CMSoundEvents {
 
     // common
     public static final DeferredHolder<SoundEvent, SoundEvent> NEW_JOURNEY = register("new_journey"); // 汇流主题曲（汇流新增）
-    public static final DeferredHolder<SoundEvent, SoundEvent> OVERWORLD_DAY = register("overworld_day");  // 常规白天
+    public static final DeferredHolder<SoundEvent, SoundEvent> OVERWORLD_DAY = register("overworld_day"); // 常规白天
     public static final DeferredHolder<SoundEvent, SoundEvent> ALT_OVERWORLD_DAY = register("alt_overworld_day"); // 常规白天备选
     public static final DeferredHolder<SoundEvent, SoundEvent> OVERWORLD_NIGHT = register("overworld_night"); // 常规夜晚
     public static final DeferredHolder<SoundEvent, SoundEvent> ALT_OVERWORLD_NIGHT = register("alt_overworld_night"); // 常规夜晚备选（汇流新增）
@@ -22,9 +22,8 @@ public final class CMSoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> DAY_REMIX = register("day_remix"); // 白天混音
     public static final DeferredHolder<SoundEvent, SoundEvent> CREATIVE_MODE = register("creative_mode");
     // location
-    public static final DeferredHolder<SoundEvent, SoundEvent> SNOW = register("snow");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ICE = register("ice");
-    public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_ICE = register("underground_ice");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SNOW = register("snow"); // 地表雪原
+    public static final DeferredHolder<SoundEvent, SoundEvent> ICE = register("ice"); // 地下雪原
     public static final DeferredHolder<SoundEvent, SoundEvent> DESERT = register("desert");
     public static final DeferredHolder<SoundEvent, SoundEvent> UNDERGROUND_DESERT = register("underground_desert");
     public static final DeferredHolder<SoundEvent, SoundEvent> OCEAN_DAY = register("ocean_day");

@@ -25,6 +25,10 @@ public class CMLanguageProvider extends LanguageProvider {
         add("confluence_music.configuration.lastSongFadeOutTime.tooltip", "Set it to 20, which means 1 second; set it to 0, which means stop immediately.", "设为20即1秒，设为0即立刻停止");
         add("confluence_music.configuration.nextSongDelay", "Next Song Delay", "下一首歌的间隔");
         add("confluence_music.configuration.nextSongDelay.tooltip", "The total interval between the two songs is: lastSongFadeOutTime + nextSongDelay.", "两首歌的总间隔为：上一首淡出时间 + 下一首歌的间隔");
+        add("confluence_music.configuration.keepCreativeModeMusic", "Keep Creative Mode Music", "保持创造模式音乐");
+        add("confluence_music.configuration.keepCreativeModeMusic.tooltip", "When this option is enabled and the player is in Creative mode, only Creative mode music will play; otherwise, ambient music will play.", "打开此选项，且玩家处于创造模式时，将只会播放创造模式音乐；否则将播放环境音乐");
+        add("confluence_music.configuration.denyVanillaMusic", "Deny Vanilla Music", "禁止原版音乐");
+        add("confluence_music.configuration.denyVanillaMusic.tooltip", "When this option is enabled, the vanilla music will no longer be played.", "启用该选项时将不再播放原版音乐");
     }
 
     public void add(String key, String en, String zh) {

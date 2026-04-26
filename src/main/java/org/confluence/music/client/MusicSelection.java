@@ -20,7 +20,6 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
 
     SNOW,
     ICE,
-    UNDERGROUND_ICE,
     DESERT,
     UNDERGROUND_DESERT,
     OCEAN_DAY,
@@ -77,6 +76,7 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     FROST_MOON,
     LUNAR_EVENTS,
     SANDSTORM,
+    BLIZZARD,
     OLD_ONES_ARMY, // 旧日军团
     SLIME_RAIN,
     WINDY_DAY,

@@ -116,15 +116,6 @@
             }
         ]
     },
-    "underground_ice": {
-        "sounds": [
-            {
-                "name": "confluence_music:underground_ice",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
     "desert": {
         "sounds": [
             {
@@ -399,6 +390,15 @@
         "sounds": [
             {
                 "name": "confluence_music:boss_5",
+                "volume": 0.4,
+                "stream": true
+            }
+        ]
+    },
+    "wall_of_flesh": {
+        "sounds": [
+            {
+                "name": "confluence_music:wall_of_flesh",
                 "volume": 0.4,
                 "stream": true
             }

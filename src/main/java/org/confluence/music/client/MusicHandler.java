@@ -1,7 +1,9 @@
 package org.confluence.music.client;
 
+import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.ChannelAccess;
@@ -30,7 +32,7 @@ import org.confluence.lib.api.entity.Boss;
 import org.confluence.lib.util.LibDateUtils;
 import org.confluence.mod.client.gameevent.ClientGameEventSystem;
 import org.confluence.mod.client.handler.WeatherHandler;
-import org.confluence.mod.common.data.saved.SpecificMoonVariant;
+import org.confluence.mod.common.gameevent.BloodMoonGameEvent;
 import org.confluence.mod.common.init.ModBiomes;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.util.OverworldUtils;
@@ -41,7 +43,6 @@ import org.confluence.music.common.network.StructureFoundPacketS2C;
 import org.confluence.terraentity.init.entity.TEBossEntities;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -59,7 +60,7 @@ public final class MusicHandler {
         @Override
         public @Nullable MusicSelection apply(EntityType<?> entityType) {
             if (cache == null) {
-                this.cache = new IdentityHashMap<>();
+                this.cache = new Reference2ObjectOpenHashMap<>();
                 cache.put(TEBossEntities.KING_SLIME.get(), MusicSelection.KING_SLIME);
                 cache.put(TEBossEntities.EYE_OF_CTHULHU.get(), MusicSelection.EYE_OF_CTHULHU);
                 cache.put(TEBossEntities.EATER_OF_WORLDS.get(), MusicSelection.EATER_OF_WORLDS);
@@ -69,10 +70,10 @@ public final class MusicHandler {
                 cache.put(TEBossEntities.SKELETRON.get(), MusicSelection.SKELETRON);
                 cache.put(TEBossEntities.WALL_OF_FLESH.get(), MusicSelection.WALL_OF_FLESH);
                 cache.put(TEBossEntities.HILL_OF_FLESH.get(), MusicSelection.WALL_OF_FLESH);
-                cache.put(TEBossEntities.THE_TWINS.get(), MusicSelection.THE_TWINS);
+//                cache.put(TEBossEntities.THE_TWINS.get(), MusicSelection.THE_TWINS); boss_2
                 cache.put(TEBossEntities.SKELETRON_PRIME.get(), MusicSelection.SKELETRON_PRIME);
-                cache.put(TEBossEntities.THE_DESTROYER.get(), MusicSelection.THE_DESTROYER);
-                cache.put(TEBossEntities.PLANTERA.get(), MusicSelection.PLANTERA);
+//                cache.put(TEBossEntities.THE_DESTROYER.get(), MusicSelection.THE_DESTROYER); boss_3
+//                cache.put(TEBossEntities.PLANTERA.get(), MusicSelection.PLANTERA); plantera
             }
             return cache.get(entityType);
         }
@@ -81,7 +82,7 @@ public final class MusicHandler {
     private static CachedLocationMusic nextSong;
     private static int nextSongDelay = 10;
     private static Holder<Biome> lastBiome;
-    static int nextBiomeCheck = 20;
+    static int nextBiomeCheck = 50;
     private static float volume = 1.0F;
     private static boolean hasBossMusic = false;
     private static byte structureMusic = StructureFoundPacketS2C.NOT_FOUND;
@@ -102,7 +103,24 @@ public final class MusicHandler {
         selectStructureMusic();
         selectBiomeMusic(player);
         SoundInstance playingMusic = event.getPlayingMusic();
-        if ((playingMusic == null || (nextSong != null && isSameModButDifferentSong(nextSong.getLocation(), playingMusic.getLocation()))) && nextSongDelay-- <= 0) {
+        // A = 没有正在播放的音乐
+        // B = 正在播放的音乐已经停止
+        // C = 禁用了原版音乐 且 正在播放的音乐是原版音乐
+        // D = A 或 B 或 C
+        // E = 下一首曲子已经选好 且 选好的是同命名空间但不同音乐
+        // F = D 或 E
+        // G = 播放下首曲子的冷却时间已结束
+        // OK = F 且 H
+        if (((playingMusic == null // A
+                || // D
+                isPlayingMusicStopped(minecraft, playingMusic) // B
+                || // D
+                (CMClientConfigs.denyVanillaMusic && isVanillaMusic(playingMusic))) // C
+                || // F
+                (nextSong != null && isSameNamespaceButDifferentSong(nextSong, playingMusic))) // E
+                && // OK
+                nextSongDelay-- <= 0 // G
+        ) {
             if (volume > 0.0F) {
                 volume = Mth.clamp(Math.min(volume, playingMusic == null ? 1.0F : playingMusic.getSound().getVolume().sample(player.getRandom())) - CMClientConfigs.lastSongFadeOutStep, 0.0F, 1.0F);
                 float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) * volume;
@@ -130,8 +148,19 @@ public final class MusicHandler {
         }
     }
 
-    private static boolean isSameModButDifferentSong(ResourceLocation next, ResourceLocation current) {
-        return next.getNamespace().equals(current.getNamespace()) && !next.getPath().equals(current.getPath());
+    private static boolean isVanillaMusic(SoundInstance playingMusic) {
+        return ResourceLocation.DEFAULT_NAMESPACE.equals(playingMusic.getLocation().getNamespace());
+    }
+
+    private static boolean isPlayingMusicStopped(Minecraft minecraft, SoundInstance playingMusic) {
+        ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
+        return handle == null || handle.isStopped();
+    }
+
+    private static boolean isSameNamespaceButDifferentSong(CachedLocationMusic next, SoundInstance current) {
+        ResourceLocation nextRl = next.getLocation();
+        ResourceLocation currentRl = current.getLocation();
+        return nextRl.getNamespace().equals(currentRl.getNamespace()) && !nextRl.getPath().equals(currentRl.getPath());
     }
 
     public static void clear() {
@@ -180,7 +209,7 @@ public final class MusicHandler {
         Holder<Biome> biome = lastBiome == null ? level.getBiome(pos) : lastBiome;
         MusicSelection selection = null;
         ResourceKey<Level> dimension = player.level().dimension();
-        if (dimension != OverworldUtils.underworld() && player.getAbilities().instabuild && player.mayFly()) {
+        if (CMClientConfigs.keepCreativeModeMusic && dimension != OverworldUtils.underworld() && isCreativeMode()) {
             selection = MusicSelection.CREATIVE_MODE;
         } else if (dimension == OverworldUtils.dimension()) {
             int dayTime = LibDateUtils.getDayTime(level);
@@ -192,10 +221,8 @@ public final class MusicHandler {
                 selection = isDay ? MusicSelection.SPACE_DAY : MusicSelection.SPACE_NIGHT;
             } else if (biome.is(ModBiomes.GLOWING_MUSHROOM)) {
                 selection = MusicSelection.MUSHROOMS;
-            } else if (biome.is(Tags.Biomes.IS_ICY)) {
-                selection = isSurface ? MusicSelection.ICE : MusicSelection.UNDERGROUND_ICE;
-            } else if (biome.is(Tags.Biomes.IS_SNOWY)) {
-                selection = MusicSelection.SNOW;
+            } else if (biome.is(Tags.Biomes.IS_SNOWY) || biome.is(Tags.Biomes.IS_ICY)) {
+                selection = isSurface ? MusicSelection.SNOW : MusicSelection.ICE;
             } else if (biome.is(ModTags.Biomes.THE_CORRUPTION)) {
                 selection = isSurface ? MusicSelection.THE_CORRUPTION : MusicSelection.UNDERGROUND_CORRUPTION;
             } else if (biome.is(ModTags.Biomes.THE_CRIMSON)) {
@@ -217,7 +244,7 @@ public final class MusicHandler {
                     selection = MusicSelection.UNDERGROUND_JUNGLE;
                 }
             } else { // todo 沙尘暴，陨石
-                if (ClientGameEventSystem.moonTexture == SpecificMoonVariant.TR_BLOOD.texture) { // todo换成别的方式
+                if (ClientGameEventSystem.isEventStarted(BloodMoonGameEvent.KEY)) {
                     selection = MusicSelection.BLOOD_MOON;
                 } else if (level.isThundering()) {
                     selection = MusicSelection.STORM;
@@ -227,12 +254,18 @@ public final class MusicHandler {
                     } else {
                         selection = isDay ? MusicSelection.RAIN_DAY : MusicSelection.RAIN_NIGHT;
                     }
-                } else if (WeatherHandler.WIND_SPEED.length() > 0.447F) {
-                    selection = MusicSelection.WINDY_DAY;
                 } else if (player.level().getEntities(player, new AABB(player.blockPosition()).inflate(80), entity -> entity instanceof Npc).size() >= 3) {
                     selection = isDay ? MusicSelection.TOWN_DAY : MusicSelection.TOWN_NIGHT;
                 } else if (isSurface) {
-                    selection = isDay ? MusicSelection.OVERWORLD_DAY : MusicSelection.OVERWORLD_NIGHT;
+                    if (isDay) {
+                        if (WeatherHandler.WIND_SPEED.length() > 1) {
+                            selection = MusicSelection.WINDY_DAY;
+                        } else {
+                            selection = MusicSelection.OVERWORLD_DAY;
+                        }
+                    } else {
+                        selection = MusicSelection.OVERWORLD_NIGHT;
+                    }
                 } else {
                     selection = MusicSelection.UNDERGROUND;
                 }
@@ -241,6 +274,11 @@ public final class MusicHandler {
             selection = MusicSelection.UNDERWORLD;
         }
         nextSong = randomMusic(CMClientConfigs.musicType, selection);
+    }
+
+    private static boolean isCreativeMode() {
+        MultiPlayerGameMode gameMode = Minecraft.getInstance().gameMode;
+        return gameMode == null || gameMode.getPlayerMode().isCreative();
     }
 
     private static @Nullable CachedLocationMusic randomMusic(ResourceLocation type, @Nullable MusicSelection selection) {
