@@ -100,7 +100,7 @@ public final class MusicHandler {
             nextBiomeCheck = CMCommonConfigs.checkInterval;
         }
         selectBossMusic(player, minecraft);
-        selectStructureMusic();
+        selectStructureMusic(player);
         selectBiomeMusic(player);
         SoundInstance playingMusic = event.getPlayingMusic();
         // A = 没有正在播放的音乐
@@ -121,6 +121,7 @@ public final class MusicHandler {
                 && // OK
                 nextSongDelay-- <= 0 // G
         ) {
+            // nextSong 与 playingMusic 仍有null的可能性
             if (volume > 0.0F) {
                 volume = Mth.clamp(Math.min(volume, playingMusic == null ? 1.0F : playingMusic.getSound().getVolume().sample(player.getRandom())) - CMClientConfigs.lastSongFadeOutStep, 0.0F, 1.0F);
                 float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) * volume;
@@ -177,7 +178,7 @@ public final class MusicHandler {
         if (minecraft.gui.getBossOverlay().shouldPlayMusic()) {
             AABB area = new AABB(player.blockPosition()).inflate(minecraft.levelRenderer.getLastViewDistance());
             for (Entity boss : player.level().getEntities((Entity) null, area, entity -> entity instanceof Boss)) {
-                nextSong = randomMusic(CMClientConfigs.musicType, bossMusicSelector.apply(boss.getType()));
+                nextSong = randomMusic(CMClientConfigs.musicType, bossMusicSelector.apply(boss.getType()), player);
                 if (nextSong != null) {
                     hasBossMusic = true;
                     nextSongDelay = 0;
@@ -192,13 +193,14 @@ public final class MusicHandler {
         }
     }
 
-    private static void selectStructureMusic() {
+    private static void selectStructureMusic(LocalPlayer player) {
         if (nextSong == null) {
-            nextSong = randomMusic(CMClientConfigs.musicType, switch (structureMusic) {
+            MusicSelection selection = switch (structureMusic) {
                 case StructureFoundPacketS2C.DUNGEON_FLOOR_1 -> MusicSelection.DUNGEON_FLOOR_1;
                 case StructureFoundPacketS2C.DUNGEON_FLOOR_2 -> MusicSelection.DUNGEON_FLOOR_2;
                 default -> null;
-            });
+            };
+            nextSong = randomMusic(CMClientConfigs.musicType, selection, player);
         }
     }
 
@@ -273,7 +275,7 @@ public final class MusicHandler {
         } else if (dimension == OverworldUtils.underworld()) {
             selection = MusicSelection.UNDERWORLD;
         }
-        nextSong = randomMusic(CMClientConfigs.musicType, selection);
+        nextSong = randomMusic(CMClientConfigs.musicType, selection, player);
     }
 
     private static boolean isCreativeMode() {
@@ -281,7 +283,7 @@ public final class MusicHandler {
         return gameMode == null || gameMode.getPlayerMode().isCreative();
     }
 
-    private static @Nullable CachedLocationMusic randomMusic(ResourceLocation type, @Nullable MusicSelection selection) {
+    private static @Nullable CachedLocationMusic randomMusic(ResourceLocation type, @Nullable MusicSelection selection, LocalPlayer player) {
         if (selection == null) return null;
         if (selection == lastSelection) return nextSong;
         lastSelection = selection;
@@ -296,6 +298,7 @@ public final class MusicHandler {
         }
         if (list.isEmpty()) return null;
         if (list.size() == 1) return list.getFirst();
+        RANDOM.setSeed(player.level().getGameTime() / 24000 + System.identityHashCode(selection));
         return Util.getRandom(list, RANDOM);
     }
 
