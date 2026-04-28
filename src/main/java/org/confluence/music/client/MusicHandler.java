@@ -227,7 +227,11 @@ public final class MusicHandler {
             } else if (biome.is(ModBiomes.GLOWING_MUSHROOM)) {
                 selection = MusicSelection.MUSHROOMS;
             } else if (biome.is(Tags.Biomes.IS_SNOWY) || biome.is(Tags.Biomes.IS_ICY)) {
-                selection = isSurface ? MusicSelection.SNOW : MusicSelection.ICE;
+                if (level.isThundering()) {
+                    selection = MusicSelection.BLIZZARD;
+                } else {
+                    selection = isSurface ? MusicSelection.SNOW : MusicSelection.ICE;
+                }
             } else if (biome.is(ModTags.Biomes.THE_CORRUPTION)) {
                 selection = isSurface ? MusicSelection.THE_CORRUPTION : MusicSelection.UNDERGROUND_CORRUPTION;
             } else if (biome.is(ModTags.Biomes.THE_CRIMSON)) {
