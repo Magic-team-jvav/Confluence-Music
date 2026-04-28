@@ -5,6 +5,7 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.ChannelAccess;
 import net.minecraft.core.BlockPos;
@@ -79,14 +80,14 @@ public final class MusicHandler {
         }
     };
     private static final int _07$30 = LibDateUtils.getDayTime(7, 30);
-    private static CachedLocationMusic nextSong;
+    private static @Nullable CachedLocationMusic nextSong;
     private static int nextSongDelay = 10;
-    private static Holder<Biome> lastBiome;
+    private static @Nullable Holder<Biome> lastBiome;
     static int nextBiomeCheck = 50;
     private static float volume = 1.0F;
     private static boolean hasBossMusic = false;
     private static byte structureMusic = StructureFoundPacketS2C.NOT_FOUND;
-    private static MusicSelection lastSelection;
+    private static @Nullable MusicSelection lastSelection;
 
     public static void handle(SelectMusicEvent event, LocalPlayer player, Minecraft minecraft) {
         if (nextBiomeCheck-- <= 0) {
@@ -102,7 +103,7 @@ public final class MusicHandler {
         selectBossMusic(player, minecraft);
         selectStructureMusic(player);
         selectBiomeMusic(player);
-        SoundInstance playingMusic = event.getPlayingMusic();
+        @Nullable SoundInstance playingMusic = event.getPlayingMusic();
         // A = 没有正在播放的音乐
         // B = 正在播放的音乐已经停止
         // C = 禁用了原版音乐 且 正在播放的音乐是原版音乐
@@ -123,9 +124,11 @@ public final class MusicHandler {
         ) {
             // nextSong 与 playingMusic 仍有null的可能性
             if (volume > 0.0F) {
-                volume = Mth.clamp(Math.min(volume, playingMusic == null ? 1.0F : playingMusic.getSound().getVolume().sample(player.getRandom())) - CMClientConfigs.lastSongFadeOutStep, 0.0F, 1.0F);
+                @Nullable Sound sound = playingMusic == null ? null : playingMusic.getSound();
+                float vm = sound == null ? 1.0F : sound.getVolume().sample(player.getRandom());
+                volume = Mth.clamp(Math.min(volume, vm) - CMClientConfigs.lastSongFadeOutStep, 0.0F, 1.0F);
                 float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) * volume;
-                ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
+                @Nullable ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
                 if (handle != null) handle.execute(channel -> {
                     if (volume <= 0.0F) {
                         channel.stop();
@@ -144,7 +147,7 @@ public final class MusicHandler {
         } else if (volume < 1.0F) {
             volume = Mth.clamp(Math.min(volume, playingMusic == null ? 1.0F : playingMusic.getSound().getVolume().sample(player.getRandom())) + CMClientConfigs.lastSongFadeOutStep, 0.0F, 1.0F);
             float v = minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) * volume;
-            ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
+            @Nullable ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
             if (handle != null) handle.execute(channel -> channel.setVolume(v));
         }
     }
@@ -154,7 +157,7 @@ public final class MusicHandler {
     }
 
     private static boolean isPlayingMusicStopped(Minecraft minecraft, SoundInstance playingMusic) {
-        ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
+        @Nullable ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playingMusic);
         return handle == null || handle.isStopped();
     }
 
@@ -305,7 +308,7 @@ public final class MusicHandler {
     @SubscribeEvent
     public static void selectMusic(SelectMusicEvent event) {
         Minecraft minecraft = Minecraft.getInstance();
-        LocalPlayer player = minecraft.player;
+        @Nullable LocalPlayer player = minecraft.player;
         if (player == null) {
             clear();
         } else {
