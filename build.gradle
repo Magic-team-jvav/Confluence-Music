@@ -96,10 +96,6 @@ repositories {
         url "https://maven.confluence.ink/releases"
     }
     maven {
-        name "org.confluenceSnapshots"
-        url "https://maven.confluence.ink/snapshots"
-    }
-    maven {
         name 'GeckoLib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
         content {
@@ -121,7 +117,6 @@ dependencies {
     modImplementation("blank:ConfluenceOtherworld-1.20.1:${confluence_version}")
     modImplementation("blank:PortLib-1.20.1:${portlib_version}")
     modCompileOnly("blank:MagicLib-1.20.1:${magic_lib_version}")
-    modCompileOnly("blank:TerraCurio-1.20.1:${terra_curio_version}")
 
     modImplementation "software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}"
     modImplementation "top.theillusivec4.curios:curios-forge:${curios_version}"
@@ -179,7 +174,7 @@ idea {
 }
 
 jar {
-    if (true) {
+    if (false) {
         exclude("assets/**")
         version = version + "-server"
     }
