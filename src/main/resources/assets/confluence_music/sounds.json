@@ -44,6 +44,15 @@
             }
         ]
     },
+    "alt_overworld_night_2": {
+        "sounds": [
+            {
+                "name": "confluence_music:alt_overworld_night_2",
+                "volume": 0.4,
+                "stream": true
+            }
+        ]
+    },
     "journeys_beginning": {
         "sounds": [
             {
@@ -458,6 +467,33 @@
             }
         ]
     },
+    "brain_of_cthulhu_phase_1": {
+        "sounds": [
+            {
+                "name": "confluence_music:brain_of_cthulhu_phase_1",
+                "volume": 0.4,
+                "stream": true
+            }
+        ]
+    },
+    "brain_of_cthulhu_phase_2": {
+        "sounds": [
+            {
+                "name": "confluence_music:brain_of_cthulhu_phase_2",
+                "volume": 0.4,
+                "stream": true
+            }
+        ]
+    },
+    "eater_of_worlds": {
+        "sounds": [
+            {
+                "name": "confluence_music:eater_of_worlds",
+                "volume": 0.4,
+                "stream": true
+            }
+        ]
+    },
     "eerie": {
         "sounds": [
             {
@@ -602,244 +638,10 @@
             }
         ]
     },
-    "otherworldly_rain": {
+    "the_end": {
         "sounds": [
             {
-                "name": "confluence_music:otherworldly_rain",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_overworld_day": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_overworld_day",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_night": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_night",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_underground": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_underground",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_desert": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_desert",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_ocean": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_ocean",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_mushrooms": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_mushrooms",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_jungle": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_jungle",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_dungeon": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_dungeon",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_space": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_space",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_underworld": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_underworld",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_snow": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_snow",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_ice": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_ice",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_corruption": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_corruption",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_underground_corruption": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_underground_corruption",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_crimson": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_crimson",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_underground_crimson": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_underground_crimson",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_hallow": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_hallow",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_underground_hallow": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_underground_hallow",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_eerie": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_eerie",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_boss_1": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_boss_1",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_boss_2": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_boss_2",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_invasion": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_invasion",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_the_towers": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_the_towers",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_lunar_boss": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_lunar_boss",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_plantera": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_plantera",
-                "volume": 0.4,
-                "stream": true
-            }
-        ]
-    },
-    "otherworldly_wall_of_flesh": {
-        "sounds": [
-            {
-                "name": "confluence_music:otherworldly_wall_of_flesh",
+                "name": "confluence_music:the_end",
                 "volume": 0.4,
                 "stream": true
             }

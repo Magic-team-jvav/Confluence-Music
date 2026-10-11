@@ -1,15 +1,15 @@
 package org.confluence.music.common.network;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.minecraft.world.entity.player.Player;
+import org.confluence.lib.network.IPacketS2C;
 import org.confluence.music.ConfluenceMusic;
 import org.confluence.music.client.MusicHandler;
 
-public record StructureFoundPacketS2C(byte data) implements CustomPacketPayload {
+/// 服务端告诉客户端“玩家目前在地牢的哪一层”，客户端据此切换地牢音乐。
+public record StructureFoundPacketS2C(byte data) implements IPacketS2C {
     public static final byte NOT_FOUND = 0;
     public static final byte DUNGEON_FLOOR_1 = 1;
     public static final byte DUNGEON_FLOOR_2 = 2;
@@ -21,14 +21,10 @@ public record StructureFoundPacketS2C(byte data) implements CustomPacketPayload 
         return TYPE;
     }
 
-    public void handle(IPayloadContext context) {
-        context.enqueueWork(() -> {
-            if (context.player().isLocalPlayer()) {
-                MusicHandler.handleStructure(data);
-            }
-        }).exceptionally(e -> {
-            context.disconnect(Component.translatable("neoforge.network.invalid_flow", e.getMessage()));
-            return null;
-        });
+    @Override
+    public void work(Player player) {
+        if (player.isLocalPlayer()) {
+            MusicHandler.handleStructure(data);
+        }
     }
 }

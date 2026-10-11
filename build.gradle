@@ -10,25 +10,6 @@ plugins {
 version = mod_version + "-${new SimpleDateFormat("yyMMdd").format(new Date())}"
 group = mod_group_id
 
-repositories {
-    mavenLocal()
-    maven {
-        url = "https://www.cursemaven.com"
-    }
-    maven {
-        name = "Curios"
-        url = uri("https://maven.theillusivec4.top/")
-    }
-    maven {
-        name "org.confluenceReleases"
-        url "https://maven.confluence.ink/releases"
-    }
-    maven {
-        name "org.confluenceSnapshots"
-        url "https://maven.confluence.ink/snapshots"
-    }
-}
-
 base {
     archivesName = mod_id
 }
@@ -94,12 +75,37 @@ neoForge {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+repositories {
+    flatDir {
+        dir 'libs'
+    }
+    mavenLocal()
+    maven {
+        url = "https://www.cursemaven.com"
+    }
+    maven {
+        name = "Curios"
+        url = uri("https://maven.theillusivec4.top/")
+    }
+    maven {
+        name "org.confluenceReleases"
+        url "https://maven.confluence.ink/releases"
+    }
+    maven {
+        name 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroupByRegex("software\\.bernie.*")
+            includeGroup("com.eliotlash.mclib")
+        }
+    }
+}
+
 dependencies {
-    implementation files("libs/ConfluenceOtherworld-1.2.4-260226.jar")
-    compileOnly files("libs/org.confluence.lib.confluence_magic_lib-0.0.8.jar")
-    compileOnly files("libs/org.confluence.terra_entity-1.2.1.jar")
-    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
-    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+    implementation "blank:ConfluenceOtherworld-1.21.1-1.2.8"
+    compileOnly "blank:MagicLib-1.21.1:1.3.0"
+    implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -140,5 +146,12 @@ idea {
     module {
         downloadSources = true
         downloadJavadoc = true
+    }
+}
+
+jar {
+    if (false) {
+        exclude("assets/**")
+        version = version + "-server"
     }
 }

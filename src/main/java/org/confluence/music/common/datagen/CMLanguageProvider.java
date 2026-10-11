@@ -18,13 +18,13 @@ public class CMLanguageProvider extends LanguageProvider {
     protected void addTranslations() {
         add("confluence_music.configuration.title", "Confluence: Otherworld Music Configs", "汇流来世音乐配置");
         add("confluence_music.configuration.checkInterval", "check Interval", "检查间隔");
-        add("confluence_music.configuration.checkInterval.tooltip", "The interval for checking whether biomes, events, and structures have changed", "检查群系、事件、结构是否变动的间隔");
+        add("confluence_music.configuration.checkInterval.tooltip", "The interval for checking which dungeon floor the player is on", "检查玩家所在地牢分层的间隔");
         add("confluence_music.configuration.musicType", "Music Type", "音乐类型");
         add("confluence_music.configuration.musicType.tooltip", "Used to determine the playlist", "用于决定歌单");
         add("confluence_music.configuration.lastSongFadeOutTime", "Last Song Fade-Out Time", "上一首淡出时间");
         add("confluence_music.configuration.lastSongFadeOutTime.tooltip", "Set it to 20, which means 1 second; set it to 0, which means stop immediately.", "设为20即1秒，设为0即立刻停止");
         add("confluence_music.configuration.nextSongDelay", "Next Song Delay", "下一首歌的间隔");
-        add("confluence_music.configuration.nextSongDelay.tooltip", "The total interval between the two songs is: lastSongFadeOutTime + nextSongDelay.", "两首歌的总间隔为：上一首淡出时间 + 下一首歌的间隔");
+        add("confluence_music.configuration.nextSongDelay.tooltip", "Ticks to wait after a song ends before the next one starts.", "一首放完之后等待多少刻才开始下一首");
         add("confluence_music.configuration.keepCreativeModeMusic", "Keep Creative Mode Music", "保持创造模式音乐");
         add("confluence_music.configuration.keepCreativeModeMusic.tooltip", "When this option is enabled and the player is in Creative mode, only Creative mode music will play; otherwise, ambient music will play.", "打开此选项，且玩家处于创造模式时，将只会播放创造模式音乐；否则将播放环境音乐");
         add("confluence_music.configuration.denyVanillaMusic", "Deny Vanilla Music", "禁止原版音乐");

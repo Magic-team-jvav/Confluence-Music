@@ -2,14 +2,11 @@ package org.confluence.music.client;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.StringRepresentable;
-import net.neoforged.fml.common.asm.enumextension.ExtensionInfo;
-import net.neoforged.fml.common.asm.enumextension.IExtensibleEnum;
-import net.neoforged.fml.common.asm.enumextension.NetworkedEnum;
 
 import java.util.Locale;
 
-@NetworkedEnum(NetworkedEnum.NetworkCheck.BIDIRECTIONAL)
-public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
+/// 音乐种类。数据包里的 `music_selection/*.json` 用这里的名字作为键。
+public enum MusicSelection implements StringRepresentable {
     OVERWORLD_DAY,
     OVERWORLD_NIGHT,
     JOURNEYS_BEGINNING,
@@ -47,11 +44,13 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     GRAVEYARD,
     TOWN_DAY,
     TOWN_NIGHT,
+    THE_END,
 
     KING_SLIME,
     EYE_OF_CTHULHU,
     EATER_OF_WORLDS,
-    BRAIN_OF_CTHULHU,
+    BRAIN_OF_CTHULHU_PHASE_1, // 克苏鲁之脑第一阶段
+    BRAIN_OF_CTHULHU_PHASE_2, // 克苏鲁之脑第二阶段
     QUEEN_BEE,
     DEERCLOPS,
     SKELETRON,
@@ -93,9 +92,5 @@ public enum MusicSelection implements StringRepresentable, IExtensibleEnum {
     @Override
     public String getSerializedName() {
         return name().toLowerCase(Locale.ROOT);
-    }
-
-    public static ExtensionInfo getExtensionInfo() {
-        return ExtensionInfo.nonExtended(MusicSelection.class);
     }
 }

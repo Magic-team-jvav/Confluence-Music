@@ -8,8 +8,11 @@
   "blood_moon": [
     "confluence_music:eerie"
   ],
-  "brain_of_cthulhu": [
-    "confluence_music:boss_3"
+  "brain_of_cthulhu_phase_1": [
+    "confluence_music:brain_of_cthulhu_phase_1"
+  ],
+  "brain_of_cthulhu_phase_2": [
+    "confluence_music:brain_of_cthulhu_phase_2"
   ],
   "creative_mode": [
     "confluence_music:creative_mode"
@@ -33,7 +36,7 @@
     "confluence_music:dungeon_floor_2"
   ],
   "eater_of_worlds": [
-    "confluence_music:boss_1"
+    "confluence_music:eater_of_worlds"
   ],
   "eclipse": [
     "confluence_music:eclipse"
@@ -109,7 +112,8 @@
   ],
   "overworld_night": [
     "confluence_music:overworld_night",
-    "confluence_music:alt_overworld_night"
+    "confluence_music:alt_overworld_night",
+    "confluence_music:alt_overworld_night_2"
   ],
   "pirate_invasion": [
     "confluence_music:pirate_invasion"
@@ -167,6 +171,9 @@
   ],
   "the_destroyer": [
     "confluence_music:boss_3"
+  ],
+  "the_end": [
+    "confluence_music:the_end"
   ],
   "the_hallow_day": [
     "confluence_music:the_hallow_day"

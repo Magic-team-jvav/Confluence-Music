@@ -18,11 +18,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+/// 载入数据包里的 `assets/<modid>/music_selection/*.json`。
+///
+/// 每份 JSON 对应一种“音乐类型”，内容是“音乐种类 → 曲目列表”。
 public class MusicSelectionLoader extends SimpleJsonResourceReloadListener {
-    public static final Codec<EnumMap<MusicSelection, List<CMMusics.CachedLocationMusic>>> CODEC = Codec.unboundedMap(MusicSelection.CODEC, CMMusics.CachedLocationMusic.CODEC.listOf()).xmap(EnumMap::new, Function.identity());
-    private static MusicSelectionLoader INSTANCE;
+    public static final Codec<EnumMap<MusicSelection, List<CMMusics.CachedLocationMusic>>> CODEC =
+            Codec.unboundedMap(MusicSelection.CODEC, CMMusics.CachedLocationMusic.CODEC.listOf()).xmap(EnumMap::new, Function.identity());
+    private static volatile MusicSelectionLoader INSTANCE;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    private Map<ResourceLocation, Map<MusicSelection, List<CMMusics.CachedLocationMusic>>> registeredMusicSelections = ImmutableMap.of(); // <类型: <选项: [音乐,]>>
+    /// <类型: <选项: \[音乐,\]>>，在资源重载线程写入、在客户端刻读取，故为 volatile。
+    private volatile Map<ResourceLocation, Map<MusicSelection, List<CMMusics.CachedLocationMusic>>> registeredMusicSelections = ImmutableMap.of();
 
     public MusicSelectionLoader() {
         super(GSON, "music_selection");

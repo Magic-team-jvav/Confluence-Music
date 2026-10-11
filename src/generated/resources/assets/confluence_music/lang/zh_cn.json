@@ -1,6 +1,6 @@
 {
   "confluence_music.configuration.checkInterval": "检查间隔",
-  "confluence_music.configuration.checkInterval.tooltip": "检查群系、事件、结构是否变动的间隔",
+  "confluence_music.configuration.checkInterval.tooltip": "检查玩家所在地牢分层的间隔",
   "confluence_music.configuration.denyVanillaMusic": "禁止原版音乐",
   "confluence_music.configuration.denyVanillaMusic.tooltip": "启用该选项时将不再播放原版音乐",
   "confluence_music.configuration.keepCreativeModeMusic": "保持创造模式音乐",
@@ -10,6 +10,6 @@
   "confluence_music.configuration.musicType": "音乐类型",
   "confluence_music.configuration.musicType.tooltip": "用于决定歌单",
   "confluence_music.configuration.nextSongDelay": "下一首歌的间隔",
-  "confluence_music.configuration.nextSongDelay.tooltip": "两首歌的总间隔为：上一首淡出时间 + 下一首歌的间隔",
+  "confluence_music.configuration.nextSongDelay.tooltip": "一首放完之后等待多少刻才开始下一首",
   "confluence_music.configuration.title": "汇流来世音乐配置"
 }
