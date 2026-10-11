@@ -1,0 +1,31 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# 由 prereqRepo 任务从 libs/ 生成，不需要提交
+local-repo/
+
+# datagen 缓存
+src/generated/resources/.cache/
+
+# 开发运行目录
+run/
+runs/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+bin/
+
+# 其他
+repo/
+
+*.ogg
+libs/

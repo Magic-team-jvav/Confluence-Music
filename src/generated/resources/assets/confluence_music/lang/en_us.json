@@ -1,0 +1,15 @@
+{
+  "confluence_music.configuration.checkInterval": "check Interval",
+  "confluence_music.configuration.checkInterval.tooltip": "The interval for checking which dungeon floor the player is on",
+  "confluence_music.configuration.denyVanillaMusic": "Deny Vanilla Music",
+  "confluence_music.configuration.denyVanillaMusic.tooltip": "When this option is enabled, the vanilla music will no longer be played.",
+  "confluence_music.configuration.keepCreativeModeMusic": "Keep Creative Mode Music",
+  "confluence_music.configuration.keepCreativeModeMusic.tooltip": "When this option is enabled and the player is in Creative mode, only Creative mode music will play; otherwise, ambient music will play.",
+  "confluence_music.configuration.lastSongFadeOutTime": "Last Song Fade-Out Time",
+  "confluence_music.configuration.lastSongFadeOutTime.tooltip": "Set it to 20, which means 1 second; set it to 0, which means stop immediately.",
+  "confluence_music.configuration.musicType": "Music Type",
+  "confluence_music.configuration.musicType.tooltip": "Used to determine the playlist",
+  "confluence_music.configuration.nextSongDelay": "Next Song Delay",
+  "confluence_music.configuration.nextSongDelay.tooltip": "Ticks to wait after a song ends before the next one starts.",
+  "confluence_music.configuration.title": "Confluence: Otherworld Music Configs"
+}
