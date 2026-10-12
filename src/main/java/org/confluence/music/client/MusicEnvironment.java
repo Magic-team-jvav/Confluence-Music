@@ -17,7 +17,6 @@ import org.confluence.lib.api.entity.Boss;
 import org.confluence.lib.common.worldgen.biome.MiniBiome;
 import org.confluence.lib.util.LibDateUtils;
 import org.confluence.mod.client.gameevent.ClientGameEventSystem;
-import org.confluence.mod.client.handler.WeatherHandler;
 import org.confluence.mod.common.entity.boss.BrainOfCthulhu;
 import org.confluence.mod.common.entity.npc.BaseNPC;
 import org.confluence.mod.common.gameevent.*;
@@ -92,7 +91,7 @@ public final class MusicEnvironment {
         this.morningRain = LibDateUtils.isWithinDayTime(LibDateUtils._04$30, MORNING_RAIN_END, dayTime);
         this.raining = level.isRaining();
         this.thundering = level.isThundering();
-        this.windy = WeatherHandler.WIND_SPEED.length() > 1.0F;
+        this.windy = ClientGameEventSystem.isEventStarted(WindyDayGameEvent.KEY);
         this.creative = isCreativeMode(minecraft);
         this.eventMusic = currentEventMusic();
         this.sandstorm = ClientGameEventSystem.isEventStarted(SandstormGameEvent.KEY);
