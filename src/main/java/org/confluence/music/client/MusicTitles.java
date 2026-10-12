@@ -47,7 +47,7 @@ public final class MusicTitles {
         map.put("underground_corruption", "Eroded Chasms (虫蚀腐渊) - SquidSine");
         map.put("underground_crimson", "Inner of Blood (血肉深处) - SquidSine");
         map.put("underworld", "Demoniac Core Of Hell (魔界狱髓) - SquidSine");
-        map.put("wall_of_flesh", "Wall Of Flesh(肉山) - SquidSine");
+        map.put("wall_of_flesh", "Wall Of Flesh(肉山) - SquidSine, Im_Little_Kitty");
         map.put("windy_day", "Time to fly kites (风筝日) - SquidSine");
     });
 
