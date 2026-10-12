@@ -165,7 +165,7 @@ public final class MusicPlayer {
         // 上一首已经放完了：同一次处境里再开一首就是重新随机抽一首
         desired = MusicRepository.pick(minecraft.player.getRandom(), selection);
         picked = desired;
-        commit(minecraft, event, selection, desired);
+        commit(event, selection, desired);
     }
 
     /// 清空全部状态，用于离开世界。
@@ -194,7 +194,7 @@ public final class MusicPlayer {
         // 只有确实是本模组交出去的那一首，才记得住它的曲目、将来能被接回来
         fadingOut.add(new FadingOut(outgoing, sameTrack(committed, outgoing) ? committed : null, lastSelection, from));
         minecraft.getMusicManager().currentMusic = null;
-        commit(minecraft, event, selection, desired);
+        commit(event, selection, desired);
     }
 
     /// {@return 淡出列表里属于 `selection`、还没淡完而且还在出声的那一首（因此可以接着放而不是从头开始）}
@@ -276,7 +276,7 @@ public final class MusicPlayer {
     ///
     /// 换上的新曲目（若真有）记成“从 0 开始渐入”；它的声道要到本刻稍后
     /// `MusicManager.startPlaying` 才建立，所以真正的第一步写音量在下一刻。
-    private void commit(Minecraft minecraft, PortSelectMusicEvent event, @Nullable MusicSelection selection, @Nullable CachedLocationMusic track) {
+    private void commit(PortSelectMusicEvent event, @Nullable MusicSelection selection, @Nullable CachedLocationMusic track) {
         resetFade();
         this.committed = track;
         if (track != null) {
@@ -328,8 +328,21 @@ public final class MusicPlayer {
         setVolume(minecraft, playing, volume);
         if (volume >= 1.0F) {
             fadingIn = false;
+            announce(playing); // 这一首刚好涨满：此刻上一首也正好淡完
         }
         return volume >= 1.0F;
+    }
+
+    /// 一首曲子从 0 涨到原始音量的那一刻，弹一条“正在播放”提示。
+    ///
+    /// 交叉淡化时两边的步长一样，所以新曲涨满的那一刻正是旧曲淡到 0 的那一刻，
+    /// 显示的也就是“现在真正在响的这一首”。自然放完、间隔之后重开的那一首同样会走这里，
+    /// 因此不会出现“有的歌没提示”；不是本模组的音乐（别的模组插进来的）不提示。
+    private static void announce(SoundInstance playing) {
+        ResourceLocation location = playing.getLocation();
+        if (ConfluenceMusic.MODID.equals(location.getNamespace())) {
+            MusicToast.show(MusicTitles.of(location));
+        }
     }
 
     private void resetFade() {

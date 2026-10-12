@@ -5,6 +5,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
+import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -62,10 +63,20 @@ public final class MusicHandler {
         }
     }
 
+    /// 画“正在播放”提示条，见 [MusicToast]。
+    ///
+    /// 这个事件在主事件总线上，排在原版 HUD 之后，所以提示条压在 HUD 上面；
+    /// 玩家按 F1 隐藏 HUD 时原版根本不会渲染 HUD，这里也就跟着不画。
+    @SubscribeEvent
+    public static void renderGui(RenderGuiEvent.Post event) {
+        MusicToast.render(event.getGuiGraphics());
+    }
+
     /// 离开世界时清空一切状态。
     public static void clear(Minecraft minecraft) {
         ENVIRONMENT.reset();
         PLAYER.reset(minecraft);
+        MusicToast.clear();
     }
 
     public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event) {
