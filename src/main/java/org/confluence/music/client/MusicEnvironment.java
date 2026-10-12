@@ -23,6 +23,7 @@ import org.confluence.mod.common.entity.npc.BaseNPC;
 import org.confluence.mod.common.gameevent.*;
 import org.confluence.mod.common.init.ModMiniBiomes;
 import org.confluence.mod.common.init.entity.BossEntities;
+import org.confluence.mod.common.wind.WindMath;
 import org.confluence.mod.util.OverworldUtils;
 import org.confluence.music.common.network.StructureFoundPacketS2C;
 import org.jetbrains.annotations.Nullable;
@@ -92,7 +93,7 @@ public final class MusicEnvironment {
         this.morningRain = LibDateUtils.isWithinDayTime(LibDateUtils._04$30, MORNING_RAIN_END, dayTime);
         this.raining = level.isRaining();
         this.thundering = level.isThundering();
-        this.windy = WeatherHandler.WIND_SPEED.length() > 1.0F;
+        this.windy = WeatherHandler.sustainedWindSpeed() > WindMath.WINDY_DAY_MIN;
         this.creative = isCreativeMode(minecraft);
         this.eventMusic = currentEventMusic();
         this.sandstorm = ClientGameEventSystem.isEventStarted(SandstormGameEvent.KEY);
