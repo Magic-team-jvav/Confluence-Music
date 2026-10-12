@@ -22,7 +22,8 @@ public final class MusicRepository {
     /// 每次“要开一首”时抽（处境变化时抽一次，一首放完再开时再抽一次），
     /// 由 [MusicPlayer] 记着抽到的那一首——所以“想放的是不是正在放的这一首”这个判断
     /// 在整首歌里都是稳定的，不会每刻重抽而抖动。
-    public static @Nullable CachedLocationMusic pick(RandomSource random, MusicSelection selection) {
+    public static @Nullable CachedLocationMusic pick(RandomSource random, @Nullable MusicSelection selection) {
+        if (selection == null) return null;
         @Nullable List<CachedLocationMusic> tracks = getTracks(CMClientConfigs.musicType, selection);
         if (tracks == null || tracks.isEmpty()) return null;
         return Util.getRandom(tracks, random);
