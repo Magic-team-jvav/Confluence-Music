@@ -11,6 +11,8 @@ import org.confluence.music.ConfluenceMusic;
 import org.confluence.music.common.init.CMMusics;
 import org.confluence.music.common.init.CMMusics.CachedLocationMusic;
 import org.jetbrains.annotations.Nullable;
+import org.lwjgl.openal.AL10;
+import org.lwjgl.openal.SOFTDirectChannels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -306,6 +308,22 @@ public final class MusicPlayer {
         fadedInstance = playing;
         volume = 0.0F;
         setVolume(minecraft, playing, 0.0F);
+        keepStereo(minecraft, playing); // 顺手要求“按缓冲自己的声道原样输出”
+    }
+
+    /// 要求 OpenAL 把这一首音乐的左右声道**原样输出**，不做空间化、不降混。
+    ///
+    /// 为什么需要它：原版 1.21 的 `Library.init` 创建 OpenAL 上下文时多传了一个属性数组
+    /// （`ALC_OUTPUT_LIMITER_SOFT`），OpenAL Soft 一收到带属性的创建请求就会重新按设备类型
+    /// 挑输出模式，在耳机类设备上选中 `STEREO_HRTF`（顺带把玩家关掉的 HRTF 重新打开）。
+    /// 那个模式要把多声道声源先降混成单声道再做双耳渲染，于是立体声音乐被压到正中间 ——
+    /// 表现为“本该在右耳的钟声跑到中间”，1.20.1 因为 OpenAL 版本更老（没有输出模式这回事）
+    /// 反而正常。`AL_DIRECT_CHANNELS_SOFT` 明确要求按缓冲自己的声道输出，因此不受它影响；
+    /// 对音乐来说这本来就是对的（音乐是成品混音，不该再被定位）。
+    private static void keepStereo(Minecraft minecraft, SoundInstance playing) {
+        @Nullable ChannelAccess.ChannelHandle handle = minecraft.getSoundManager().soundEngine.instanceToChannel.get(playing);
+        if (handle == null) return;
+        handle.execute(channel -> AL10.alSourcei(channel.source, SOFTDirectChannels.AL_DIRECT_CHANNELS_SOFT, AL10.AL_TRUE));
     }
 
     /// 把正在播放的这一首渐入到原始音量。
