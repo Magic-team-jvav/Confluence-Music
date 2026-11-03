@@ -14,6 +14,7 @@ import org.mesdag.portlib.event.client.PortSelectMusicEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /// 音乐播放状态机：决定“什么时候换曲、怎么换”。
 ///
@@ -86,6 +87,16 @@ public final class MusicPlayer {
     private boolean fadingIn;
     /// 最近一次交给事件的那一首曲目，用来在本刻末尾认出原版刚为它建好的声道，见 [#applyPendingFadeIn]。
     private @Nullable CachedLocationMusic committed;
+    /// 我们交出去、现在由我们负责的那一份声道实例。
+    ///
+    /// 原版只认一个 `currentMusic`，别的模组（Boss 音乐模组之类）会直接把它置空或换掉；
+    /// 那一份如果既不在 [#fadingOut] 里、也没人停它，就会一直响，等我们再开一首时就跟它叠在一起。
+    /// 所以这里记着我们自己负责的那一份，一旦它不再是“当前音乐”就收掉它（见 [#retireOwn]）。
+    private @Nullable SoundInstance ownInstance;
+    /// [#ownInstance] 是被别人直接掐掉的（而不是自然放完）：下一首要先退让，别跟人家抢音乐。
+    private boolean suppressed;
+    /// [#ownInstance] 已经归我们负责多少刻，用来区分“自然放完”和“刚开就被别人掐掉”。
+    private int ownTicks;
     /// 正在淡出的旧声道们；一轮交叉淡化通常只有一首，短促的连续换曲下会叠上第二首。
     private final List<FadingOut> fadingOut = new ArrayList<>(2);
     /// 正在等待确认的新种类，见 [#CHANGE_CONFIRM_TICKS]。
@@ -112,6 +123,16 @@ public final class MusicPlayer {
         }
         @Nullable CachedLocationMusic desired = picked;
         @Nullable SoundInstance playing = event.getPlayingMusic();
+        retireOwn(minecraft, playing); // 别人把“当前音乐”换掉/置空时，先收掉我们那一份
+        if (ownInstance != null) ownTicks++;
+        if (foreignMusicPlaying(minecraft)) {
+            // 别的模组（Boss 音乐模组之类）正在放它自己的音乐：把我们那份淡出，本刻不再推进，
+            // 等它放完自然接回来。不这么做的话，它每刻都会把我们的音乐掐掉，我们就只能一遍遍重开。
+            yieldToForeign(minecraft);
+            suppressVanillaMusic(event);
+            waitTicks = CMClientConfigs.nextSongDelay;
+            return;
+        }
 
         if (isPlaying(minecraft, playing)) {
             if (selection != lastSelection) {
@@ -150,6 +171,12 @@ public final class MusicPlayer {
         pendingSelection = null;
         boolean changed = lastSelection != null && lastSelection != selection;
         lastSelection = selection;
+        if (suppressed) {
+            // 刚才那一首是别人掐掉的（Boss 音乐模组之类正占着音乐）：先退让一会儿再试，
+            // 免得每十刻就重开一次、把同一首反复叠起来
+            suppressed = false;
+            waitTicks = Math.max(waitTicks, CMClientConfigs.nextSongDelay * 8);
+        }
         if (desired == null) {
             suppressVanillaMusic(event);
             waitTicks = CMClientConfigs.nextSongDelay;
@@ -175,6 +202,9 @@ public final class MusicPlayer {
             minecraft.getSoundManager().stop(fading.instance()); // 别让旧声道留在世界里继续响
         }
         fadingOut.clear();
+        ownInstance = null;
+        suppressed = false;
+        ownTicks = 0;
         pendingSelection = null;
         lastSelection = null;
         picked = null;
@@ -193,8 +223,65 @@ public final class MusicPlayer {
         float from = fadedInstance == outgoing ? volume : 1.0F; // 如果它本来就还在渐入，就从当前音量接着降
         // 只有确实是本模组交出去的那一首，才记得住它的曲目、将来能被接回来
         fadingOut.add(new FadingOut(outgoing, sameTrack(committed, outgoing) ? committed : null, lastSelection, from));
+        ownInstance = null; // 交出去的这一份已经归淡出列表管了
         minecraft.getMusicManager().currentMusic = null;
         commit(event, selection, desired);
+    }
+
+    /// {@return 现在是否有**别的模组**的音乐在响}
+    ///
+    /// 原版只暴露 `MusicManager.currentMusic` 一个槽位，别的模组直接 `play` 自己的音乐时我们看不见；
+    /// 所以从声引擎的声道表里找：只要有一个非本模组的 `MUSIC` 声道还在响，就算音乐被占着。
+    /// 原版音乐（`minecraft` 命名空间）不算，那一段由 [CMClientConfigs#denyVanillaMusic] 与
+    /// `replaceCurrentMusic` 负责。
+    private static boolean foreignMusicPlaying(Minecraft minecraft) {
+        for (Map.Entry<SoundInstance, ChannelAccess.ChannelHandle> entry
+                : minecraft.getSoundManager().soundEngine.instanceToChannel.entrySet()) {
+            SoundInstance instance = entry.getKey();
+            if (instance.getSource() != SoundSource.MUSIC) continue;
+            String namespace = instance.getLocation().getNamespace();
+            if (ConfluenceMusic.MODID.equals(namespace) || ResourceLocation.DEFAULT_NAMESPACE.equals(namespace)) continue;
+            if (entry.getValue().isStopped()) continue;
+            return true;
+        }
+        return false;
+    }
+
+    /// 别人的音乐在响时把我们的那一份让出去：交给淡出列表，等它放完自然再接回来。
+    private void yieldToForeign(Minecraft minecraft) {
+        @Nullable SoundInstance own = ownInstance;
+        if (own == null) return;
+        ownInstance = null;
+        if (containsFading(own)) return;
+        if (!isPlaying(minecraft, own)) return;
+        fadingOut.add(new FadingOut(own, sameTrack(committed, own) ? committed : null, lastSelection,
+                fadedInstance == own ? volume : 1.0F));
+    }
+
+    /// 我们负责的那一份已经不是“当前音乐”了：把它交给淡出列表，绝不把它晾在那里继续响。
+    ///
+    /// 别的模组接管音乐时只会动 `MusicManager.currentMusic`，我们交出去的那一份声道还活着；
+    /// 不在这里收掉它，它就会和新开的下一首同时响（听起来就是同一首歌不停叠加）。
+    /// 如果它已经被别人直接停掉了，则记下 [#suppressed]，让下一首多等一会儿，不跟人家抢。
+    private void retireOwn(Minecraft minecraft, @Nullable SoundInstance playing) {
+        @Nullable SoundInstance own = ownInstance;
+        if (own == null || own == playing) return;
+        ownInstance = null;
+        if (containsFading(own)) return; // 已经在淡出列表里了
+        if (!isPlaying(minecraft, own)) {
+            suppressed = ownTicks < 40; // 刚开不到两秒就被掐掉：多半是别人在占着音乐
+            return;
+        }
+        fadingOut.add(new FadingOut(own, sameTrack(committed, own) ? committed : null, lastSelection,
+                fadedInstance == own ? volume : 1.0F));
+    }
+
+    /// {@return 这个声道实例是否已经在淡出列表里}
+    private boolean containsFading(SoundInstance instance) {
+        for (FadingOut fading : fadingOut) {
+            if (fading.instance() == instance) return true;
+        }
+        return false;
     }
 
     /// {@return 淡出列表里属于 `selection`、还没淡完而且还在出声的那一首（因此可以接着放而不是从头开始）}
@@ -232,6 +319,8 @@ public final class MusicPlayer {
         this.picked = track; // 接着放的这一首就是当前处境要的那一首
         this.pickedSelection = selection;
         fadedInstance = back.instance();
+        ownInstance = back.instance(); // 这一份重新归我们负责
+        ownTicks = 0;
         volume = back.volume(); // 接着它当前（还没淡完）的音量继续往上淡
         fadingIn = true;
         pendingSelection = null;
@@ -305,6 +394,8 @@ public final class MusicPlayer {
         @Nullable SoundInstance playing = minecraft.getMusicManager().currentMusic;
         if (playing == null || !track.getLocation().equals(playing.getLocation())) return; // 还没起来或不是我们交出去的那一首
         fadedInstance = playing;
+        ownInstance = playing; // 从这一刻起这一份归我们负责（别人换掉它时要收掉）
+        ownTicks = 0;
         volume = 0.0F;
         setVolume(minecraft, playing, 0.0F);
     }
@@ -316,9 +407,14 @@ public final class MusicPlayer {
     ///
     /// @return 是否已经回到原始音量
     private boolean fadeIn(Minecraft minecraft, SoundInstance playing) {
+        if (containsFading(playing)) return false; // 这一份正在淡出，别再把它调回来
         if (fadedInstance != playing) { // 换了一个声道实例
             fadedInstance = playing;
             volume = fadingIn ? 0.0F : 1.0F;
+        }
+        if (sameTrack(committed, playing) && ownInstance != playing) {
+            ownInstance = playing; // 认领：这一份是我们要的那一首
+            ownTicks = 0;
         }
         if (volume >= 1.0F) {
             fadingIn = false;
