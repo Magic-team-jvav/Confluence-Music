@@ -58,24 +58,21 @@ public final class MusicToast {
     private static @Nullable String title;
     /// [#title] 是什么时候开始显示的。
     private static long shownAt;
-    /// 上一条提示的内容，用来压掉“同一首曲子被反复接回来”时的重复提示。
+    /// 上一条提示的内容：同一首歌再来就忽略，只有换歌才弹。
     private static @Nullable String lastTitle;
-    private static long lastAt;
 
     private MusicToast() {}
 
-    /// 显示一条曲名提示；重复调用会从滑入重新开始。
+    /// 显示一条曲名提示：换了歌才弹，同一首（曲名相同）反复出现时忽略。
     ///
-    /// 同一条曲名在 [#HOLD_MS] 之内再来一次（处境在边界上抖、同一首被接回来……）时忽略，
-    /// 免得提示条一直重播。
+    /// 处境在边界上抖、同一首被系统接着放回来这类“同一首歌来回交替”，曲名没变就没必要再弹；
+    /// 离开世界时 [#clear] 会忘掉这条记录，所以下次进世界听到同一首仍然会弹。
     public static void show(@Nullable String title) {
         if (title == null) return;
-        long now = Util.getMillis();
-        if (title.equals(lastTitle) && now - lastAt < HOLD_MS) return;
+        if (title.equals(lastTitle)) return;
         MusicToast.title = title;
-        MusicToast.shownAt = now;
+        MusicToast.shownAt = Util.getMillis();
         MusicToast.lastTitle = title;
-        MusicToast.lastAt = now;
     }
 
     /// 立刻收起（离开世界时用）。
