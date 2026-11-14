@@ -27,7 +27,7 @@
 | the_crimson              | the_crimson                                                 | none                     |
 | underground_crimson      | underground_crimson                                         | none                     |
 | the_hallow_day           | the_hallow_day                                              | none                     |
-| the_hallow_night         | overworld_night                                             | none                     |
+| the_hallow_night         | the_hallow_night                                            | none                     |
 | underground_hallow       | underground_hallow                                          | music:underground_hallow |
 | underworld               | underworld                                                  | none                     |
 | dungeon_floor_1          | dungeon_floor_1                                             | none                     |

@@ -278,6 +278,15 @@
             }
         ]
     },
+    "the_hallow_night": {
+        "sounds": [
+            {
+                "name": "confluence_music:the_hallow_night",
+                "volume": 0.4,
+                "stream": true
+            }
+        ]
+    },
     "underground_hallow": {
         "sounds": [
             {

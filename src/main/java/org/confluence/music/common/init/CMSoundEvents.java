@@ -42,6 +42,7 @@ public final class CMSoundEvents {
     public static final RegistryObject<SoundEvent> THE_CRIMSON = register("the_crimson");
     public static final RegistryObject<SoundEvent> UNDERGROUND_CRIMSON = register("underground_crimson");
     public static final RegistryObject<SoundEvent> THE_HALLOW_DAY = register("the_hallow_day");
+    public static final RegistryObject<SoundEvent> THE_HALLOW_NIGHT = register("the_hallow_night");
     public static final RegistryObject<SoundEvent> UNDERGROUND_HALLOW = register("underground_hallow");
     public static final RegistryObject<SoundEvent> UNDERWORLD = register("underworld"); // 下界
     public static final RegistryObject<SoundEvent> TEMPLE = register("temple");

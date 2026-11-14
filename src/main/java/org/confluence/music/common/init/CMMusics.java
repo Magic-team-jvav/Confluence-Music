@@ -51,6 +51,7 @@ public final class CMMusics {
     public static final CachedLocationMusic THE_CRIMSON = register(CMSoundEvents.THE_CRIMSON, Type.LOCATION);
     public static final CachedLocationMusic UNDERGROUND_CRIMSON = register(CMSoundEvents.UNDERGROUND_CRIMSON, Type.LOCATION);
     public static final CachedLocationMusic THE_HALLOW_DAY = register(CMSoundEvents.THE_HALLOW_DAY, Type.LOCATION);
+    public static final CachedLocationMusic THE_HALLOW_NIGHT = register(CMSoundEvents.THE_HALLOW_NIGHT, Type.LOCATION);
     public static final CachedLocationMusic UNDERGROUND_HALLOW = register(CMSoundEvents.UNDERGROUND_HALLOW, Type.LOCATION);
     public static final CachedLocationMusic UNDERWORLD = register(CMSoundEvents.UNDERWORLD, Type.LOCATION);
     public static final CachedLocationMusic TEMPLE = register(CMSoundEvents.TEMPLE, Type.LOCATION);

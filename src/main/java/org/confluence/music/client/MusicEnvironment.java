@@ -2,15 +2,13 @@ package org.confluence.music.client;
 
 import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.phys.AABB;
 import org.confluence.lib.api.entity.Boss;
@@ -78,14 +76,12 @@ public final class MusicEnvironment {
 
     /// 刷新一次环境快照。每客户端刻调用一次。
     public void update(LocalPlayer player, Minecraft minecraft) {
-        Level level = player.level();
-        BlockPos pos = player.blockPosition();
-        ResourceKey<Level> dimension = level.dimension();
-        this.biome = level.getBiome(pos);
-        this.inOverworld = dimension == OverworldUtils.dimension();
-        this.inUnderworld = dimension == OverworldUtils.underworld();
-        this.surface = pos.getY() > OverworldUtils.getSurfaceY();
-        this.space = pos.getY() > OverworldUtils.getSpaceY();
+        ClientLevel level = player.clientLevel;
+        this.biome = level.getBiome(player.blockPosition());
+        this.inOverworld = level.dimension() == OverworldUtils.dimension();
+        this.inUnderworld = OverworldUtils.inUnderworld(level.dimension(), player.getY());
+        this.surface = OverworldUtils.inSurface(player.getY());
+        this.space = OverworldUtils.inSpace(player.getY());
         int dayTime = LibDateUtils.getDayTime(level);
         this.day = LibDateUtils.isDay(dayTime);
         this.morningRain = LibDateUtils.isWithinDayTime(LibDateUtils._04$30, MORNING_RAIN_END, dayTime);
@@ -139,12 +135,12 @@ public final class MusicEnvironment {
         return inUnderworld;
     }
 
-    /// 是否位于地表（高于 {@link OverworldUtils#getSurfaceY()}）。
+    /// 是否位于地表
     public boolean surface() {
         return surface;
     }
 
-    /// 是否位于太空层（高于 {@link OverworldUtils#getSpaceY()}）。
+    /// 是否位于太空层
     public boolean space() {
         return space;
     }
