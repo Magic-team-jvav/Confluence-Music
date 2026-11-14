@@ -31,7 +31,7 @@ public class CMMusicSelectionProvider extends AbstractRecipeProvider {
                 .add(MusicSelection.BLOOD_MOON, CMMusics.EERIE)
                 .add(MusicSelection.METEORITE, CMMusics.EERIE)
                 .add(MusicSelection.OVERWORLD_NIGHT, CMMusics.OVERWORLD_NIGHT, CMMusics.ALT_OVERWORLD_NIGHT, CMMusics.ALT_OVERWORLD_NIGHT_2)
-                .add(MusicSelection.THE_HALLOW_NIGHT, CMMusics.OVERWORLD_NIGHT)
+                .add(MusicSelection.THE_HALLOW_NIGHT, CMMusics.THE_HALLOW_NIGHT)
                 .add(MusicSelection.UNDERGROUND, CMMusics.UNDERGROUND, CMMusics.ALT_UNDERGROUND)
                 .add(MusicSelection.EATER_OF_WORLDS, CMMusics.EATER_OF_WORLDS)
                 .add(MusicSelection.EYE_OF_CTHULHU, CMMusics.BOSS_1)

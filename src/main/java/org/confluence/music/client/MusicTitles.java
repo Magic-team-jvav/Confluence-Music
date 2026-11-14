@@ -42,6 +42,7 @@ public final class MusicTitles {
         map.put("the_crimson", "Bloodstained Landscape (血染沃土) - SquidSine");
         map.put("the_end", "Ender Eremus (终眇归墟) - SquidSine");
         map.put("the_hallow_day", "Glint Shard (煜爚琉璃) - SquidSine");
+        map.put("the_hallow_night", "Flawless Rainbow (虹绚无瑕) - SquidSine");
         map.put("town_night", "Warm Light at Night (晚间暖光) - SquidSine");
         map.put("underground", "Discover in Depth (探渊寻源) - SquidSine");
         map.put("underground_corruption", "Eroded Chasms (虫蚀腐渊) - SquidSine");
